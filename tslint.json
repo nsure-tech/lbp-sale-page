@@ -1,11 +1,18 @@
 {
+  "compilerOptions": {
+    "target": "es5",
+    "strict": true,
+    "module": "es2015",
+    "moduleResolution": "node"
+  },
   "defaultSeverity": "warning",
   "extends": [
     "tslint:recommended"
   ],
   "linterOptions": {
     "exclude": [
-      "node_modules/**"
+      "node_modules/**",
+      "dist", "src/main.ts"
     ]
   },
   "rules": {
