@@ -21,6 +21,7 @@
     "no-consecutive-blank-lines": false,
     "object-literal-sort-keys": false,
     "ordered-imports": false,
+    "noImplicitAny": false,
     "quotemark": [true, "single"]
   }
 }

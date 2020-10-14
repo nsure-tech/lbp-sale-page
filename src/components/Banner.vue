@@ -45,12 +45,13 @@
             tooltip: {
                 trigger: "axis",
                 formatter: (params) => {
-                    params = params[0].data;
-                    let date = new Date(params.name);
-                    if(this.endList[0].name < params.name){
+                    let data:any = params;
+                    data = data[0].data;
+                    let date = new Date(data.name);
+                    if(this.endList[0].name < data.name){
                         return ;
                     }
-                    return params.value[1] + " <br/> " + date.getDate() + "/" + (date.getHours() + 1) + "/" + date.getMinutes();
+                    return data.value[1] + " <br/> " + date.getDate() + "/" + (date.getHours() + 1) + "/" + date.getMinutes();
                 },
                 axisPointer: {
                     animation: false
@@ -158,10 +159,10 @@
             const end = Date.parse("2020-10-16");
             const now = Date.parse(new Date().toString());
             const msec: any = end - now;
-            let day: any = parseInt(msec / 1000 / 60 / 60 / 24);
-            let hr: any = parseInt(msec / 1000 / 60 / 60 % 24) + day * 24;
-            let min: any = parseInt(msec / 1000 / 60 % 60);
-            let sec: any = parseInt(msec / 1000 % 60);
+            let day: any = parseInt((msec / 1000 / 60 / 60 / 24).toString());
+            let hr: any = parseInt((msec / 1000 / 60 / 60 % 24).toString()) + day * 24;
+            let min: any = parseInt((msec / 1000 / 60 % 60).toString());
+            let sec: any = parseInt((msec / 1000 % 60).toString());
             hr = hr > 9 ? hr : "0" + hr;
             min = min > 9 ? min : "0" + min;
             sec = sec > 9 ? sec : "0" + sec;
@@ -196,7 +197,7 @@
 
             const factor = 0.89;
 
-            for (let i = 0; i < ((this.endDate.valueOf() - _date)/3600000).toFixed() ; i++) {
+            for (let i = 0; i < ((this.endDate.valueOf() - _date)/3600000) ; i++) {
                 this.endList.push(this.randomData( _tmpPrice,_date + i  * 3600000));
 
                  _tmpPrice = _tmpPrice*factor;
@@ -208,7 +209,7 @@
         }
 
 
-        randomData(ev: number,date) {
+        randomData(ev: number,date:any) {
             this.now = new Date(date).valueOf();
             return {
                 name: this.now,
