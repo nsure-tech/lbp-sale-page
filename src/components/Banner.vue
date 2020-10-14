@@ -35,9 +35,10 @@
         private currentPrice = 0;
 
         private dataList: Array<any> = [];
-        private startList: Array<any> = [];
+        private endList: Array<any> = [];
 
-        private now = +new Date(2020, 10, 13);
+        private now = +new Date('2020-10-13');
+        private endDate = +new Date('2020-10-17');
         private oneDay = 3600 * 100;
         public $echarts: any;
         private options = {
@@ -46,7 +47,7 @@
                 formatter: (params) => {
                     params = params[0].data;
                     let date = new Date(params.name);
-                    if(this.startList[0].name < params.name){
+                    if(this.endList[0].name < params.name){
                         return ;
                     }
                     return params.value[1] + " <br/> " + date.getDate() + "/" + (date.getHours() + 1) + "/" + date.getMinutes();
@@ -63,7 +64,7 @@
                 axisLabel: {
                     formatter: (value, idx) => {
                         let date = new Date(value);
-                        return [date.getMonth(), date.getDate()].join("-");
+                        return idx == 5? '':[date.getMonth(), date.getDate()].join("-");
                     }
                 },
                 splitLine: {
@@ -108,8 +109,7 @@
                     type: "line",
                     showSymbol: false,
                     hoverAnimation: false,
-                    data: this.startList,
-                    // smooth: false,
+                    data: this.endList,
                     smooth: true,
                     itemStyle: {
                         normal: {
@@ -137,9 +137,8 @@
         public mounted() {
             const ele = document.getElementById("myEcharts");
             this.chart = this.$echarts.init(ele);
-            for (let i = 0; i < 240; i++) {
-                this.dataList.push(this.randomData(0.00001));
-            }
+
+            this.startListFu();
             this.getPrice();
             this.countdown();
             this.getCurrentPrice();
@@ -177,7 +176,7 @@
 
 
             data.map((ev) => {
-                this.dataList.push(this.randomData(ev.price));
+                 this.dataList.push(this.randomData(ev.price,ev.date));
             });
 
             this.endListFu();
@@ -185,22 +184,32 @@
         }
 
 
-        endListFu() {
-            let _length:number = 1200 - this.dataList.length;
-            let _tmpPrice:number = this.dataList[this.dataList.length - 1].value[1];
-            this.startList.push(this.randomData(_tmpPrice),);
+        startListFu() {
+            this.dataList.push(this.randomData(0.00001,'2020-10-13'),);
+            this.dataList.push(this.randomData(0.00001,'2020-10-14'),);
 
-            const factor = 0.995;
-            for (let i = 0; i < _length; i++) {
-                this.startList.push(this.randomData( _tmpPrice));
-                _tmpPrice = _tmpPrice*factor;
+        }
+        endListFu() {
+            let _date = this.dataList[this.dataList.length - 1].value[0];
+            let _tmpPrice:number = this.dataList[this.dataList.length - 1].value[1];
+            // this.endList.push(this.randomData( _tmpPrice,_date));
+
+            const factor = 0.89;
+
+            for (let i = 0; i < ((this.endDate.valueOf() - _date)/3600000).toFixed() ; i++) {
+                this.endList.push(this.randomData( _tmpPrice,_date + i  * 3600000));
+
+                 _tmpPrice = _tmpPrice*factor;
+
             }
+
+
 
         }
 
 
-        randomData(ev: number) {
-            this.now = new Date(+this.now + this.oneDay).valueOf();
+        randomData(ev: number,date) {
+            this.now = new Date(date).valueOf();
             return {
                 name: this.now,
                 value: [

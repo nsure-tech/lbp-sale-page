@@ -2,6 +2,9 @@
     <div id="app">
         <HeaderBar/>
         <Banner/>
+        <PieChart/>
+        <div style="height: 20px"></div>
+        <LadderDiagram/>
         <Footer/>
     </div>
 </template>
@@ -10,8 +13,11 @@
     import HeaderBar from "@/components/Header.vue";
     import Footer from "@/components/Footer.vue";
     import Banner from '@/components/Banner.vue';
+    import PieChart from '@/components/PieChart.vue';
+    import LadderDiagram from '@/components/LadderDiagram.vue';
 
-    @Component({components: {HeaderBar,Footer,Banner}})
+
+    @Component({components: {HeaderBar,Footer,Banner,PieChart,LadderDiagram}})
     export default class App extends Vue {
     }
 </script>
