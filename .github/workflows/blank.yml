@@ -24,7 +24,7 @@ jobs:
     - name: Install and Build
       run: |
         yarn
-        npm run build:prod
+        npm run build
      
     # react项目的FOLDER为build，vue项目改为dist   
     - name: Deploy
