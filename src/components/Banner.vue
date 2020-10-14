@@ -31,39 +31,41 @@
     @Component
     export default class Banner extends Vue {
 
-        private date_ = '';
+        private date_ = "";
         private currentPrice = 0;
 
         private dataList: Array<any> = [];
-        private now = +new Date(1997, 9, 3);
-        private value = Math.random() * 1000;
+        private startList: Array<any> = [];
+
+        private now = +new Date(2020, 10, 13);
+        private oneDay = 3600 * 100;
         public $echarts: any;
         private options = {
             tooltip: {
                 trigger: "axis",
-                // formatter: (params) => {
-                //     params = params[0].data;
-                //     let date = new Date(params.name);
-                //     return params.value[1] + " <br/> " + date.getDate() + "/" + (date.getHours() + 1) + "/" + date.getMinutes();
-                // },
+                formatter: (params) => {
+                    params = params[0].data;
+                    let date = new Date(params.name);
+                    if(this.startList[0].name < params.name){
+                        return ;
+                    }
+                    return params.value[1] + " <br/> " + date.getDate() + "/" + (date.getHours() + 1) + "/" + date.getMinutes();
+                },
                 axisPointer: {
                     animation: false
                 }
             },
             xAxis: {
                 type: "time",
-                splitLine: {
-                    show: false
+                data: this.dataList.map((item) => {
+                    return item.date;
+                }),
+                axisLabel: {
+                    formatter: (value, idx) => {
+                        let date = new Date(value);
+                        return [date.getMonth(), date.getDate()].join("-");
+                    }
                 },
-                // data: this.dataList.map( (item) =>{
-                //     return item.date;
-                // }),
-                // axisLabel: {
-                //     formatter: (value, idx) =>{
-                //         let date = new Date(value);
-                //         return idx === 0 ? value : [date.getMonth() + 1, date.getDate()].join('-');
-                //     }
-                // },
                 splitLine: {
                     show: false
                 },
@@ -79,6 +81,7 @@
                 splitLine: {
                     show: false
                 },
+                boundaryGap: [0, "100%"],
                 axisLine: {
                     lineStyle: {
                         color: "#fff"
@@ -90,18 +93,41 @@
                     type: "line",
                     showSymbol: false,
                     hoverAnimation: false,
-                    data:[["2000-06-05",116],["2000-06-06",129],["2000-06-07",135]],
-                    // data: this.dataList,
-                    smooth: 0.6,
+                    data: this.dataList,
                     smooth: true,
                     lineStyle: {
-                        color: 'red',
+                        color: "red",
                         width: 1
                     },
                     markLine: {
-                        symbol: ['none', 'none'],
+                        symbol: ["none", "none"],
                     },
-                }
+                },
+                {
+
+                    type: "line",
+                    showSymbol: false,
+                    hoverAnimation: false,
+                    data: this.startList,
+                    // smooth: false,
+                    smooth: true,
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                width: 2,
+                                type: "dotted"  //'dotted'虚线 'solid'实线
+                            }
+                        }
+                    },
+
+                    lineStyle: {
+                        color: "#fff",
+                        width: 1
+                    },
+                    markLine: {
+                        symbol: ["none", "none"],
+                    },
+                },
             ]
         };
 
@@ -109,20 +135,20 @@
 
 
         public mounted() {
-
-
-
             const ele = document.getElementById("myEcharts");
             this.chart = this.$echarts.init(ele);
+            for (let i = 0; i < 240; i++) {
+                this.dataList.push(this.randomData(0.00001));
+            }
             this.getPrice();
             this.countdown();
-
             this.getCurrentPrice();
         }
 
-        async  getCurrentPrice(){
-            let data = await  ApiServer.getCurrentPrice();
-            let spot = await  ApiServer.spot();
+
+        async getCurrentPrice() {
+            let data = await ApiServer.getCurrentPrice();
+            let spot = await ApiServer.spot();
             this.currentPrice = data.price * spot.data.amount;
 
         }
@@ -130,10 +156,10 @@
 
         countdown() {
             // 目标日期时间戳
-            const end = Date.parse('2020-10-15');
+            const end = Date.parse("2020-10-16");
             const now = Date.parse(new Date().toString());
-            const msec = end - now;
-            let day = parseInt(msec / 1000 / 60 / 60 / 24);
+            const msec: any = end - now;
+            let day: any = parseInt(msec / 1000 / 60 / 60 / 24);
             let hr: any = parseInt(msec / 1000 / 60 / 60 % 24) + day * 24;
             let min: any = parseInt(msec / 1000 / 60 % 60);
             let sec: any = parseInt(msec / 1000 % 60);
@@ -151,26 +177,38 @@
 
 
             data.map((ev) => {
-                this.dataList.push(this.randomData(ev.date, ev.price));
+                this.dataList.push(this.randomData(ev.price));
             });
 
-
+            this.endListFu();
             this.chart.setOption(this.options);
         }
 
 
-        randomData(ev: number, price: number) {
-            this.now = new Date(ev);
-            return {
-                name: this.now.toString(),
-                value: [
-                    ev,
-                    price
-                ]
-            };
+        endListFu() {
+            let _length:number = 1200 - this.dataList.length;
+            let _tmpPrice:number = this.dataList[this.dataList.length - 1].value[1];
+            this.startList.push(this.randomData(_tmpPrice),);
+
+            const factor = 0.995;
+            for (let i = 0; i < _length; i++) {
+                this.startList.push(this.randomData( _tmpPrice));
+                _tmpPrice = _tmpPrice*factor;
+            }
+
         }
 
 
+        randomData(ev: number) {
+            this.now = new Date(+this.now + this.oneDay).valueOf();
+            return {
+                name: this.now,
+                value: [
+                    this.now,
+                    ev
+                ]
+            };
+        }
     }
 </script>
 
@@ -223,7 +261,7 @@
                         font-weight: bold;
                     }
 
-                    h4{
+                    h4 {
                         flex: 1;
                         display: flex;
                         justify-items: center;
