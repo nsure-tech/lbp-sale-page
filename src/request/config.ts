@@ -1,7 +1,7 @@
 const DOMAIN_CONFIG = {
     // 开发
     dev: {
-        common: 'http://192.168.0.111:8080',
+        common: 'http://192.168.0.103:8080',
     },
     // 测试
     test: {
