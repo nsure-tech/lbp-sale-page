@@ -1,33 +1,42 @@
 <template>
     <div class="header home">
-        <div class="pages-wrapper header-wrapper">
-            <div class="logon-wrapper" @click="home">
-                <img src="@/assets/images/logo@2x.png" width="40" alt="">
-                <span>Nsure.Network</span>
-            </div>
-            <div class="right-wrapper">
-                <div class="right-list">
-                    <div class="right-list-item">
-                        <a href="/Nsure_WP_0.7.pdf" target="_blank" rel="">Whitepaper</a>
+        <b-navbar toggleable="lg" type="dark">
+            <b-container>
+                <b-navbar-brand href="#">
+                    <div class="logon-wrapper" @click="home">
+                        <img src="@/assets/images/logo@2x.png" width="40" alt="">
+                        <span>Nsure.Network</span>
                     </div>
-                    <div class="right-list-item">
-                        <router-link to="/faq">FAQ</router-link>
-                    </div>
-                    <!-- <div class="right-list-item last">
-                        <a href="https://buy.nsure.network/#/" class="last-item" rel="">Testnet</a>
-                    </div> -->
-                </div>
-            </div>
-        </div>
+                </b-navbar-brand>
+                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+                <b-collapse id="nav-collapse" is-nav>
+                    <!-- Right aligned nav items -->
+                    <b-navbar-nav class="ml-auto">
+                        <b-nav-form>
+                            <div class="right-list-item">
+                                <a href="/Nsure_WP_0.7.pdf" target="_blank" rel="">Whitepaper</a>
+                            </div>
+                            <div class="right-list-item">
+                                <router-link to="/faq">FAQ</router-link>
+                            </div>
+
+                        </b-nav-form>
+
+                    </b-navbar-nav>
+                </b-collapse>
+            </b-container>
+        </b-navbar>
+
     </div>
 </template>
 
 
 <script lang="ts">
-    import { Component, Prop, Vue } from 'vue-property-decorator';
+    import {Component, Prop, Vue} from "vue-property-decorator";
+
     @Component
     export default class HeaderBar extends Vue {
-        home(){
+        home() {
             console.log(12312);
         }
     }
@@ -39,81 +48,81 @@
         font-weight: bold;
         background-color: #fff;
 
-    &.home {
-         background-color: #1B2532;
-         padding: 0 20px;
+        &.home {
+            background-color: #1B2532;
+            padding: 0 20px;
 
-    span {
-        color: #fff;
-    }
+            span {
+                color: #fff;
+            }
 
-    .pages-wrapper {
-        width: 100%;
-    }
-    }
+            .pages-wrapper {
+                width: 100%;
+            }
+        }
 
-    .header-wrapper {
-        height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+        .header-wrapper {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    .logon-wrapper {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
+        .logon-wrapper {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
 
-    img {
-        margin-right: 20px;
-    }
-    }
+            img {
+                margin-right: 20px;
+            }
+        }
 
-    .right-list {
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        .right-list {
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-    &-item {
-         margin-left: 40px;
-         font-size: 16px;
+            &-item {
+                margin-left: 40px;
+                font-size: 16px;
 
-    a {
-        color: #fff;
-        cursor: pointer;
-        text-decoration: none;
-    }
+                a {
+                    color: #fff;
+                    cursor: pointer;
+                    text-decoration: none;
+                }
 
-    .last-item {
-        display: block;
-        cursor: pointer;
-        width: 148px;
-        height: 48px;
-        line-height: 48px;
-        text-align: center;
-        background: url('../assets/images/button@2x.png') center center no-repeat;
-        background-size: contain;
-    }
-    }
-    }
+                .last-item {
+                    display: block;
+                    cursor: pointer;
+                    width: 148px;
+                    height: 48px;
+                    line-height: 48px;
+                    text-align: center;
+                    background: url('../assets/images/button@2x.png') center center no-repeat;
+                    background-size: contain;
+                }
+            }
+        }
 
-    .nav-list {
-        display: flex;
+        .nav-list {
+            display: flex;
 
-    li {
-        font-size: 14px;
-        margin-left: 20px;
+            li {
+                font-size: 14px;
+                margin-left: 20px;
 
-    a {
-        color: #000;
-        text-decoration: none;
+                a {
+                    color: #000;
+                    text-decoration: none;
 
-    &.router-link-active {
-         color: #00b984;
-     }
-    }
-    }
-    }
+                    &.router-link-active {
+                        color: #00b984;
+                    }
+                }
+            }
+        }
     }
 </style>

@@ -2,7 +2,6 @@
   "name": "nsure.blp",
   "version": "0.1.0",
   "private": true,
-  "homepage":"https://nsure-tech.github.io/blp-sale-page",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -11,9 +10,11 @@
   "dependencies": {
     "@types/echarts": "^4.8.1",
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.3",
+    "bootstrap-vue": "^2.17.3",
     "core-js": "^3.6.5",
     "echarts": "^4.9.0",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.2",
     "vue-router": "^3.2.0"
@@ -23,9 +24,12 @@
     "@vue/cli-plugin-router": "^4.5.0",
     "@vue/cli-plugin-typescript": "^4.5.0",
     "@vue/cli-service": "^4.5.0",
+    "node-sass": "^4.9.2",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",
+    "vue-cli-plugin-element": "^1.0.1",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "homepage": "https://nsure-tech.github.io/blp-sale-page"
 }

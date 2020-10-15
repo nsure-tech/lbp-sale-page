@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+
         <HeaderBar/>
         <Banner/>
         <PieChart/>
@@ -8,14 +9,15 @@
         <Footer/>
     </div>
 </template>
+
+
 <script lang="ts">
-    import {Component, Vue} from "vue-property-decorator";
-    import HeaderBar from "@/components/Header.vue";
-    import Footer from "@/components/Footer.vue";
+    import HeaderBar from '@/components/Header.vue';
+    import Footer from '@/components/Footer.vue';
     import Banner from '@/components/Banner.vue';
     import PieChart from '@/components/PieChart.vue';
     import LadderDiagram from '@/components/LadderDiagram.vue';
-
+    import {Component, Prop, Vue} from "vue-property-decorator";
 
     @Component({components: {HeaderBar,Footer,Banner,PieChart,LadderDiagram}})
     export default class App extends Vue {

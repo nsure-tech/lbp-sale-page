@@ -2,7 +2,14 @@
     <div class="wap">
         <h2>TITLe</h2>
         <h3>(dasdajsghdakjsgdhjagfhjgahjkdgfhdgfajhdgahgfhjd)</h3>
-        <div class="charts">
+        <b-container class="bv-example-row">
+            <b-row>
+                <b-col sm="8">col-sm-8</b-col>
+                <b-col sm="4">col-sm-4</b-col>
+            </b-row>
+        </b-container>
+
+        <!--<div class="charts">
             <div class="left">
                 <div id="myEcharts" style="height: 400px;width: 600px;max-width: 600px;"></div>
                 <h4>Access LBP on Balancer</h4>
@@ -14,13 +21,13 @@
                 </div>
                 <div>
                     <p>Latest Price(USDE)</p>
-                    <h4>{{currentPrice? currentPrice.toFixed(5):'---'}}</h4>
+                    <h4>{{currentPrice? currentPrice.toFixed(5):'-&#45;&#45;'}}</h4>
                 </div>
                 <div>
                     <p>Estimated Market cap at current price</p>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </template>
 
@@ -37,21 +44,21 @@
         private dataList: Array<any> = [];
         private endList: Array<any> = [];
 
-        private now = +new Date('2020-10-13');
-        private endDate = +new Date('2020-10-17');
+        // private now = +new Date("2020-10-13");
+        private endDate = +new Date("2020-10-17");
         private oneDay = 3600 * 100;
         public $echarts: any;
         private options = {
             tooltip: {
                 trigger: "axis",
                 formatter: (params) => {
-                    let data:any = params;
+                    let data: any = params;
                     data = data[0].data;
                     let date = new Date(data.name);
                     if(this.endList[0].name < data.name){
                         return ;
                     }
-                    return data.value[1] + " <br/> " + date.getDate() + "/" + (date.getHours() + 1) + "/" + date.getMinutes();
+                    return data.value[1] + " <br/> " + date.getDate() + "/" + (date.getHours()) + "/" + date.getMinutes();
                 },
                 axisPointer: {
                     animation: false
@@ -65,7 +72,7 @@
                 axisLabel: {
                     formatter: (value, idx) => {
                         let date = new Date(value);
-                        return idx == 5? '':[date.getMonth(), date.getDate()].join("-");
+                        return idx == 5 ? "" : [date.getMonth(), date.getDate()].join("-");
                     }
                 },
                 splitLine: {
@@ -137,6 +144,7 @@
 
         public mounted() {
             const ele = document.getElementById("myEcharts");
+            ele.style.width= "100%";
             this.chart = this.$echarts.init(ele);
 
             this.startListFu();
@@ -177,7 +185,7 @@
 
 
             data.map((ev) => {
-                 this.dataList.push(this.randomData(ev.price,ev.date));
+                this.dataList.push(this.randomData(ev.price, ev.date));
             });
 
             this.endListFu();
@@ -186,35 +194,38 @@
 
 
         startListFu() {
-            this.dataList.push(this.randomData(0.00001,'2020-10-13'),);
-            this.dataList.push(this.randomData(0.00001,'2020-10-14'),);
+            this.dataList.push(this.randomData(0.00001, "2020-10-14 00:00:00"),);
+            this.dataList.push(this.randomData(0.00001, "2020-10-14 23:59:59"),);
 
         }
+
         endListFu() {
             let _date = this.dataList[this.dataList.length - 1].value[0];
-            let _tmpPrice:number = this.dataList[this.dataList.length - 1].value[1];
-            // this.endList.push(this.randomData( _tmpPrice,_date));
+            let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
+            let _scale: number = 36000000;
+            const factor = 0.4;
 
-            const factor = 0.89;
+            // this.endList.push(this.randomData(_tmpPrice,_date),);
+            // this.endList.push(this.randomData(0.00002,this.endDate - 10000),);
+            // // this.endList.push(this.randomData(0,this.endDate),);
 
-            for (let i = 0; i < ((this.endDate.valueOf() - _date)/3600000) ; i++) {
-                this.endList.push(this.randomData( _tmpPrice,_date + i  * 3600000));
+            for (let i = 0; i < ((this.endDate.valueOf() - _date) / _scale); i++) {
+                this.endList.push(this.randomData(_tmpPrice, _date + i * _scale),);
 
-                 _tmpPrice = _tmpPrice*factor;
+                _tmpPrice = _tmpPrice * factor;
 
             }
 
 
-
         }
 
 
-        randomData(ev: number,date:any) {
-            this.now = new Date(date).valueOf();
+        randomData(ev: number, date: any) {
+            let now = new Date(date).valueOf();
             return {
-                name: this.now,
+                name: now,
                 value: [
-                    this.now,
+                    now,
                     ev
                 ]
             };
@@ -236,9 +247,9 @@
                 width: 600px;
                 background-color: #24303e;
 
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
                 h4 {
                     color: black;
@@ -265,21 +276,21 @@
                     flex-direction: column;
                     justify-items: center;
 
-                    p {
-                        font-size: 12px;
-                        color: white;
-                        font-weight: bold;
-                    }
+                p {
+                    font-size: 12px;
+                    color: white;
+                    font-weight: bold;
+                }
 
-                    h4 {
-                        flex: 1;
-                        display: flex;
-                        justify-items: center;
-                        align-items: center;
-                        font-size: 14px;
-                        color: white;
-                        justify-content: center;
-                    }
+                h4 {
+                    flex: 1;
+                    display: flex;
+                    justify-items: center;
+                    align-items: center;
+                    font-size: 14px;
+                    color: white;
+                    justify-content: center;
+                }
 
                 }
             }
