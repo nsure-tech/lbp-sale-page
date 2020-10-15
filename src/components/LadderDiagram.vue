@@ -1,7 +1,7 @@
 <template>
     <div class="wap">
         <div class="charts">
-            <div id="ladderDiagram" style="height: 500px;width: 900px;max-width: 900px;"></div>
+            <div id="ladderDiagram" style="height: 500px;"></div>
         </div>
     </div>
 </template>
@@ -76,6 +76,7 @@
 
         public mounted() {
             const ele = document.getElementById("ladderDiagram");
+            ele.style.width = "100%";
             this.chart = this.$echarts.init(ele);
             this.chart.setOption(this.options);
 
@@ -85,7 +86,7 @@
 
 <style lang="scss" scoped>
     .wap {
-        width: 900px;
+        max-width: 900px;
         margin: 0 auto;
         background-color: white;
     }

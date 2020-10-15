@@ -50,7 +50,6 @@
 
         &.home {
             background-color: #1B2532;
-            padding: 0 20px;
 
             span {
                 color: #fff;

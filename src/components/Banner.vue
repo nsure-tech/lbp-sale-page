@@ -2,32 +2,57 @@
     <div class="wap">
         <h2>TITLe</h2>
         <h3>(dasdajsghdakjsgdhjagfhjgahjkdgfhdgfajhdgahgfhjd)</h3>
-        <b-container class="bv-example-row">
-            <b-row>
-                <b-col sm="8">col-sm-8</b-col>
-                <b-col sm="4">col-sm-4</b-col>
+
+        <b-container class="bv-example-row ">
+            <b-row class="justify-content-md-center ">
+                <b-col sm="7" class="left">
+                    <div id="myEcharts" style="height: 400px;width: 600px;max-width: 600px;"></div>
+                    <h4>Access LBP on Balancer</h4>
+                </b-col>
+                <b-col sm="2" class="d-none d-sm-block">
+                    <b-container style="height: 100%;" class="bv-example-row bv-example-row-flex-cols">
+                        <b-row align-v="center" style="height: 100%;" align-content="between">
+                            <b-col xs="3">
+                                <div class="r_div">
+                                    <p>LBP Ends in</p>
+                                    <h4>{{date_}}</h4>
+                                </div>
+                            </b-col>
+                            <b-col xs="3">
+                                <div class="r_div">
+                                    <p>Latest Price(USDE)</p>
+                                    <h4>{{currentPrice? currentPrice.toFixed(5):'---'}}</h4>
+                                </div>
+                            </b-col>
+                            <b-col xs="3">
+                                <div class="r_div">
+                                    <p>Estimated Market cap at current price</p>
+                                </div>
+                            </b-col>
+                        </b-row>
+                    </b-container>
+
+                </b-col>
             </b-row>
         </b-container>
 
-        <!--<div class="charts">
-            <div class="left">
-                <div id="myEcharts" style="height: 400px;width: 600px;max-width: 600px;"></div>
-                <h4>Access LBP on Balancer</h4>
-            </div>
-            <div class="right">
-                <div>
+        <div class="bottom_bar d-block d-sm-none">
+            <div class="box">
+                <div class="child">
                     <p>LBP Ends in</p>
                     <h4>{{date_}}</h4>
                 </div>
-                <div>
+                <div class="child">
                     <p>Latest Price(USDE)</p>
-                    <h4>{{currentPrice? currentPrice.toFixed(5):'-&#45;&#45;'}}</h4>
+                    <h4>{{currentPrice? currentPrice.toFixed(5):'---'}}</h4>
                 </div>
-                <div>
+                <div class="child">
                     <p>Estimated Market cap at current price</p>
                 </div>
             </div>
-        </div>-->
+
+        </div>
+
     </div>
 </template>
 
@@ -55,8 +80,8 @@
                     let data: any = params;
                     data = data[0].data;
                     let date = new Date(data.name);
-                    if(this.endList[0].name < data.name){
-                        return ;
+                    if (this.endList[0].name < data.name) {
+                        return;
                     }
                     return data.value[1] + " <br/> " + date.getDate() + "/" + (date.getHours()) + "/" + date.getMinutes();
                 },
@@ -144,7 +169,7 @@
 
         public mounted() {
             const ele = document.getElementById("myEcharts");
-            ele.style.width= "100%";
+            ele.style.width = "100%";
             this.chart = this.$echarts.init(ele);
 
             this.startListFu();
@@ -234,52 +259,80 @@
 </script>
 
 <style lang="scss" scoped>
+    .col {
+        padding: 0;
+    }
+
     .wap {
         h3 {
             margin-bottom: 10px;
         }
 
-        .charts {
-            display: flex;
-            justify-content: center;
-
-            .left {
-                width: 600px;
-                background-color: #24303e;
+        .left {
+            width: 600px;
+            background-color: #24303e;
 
             display: flex;
             flex-direction: column;
             align-items: center;
 
-                h4 {
-                    color: black;
-                    background-color: #09c992;
-                    border-radius: 10px;
-                    padding: 10px;
-                    margin-bottom: 20px;
-                }
+            h4 {
+                color: black;
+                background-color: #09c992;
+                border-radius: 10px;
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .r_div {
+            width: 140px;
+            height: 140px;
+            background-color: #24303e;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-items: center;
+
+            p {
+                font-size: 12px;
+                color: white;
+                font-weight: bold;
             }
 
-            .right {
-                margin-left: 10px;
+            h4 {
+                flex: 1;
                 display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+                justify-items: center;
+                align-items: center;
+                font-size: 14px;
+                color: white;
+                justify-content: center;
+            }
 
-                div {
-                    width: 140px;
-                    height: 140px;
-                    background-color: #24303e;
-                    padding: 10px;
-                    box-sizing: border-box;
-                    display: flex;
-                    flex-direction: column;
-                    justify-items: center;
+        }
+
+        .bottom_bar {
+            .box{
+                display: flex;
+                justify-content: space-around;
+            }
+            padding: 20px 0;
+
+
+            .child {
+                width: 29%;
+                height: 80px;
+                padding: 10px;
+                box-sizing: border-box;
+                background-color: #24303e;
 
                 p {
                     font-size: 12px;
                     color: white;
                     font-weight: bold;
+                    margin: 0;
                 }
 
                 h4 {
@@ -292,8 +345,9 @@
                     justify-content: center;
                 }
 
-                }
             }
+
+
         }
     }
 </style>
