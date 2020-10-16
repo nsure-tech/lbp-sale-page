@@ -9,21 +9,21 @@
                     </div>
                 </b-navbar-brand>
                 <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-                <b-collapse id="nav-collapse" is-nav>
-                    <!-- Right aligned nav items -->
-                    <b-navbar-nav class="ml-auto">
-                        <b-nav-form>
-                            <div class="right-list-item">
-                                <a href="/Nsure_WP_0.7.pdf" target="_blank" rel="">Whitepaper</a>
-                            </div>
-                            <div class="right-list-item">
-                                <router-link to="/faq">FAQ</router-link>
-                            </div>
+                <!--<b-collapse id="nav-collapse" is-nav>-->
+                    <!--&lt;!&ndash; Right aligned nav items &ndash;&gt;-->
+                    <!--<b-navbar-nav class="ml-auto">-->
+                        <!--<b-nav-form>-->
+                            <!--<div class="right-list-item">-->
+                                <!--<a href="/Nsure_WP_0.7.pdf" target="_blank" rel="">Whitepaper</a>-->
+                            <!--</div>-->
+                            <!--<div class="right-list-item">-->
+                                <!--<router-link to="/faq">FAQ</router-link>-->
+                            <!--</div>-->
 
-                        </b-nav-form>
+                        <!--</b-nav-form>-->
 
-                    </b-navbar-nav>
-                </b-collapse>
+                    <!--</b-navbar-nav>-->
+                <!--</b-collapse>-->
             </b-container>
         </b-navbar>
 
@@ -100,7 +100,7 @@
                     height: 48px;
                     line-height: 48px;
                     text-align: center;
-                    background: url('../assets/images/button@2x.png') center center no-repeat;
+                    /*background: url('../assets/images/button@2x.png') center center no-repeat;*/
                     background-size: contain;
                 }
             }

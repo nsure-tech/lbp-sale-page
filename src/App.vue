@@ -2,7 +2,19 @@
     <div id="app">
 
         <HeaderBar/>
+
         <Banner/>
+        <div class="caveat">
+            <div class="box">
+                <img src="@/assets/images/caveat.png" alt="">
+                <div class="text">
+                    This Balancer LBP is intended to act as TGE for the public  and will be closed once the targeted block height (approx. 2 days) is reached. The Dynamics of this LBP are designed to allow users to purchase NSURE while allowing for fair price discovery, as it’s structure is based on principles of Dutch Auctions.
+
+                </div>
+            </div>
+        </div>
+        <Problem></Problem>
+
         <PieChart/>
         <div style="height: 20px"></div>
         <LadderDiagram/>
@@ -18,14 +30,42 @@
     import PieChart from '@/components/PieChart.vue';
     import LadderDiagram from '@/components/LadderDiagram.vue';
     import {Component, Prop, Vue} from "vue-property-decorator";
+    import Problem from '@/components/problem.vue';
 
-    @Component({components: {HeaderBar,Footer,Banner,PieChart,LadderDiagram}})
+    @Component({components: {HeaderBar,Footer,Banner,PieChart,LadderDiagram,Problem}})
     export default class App extends Vue {
     }
 </script>
 
 <style lang="scss">
     #app {
+        .caveat{
+            margin: 80px auto 80px auto;
+            box-sizing: border-box;
+            max-width: 900px;
+
+
+            .box{
+                position: relative;
+                img{
+                    width: 60px;
+                    height: 46px;
+                    position: absolute;
+                    left: 0;
+                    top: -30px;
+                }
+                .text{
+                    background: #0a1525;
+                    padding:  26px 12px;
+                    box-sizing: border-box;
+                    text-align: left;
+                    font-size: 1rem;
+                    font-family: Arial;
+                    font-weight: bold;
+                    color: #F1F1EF;
+                }
+            }
+        }
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -34,16 +74,4 @@
         background-color: #1B2532;
     }
 
-    #nav {
-        padding: 30px;
-
-        a {
-            font-weight: bold;
-            color: #2c3e50;
-
-            &.router-link-exact-active {
-                color: #42b983;
-            }
-        }
-    }
 </style>

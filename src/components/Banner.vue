@@ -1,15 +1,17 @@
 <template>
     <div class="wap">
-        <h2>TITLe</h2>
-        <h3>(dasdajsghdakjsgdhjagfhjgahjkdgfhdgfajhdgahgfhjd)</h3>
+        <h2>Liquidity Bootstrapping Pool for Nsure</h2>
 
-        <b-container class="bv-example-row ">
-            <b-row class="justify-content-md-center ">
-                <b-col sm="7" class="left">
-                    <div id="myEcharts" style="height: 400px;width: 600px;max-width: 600px;"></div>
-                    <h4>Access LBP on Balancer</h4>
+        <b-container class="bv-example-row echarts">
+            <b-row class="justify-content-md-center">
+                <b-col sm="10" >
+                    <div class="left">
+                        <div id="myEcharts" style="height: 50vh;min-height:300px;width: 600px;max-width: 600px;"></div>
+                        <a href="https://kovan.balancer.exchange/#/swap/0xd0A1E359811322d97991E03f863a0C30C2cF029C/0x92c94707fdc3fE9FCb0278c310911A0371752A20">Access LBP on Balancer</a>
+                    </div>
+
                 </b-col>
-                <b-col sm="2" class="d-none d-sm-block">
+                <b-col sm="2" class="d-none d-sm-block right-box">
                     <b-container style="height: 100%;" class="bv-example-row bv-example-row-flex-cols">
                         <b-row align-v="center" style="height: 100%;" align-content="between">
                             <b-col xs="3">
@@ -52,7 +54,11 @@
             </div>
 
         </div>
-
+        <div class="bottom">
+            <p>whitepaper</p>
+            <p>NSURE LBP sheet</p>
+            <p>MUST READ</p>
+        </div>
     </div>
 </template>
 
@@ -69,7 +75,6 @@
         private dataList: Array<any> = [];
         private endList: Array<any> = [];
 
-        // private now = +new Date("2020-10-13");
         private endDate = +new Date("2020-10-17");
         private oneDay = 3600 * 100;
         public $echarts: any;
@@ -80,10 +85,10 @@
                     let data: any = params;
                     data = data[0].data;
                     let date = new Date(data.name);
-                    if (this.endList[0].name < data.name) {
+                    if (this.endList[1].name < data.name) {
                         return;
                     }
-                    return data.value[1] + " <br/> " + date.getDate() + "/" + (date.getHours()) + "/" + date.getMinutes();
+                    return data.value[1] + " <br/> " + date.getDate() + "/" + (date.getHours()) + "/" + date.getMinutes() + "/" + date.getSeconds();
                 },
                 axisPointer: {
                     animation: false
@@ -97,7 +102,7 @@
                 axisLabel: {
                     formatter: (value, idx) => {
                         let date = new Date(value);
-                        return idx == 5 ? "" : [date.getMonth(), date.getDate()].join("-");
+                        return idx == 5 ? "" : [date.getMonth() + 1, date.getDate()].join("-");
                     }
                 },
                 splitLine: {
@@ -168,22 +173,31 @@
 
 
         public mounted() {
-            const ele = document.getElementById("myEcharts");
+            let ele: any = document.getElementById("myEcharts");
             ele.style.width = "100%";
+
             this.chart = this.$echarts.init(ele);
 
             this.startListFu();
             this.getPrice();
             this.countdown();
             this.getCurrentPrice();
+
+
+            setInterval(async () => {
+                this.getCurrentPrice();
+                this.endList[0] = this.dataList[this.dataList.length - 1];
+                this.chart.setOption(this.options);
+
+            }, 10000);
         }
 
 
         async getCurrentPrice() {
-            let data = await ApiServer.getCurrentPrice();
-            let spot = await ApiServer.spot();
-            this.currentPrice = data.price * spot.data.amount;
-
+            let _data = await ApiServer.getCurrentPrice();
+            let _spot = await ApiServer.spot();
+            this.currentPrice = _data.price * _spot.data.amount;
+            this.dataList.push(this.randomData(_data.price, new Date().toString()),);
         }
 
 
@@ -219,9 +233,8 @@
 
 
         startListFu() {
-            this.dataList.push(this.randomData(0.00001, "2020-10-14 00:00:00"),);
-            this.dataList.push(this.randomData(0.00001, "2020-10-14 23:59:59"),);
-
+            this.dataList.push(this.randomData(0.001, "2020-10-14 00:00:00"),);
+            this.dataList.push(this.randomData(0.001, "2020-10-14 23:59:59"),);
         }
 
         endListFu() {
@@ -230,13 +243,8 @@
             let _scale: number = 36000000;
             const factor = 0.4;
 
-            // this.endList.push(this.randomData(_tmpPrice,_date),);
-            // this.endList.push(this.randomData(0.00002,this.endDate - 10000),);
-            // // this.endList.push(this.randomData(0,this.endDate),);
-
             for (let i = 0; i < ((this.endDate.valueOf() - _date) / _scale); i++) {
                 this.endList.push(this.randomData(_tmpPrice, _date + i * _scale),);
-
                 _tmpPrice = _tmpPrice * factor;
 
             }
@@ -264,62 +272,96 @@
     }
 
     .wap {
-        h3 {
-            margin-bottom: 10px;
+        height: 90vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        h2 {
+            font-size: 2rem;
+            font-family: Arial;
+            font-weight: bold;
+            color: #F1F1EF;
+            text-align: center;
+
         }
 
-        .left {
-            width: 600px;
-            background-color: #24303e;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            h4 {
-                color: black;
-                background-color: #09c992;
-                border-radius: 10px;
-                padding: 10px;
-                margin-bottom: 20px;
-            }
-        }
-
-        .r_div {
-            width: 140px;
-            height: 140px;
-            background-color: #24303e;
-            padding: 10px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-items: center;
-
-            p {
-                font-size: 12px;
-                color: white;
-                font-weight: bold;
-            }
-
-            h4 {
-                flex: 1;
+        .echarts{
+            height: 60vh;
+            .left {
+                background-color: #243142;
+padding-bottom: 20px;
+                box-sizing: border-box;
                 display: flex;
-                justify-items: center;
+                flex-direction: column;
                 align-items: center;
-                font-size: 14px;
-                color: white;
-                justify-content: center;
+
+                a {
+                    display: block;
+                    background-color: #09c992;
+                    border-radius: 10px;
+                    padding: 10px;
+                    width: 300px;
+                    margin: 0 auto;
+                    height: 50px;
+                    line-height: 30px;
+
+                    font-size: 1rem;
+                    font-family: Arial;
+                    font-weight: bold;
+                    color: #1B2532;
+                    text-align: center;
+
+                }
             }
 
+            .right-box{
+
+                .r_div {
+                    width: 140px;
+                    height: 16vh;
+                    background-color: #24303e;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    display: flex;
+                    flex-direction: column;
+                    justify-items: center;
+
+                    p {
+                        font-weight: bold;
+                        font-size: 0.5rem;
+                        font-family: Arial;
+                        color: #F1F1EF;
+
+                    }
+
+                    h4 {
+                        flex: 1;
+                        display: flex;
+                        justify-items: center;
+                        align-items: center;
+                        justify-content: center;
+
+                        font-size: 0.5rem;
+                        font-family: Arial;
+                        font-weight: bold;
+                        color: #F1F1EF;
+                    }
+
+                }
+
+            }
         }
+
+
 
         .bottom_bar {
-            .box{
+            .box {
                 display: flex;
                 justify-content: space-around;
             }
             padding: 20px 0;
-
 
             .child {
                 width: 29%;
@@ -348,6 +390,26 @@
             }
 
 
+        }
+
+        .bottom{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            p{
+                width: 30%;
+                height: 60px;
+                margin: 0;
+                text-align: center;
+                line-height: 60px;
+                border: 3px solid #57F9AF;
+                border-radius: 64px;
+                font-size: 1rem;
+                font-family: Arial;
+                font-weight: bold;
+                color: #57F9AF;
+            }
         }
     }
 </style>

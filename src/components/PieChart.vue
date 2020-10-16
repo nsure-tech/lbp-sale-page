@@ -1,15 +1,18 @@
 <template>
     <div class="wap">
-        <!--<div id="myEchartss" style="height: 400px;"></div>-->
-        <div class="charts">
-            <b-container class="bv-example-row ">
-                <b-row>
-                    <b-col>
-                        <div id="myEchartss" style="height: 400px;width: 100px;"></div>
-                    </b-col>
-                </b-row>
-            </b-container>
-        </div>
+        <h2>TOKEN ALLOCATION</h2>
+      <div class="box">
+          <div class="charts">
+              <b-container class="bv-example-row ">
+                  <b-row>
+                      <b-col>
+                          <div id="myEchartss" style="height: 400px;width: 100px;"></div>
+                      </b-col>
+                  </b-row>
+              </b-container>
+          </div>
+      </div>
+
     </div>
 </template>
 
@@ -23,27 +26,23 @@
                 trigger: "item",
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
             },
-            legend: {
-                orient: 'vertical',
-                top: 'center',
-                left: '65%',
-                data: ["a", "b", "c", "d", "e", "f"]
-            },
+            legend:{},
 
             series: [
-
                 {
                     name: "a",
                     type: "pie",
                     radius: ["50%", "70%"],
                     avoidLabelOverlap: false,
-                    center: ['30%', '50%'],
+                    center: ['40%', '50%'],
                     data: [
-                        {value: 335, name: "b"},
-                        {value: 310, name: "c"},
-                        {value: 234, name: "d"},
-                        {value: 135, name: "e"},
-                        {value: 1548, name: "f"}
+                        {value: 1, name: "Seed round"},
+                        {value: 55, name: "Capital/Insurance Minning"},
+                        {value: 14, name: "Private Sale"},
+                        {value: 4, name: "Public Sale"},
+                        {value: 10, name: "Foundation Reserve"},
+                        {value: 10, name: "Marketing & Operations"},
+                        {value: 6, name: "Team"},
                     ]
                 }
             ],
@@ -56,13 +55,20 @@
 
         public created(){
             if(document.body.clientWidth < 768){
-                this.options.legend = null;
+
                 this.options.series[0].center = ['50%', '50%'];
+            }else{
+                this.options.legend =  {
+                    orient: 'vertical',
+                    top: '20px',
+                    left: '70%',
+                    data: ["Capital/Insurance Minning", "Seed round", "Private Sale", "Public Sale", "Foundation Reserve", "Marketing & Operations","Team"]
+                };
             }
         }
 
         public mounted() {
-            const ele = document.getElementById("myEchartss");
+            let ele:any = document.getElementById("myEchartss");
             ele.style.width = "100%";
 
 
@@ -77,7 +83,18 @@
 <style lang="scss" scoped>
     .wap {
         max-width: 900px;
-        background-color: white;
         margin: 0 auto;
+        h2{
+            height: 40px;
+            font-size: 2rem;
+            font-family: Arial;
+            font-weight: bold;
+            margin: 90px 0 30px 0;
+            color: #F1F1EF;
+
+        }
+        .box{
+            background-color: white;
+        }
     }
 </style>
