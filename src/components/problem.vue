@@ -30,8 +30,6 @@
 
     export default class Problem extends Vue {
 
-        public  title = "123123";
-        private showKey:string = null;
         private problemList: Array<{ ask: string, answer: string,isShow:boolean}>  = [
             {
                 ask: "How can I get Nsure tokens?",
