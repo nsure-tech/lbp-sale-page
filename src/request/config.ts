@@ -1,15 +1,15 @@
 const DOMAIN_CONFIG = {
     // 开发
     dev: {
-        common: 'http://192.168.0.103:8080',
+        common: 'https://napi.nsure.network/lbp',
     },
     // 测试
     test: {
-        common: 'https://test.goomtu.com',
+        common: 'https://napi.nsure.network/lbp',
     },
     // 正式
     prod: {
-        common: 'https://test.goomtu.com',
+        common: 'https://napi.nsure.network/lbp',
     }
 };
 
