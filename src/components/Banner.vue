@@ -75,7 +75,7 @@
         private dataList: Array<any> = [];
         private endList: Array<any> = [];
 
-        private endDate = +new Date("2020-10-17");
+        private endDate = +new Date("2020-10-19");
         private oneDay = 3600 * 100;
         public $echarts: any;
         private options = {
@@ -203,7 +203,7 @@
 
         countdown() {
             // 目标日期时间戳
-            const end = Date.parse("2020-10-16");
+            const end = Date.parse("2020-10-19");
             const now = Date.parse(new Date().toString());
             const msec: any = end - now;
             let day: any = parseInt((msec / 1000 / 60 / 60 / 24).toString());

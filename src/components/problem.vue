@@ -3,12 +3,12 @@
         <h2>What do l need to know? </h2>
         <ul class="one">
             <li></li>
-            <li v-for="item in problemList" :key="item.ask" @click="showAnswer(item)">
+            <li v-for="item in problemList" :key="item.ask" @click="showAnswer(item.isShow)">
                 <p><span></span>{{
                     item.ask
                     }}
                 </p>
-                <h5 v-if="item.isShow">{{ item.answer}}</h5>
+                <h5 v-if="item.isShow == showKey">{{ item.answer}}</h5>
             </li>
         </ul>
 
@@ -30,67 +30,69 @@
 
     export default class Problem extends Vue {
 
-        private problemList: Array<{ ask: string, answer: string,isShow:boolean}>  = [
+        private showKey:string = '';
+
+        private problemList: Array<{ ask: string, answer: string,isShow:string}>  = [
             {
                 ask: "How can I get Nsure tokens?",
-                isShow:false,
+                isShow:'1',
                 answer: "The main options to get NSURE tokens now is either through capital mining or Balancer Liquidity Bootstrapping Pool (LBP). We also have a trading competition coming in a few weeks.",
             },
             {
                 ask: "When will the TGE take place on Balancer LBP?",
-                isShow:false,
+                isShow:'2',
 
                 answer: "The TGE via LBP on Balance will take place on the XXXX starting at XXX UTC, for a duration of approximately 2 days, from block XXXX to block XXXX.\n"
             },
             {
                 ask: "How does the Balancer LBP work?",
-                isShow:false,
+                isShow:'3',
                 answer: "The TGE via LBP on Balance will take place on the XXXX starting at XXX UTC, for a duration of approximately 2 days, from block XXXX to block XXXX.\n"
             },
             {
                 ask: "Why can’t I purchase the tokens from Balancer LBP at the 1st block?\n",
-                isShow:false,
+                isShow:'4',
                 answer: "Participants should not purchase NSURE tokens when LBP starts, there will be a very large slippage to be dealt with."
             },
             {
                 ask: "What is the best strategy to get PERP from LBP?",
-                isShow:false,
+                isShow:'5',
                 answer: "If you want to submit a very large order, the best strategy for you is to divide the order into small chunks and spread them out over 2 days to average down the price."
             },
             {
                 ask: "Can I use tokens other than USDC to get NSURE from LBP?",
-                isShow:false,
+                isShow:'6',
                 answer: "Yes, any token supported on Balancer can be used to exchange for our token (but usually, the exchange rate will be worse due to multiple hops between different pools on Balancer)."
             },
             {
                 ask: "Can I get NSURE from Uniswap?",
-                isShow:false,
+                isShow:'7',
                 answer: "It’s possible that during the three-day existence of the Balancer’s Liquidity Bootstrapping Pool (LBP), someone who has acquired our token and created a pool for people to buy it.\n" +
                     "But we expect there will be lots of scam pools on Uniswap. Therefore, it’s recommended only to get NSURE from our LBP on Balancer."
             },
             {
                 ask: "Which Wallet is supported on Balancer LBP?",
-                isShow:false,
+                isShow:'8',
                 answer: "Metamask, Portis, or any wallet that can be connected to a desktop Dapp through wallet connect should be fine. You can test if your wallet is supported now by going to Balancer’s website and swapping a token to another. https://balancer.exchange"
             },
             {
                 ask:"How about a whitelist and a fixed price?",
-                isShow:false,
+                isShow:'9',
                 answer:"The goal of the Nsure Network is to build a 1) permissionless protocol with 2) price discovery provided by a vAMM. We think it’s not aligned with our goal to have a whitelist and a fixed price."
             },
             {
                 ask:"Who is behind Perpetual Protocol?",
-                isShow:false,
+                isShow:'10',
                 answer:"Our team members are also very decentralized. Team members and strategic partners are from Europe, America, and Asia, core members are based in Shanghai and Shenzhen, all have a solid combined working experience in the insurance and blockchain industry like Venture Capital, crypto exchanges, wallet solution services, multinational insurance companies, actuarial analysis etc."
             },
             {
                 ask:"Who are the strategic investors of the Perpetual Protocol?",
-                isShow:false,
+                isShow:'11',
                 answer:"We have raised $1.45M in a strategic seed & private round led by Based Ventures with participation from Mechanism Capital, Three Commas, AU21, GenBlock and Signal Ventures. Further strategic partners and collaborations to be announced as we move on to Beta."
             },
             {
                 ask:"Weight changes and other parameters for the Nsure LBP",
-                isShow:false,
+                isShow:'12',
                 answer:"Create doc like Perp:\thttps://docs.google.com/spreadsheets/d/10yyVQjPtWsWMP6L--AT0_PsNdZdEo6_Zkpv30qh3CZU/edit#gid=0\n"
             },
 
@@ -126,7 +128,7 @@
         }
 
         showAnswer(ev){
-            ev.isShow = !ev.isShow;
+            this.showKey = ev;
             this.$forceUpdate();
         }
 
