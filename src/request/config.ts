@@ -1,7 +1,8 @@
 const DOMAIN_CONFIG = {
     // 开发
     dev: {
-        common: 'https://napi.nsure.network/lbp',
+        // common: 'https://napi.nsure.network/lbp',
+        common: 'http://192.168.0.101:8080',
     },
     // 测试
     test: {

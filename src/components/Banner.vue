@@ -102,7 +102,7 @@
                 axisLabel: {
                     formatter: (value, idx) => {
                         let date = new Date(value);
-                        return idx == 5 ? "" : [date.getMonth() + 1, date.getDate()].join("-");
+                        return [date.getMonth() + 1, date.getDate()].join("-");
                     }
                 },
                 splitLine: {
@@ -187,12 +187,10 @@
             this.getCurrentPrice();
 
             setInterval(async () => {
-
                 this.getCurrentPrice();
                 this.endList[0] = this.dataList[this.dataList.length - 1];
                 this.chart.setOption(this.options);
-
-            }, 10000);
+            }, 10000,);
         }
 
 
@@ -200,8 +198,10 @@
             let _data = await ApiServer.getCurrentPrice();
             let _spot = await ApiServer.spot();
             this.currentPrice = _data.price * _spot.data.amount;
-            this.dataList.push(this.randomData(_data.price, new Date().toString()),);
+            this.dataList.push(this.randomData(_data.price, this.dataList[this.dataList.length - 1].value[0] + 10000,),);
+
         }
+
 
 
         countdown() {
@@ -225,17 +225,27 @@
 
         dateFmt(date: Date) {
             let
-                month = '' + (date.getMonth() + 1),
-                day = '' + date.getDate(),
-                h = ''+date.getHours(),
-                m= '' + date.getMinutes(),
-                s = '' + date.getSeconds();
-            if (month.length < 2) month = '0' + month;
-            if (day.length < 2) day = '0' + day;
-            if (h.length < 2) h = '0' + h;
-            if (m.length < 2) m = '0' + m;
-            if (s.length < 2) s = '0' + s;
-            return [ month, day].join('-') + '  ' + [h,m,s].join(':');
+                month = "" + (date.getMonth() + 1),
+                day = "" + date.getDate(),
+                h = "" + date.getHours(),
+                m = "" + date.getMinutes(),
+                s = "" + date.getSeconds();
+            if (month.length < 2) {
+                month = "0" + month;
+            }
+            if (day.length < 2) {
+                day = "0" + day;
+            }
+            if (h.length < 2) {
+                h = "0" + h;
+            }
+            if (m.length < 2) {
+                m = "0" + m;
+            }
+            if (s.length < 2) {
+                s = "0" + s;
+            }
+            return [month, day].join("-") + "  " + [h, m, s].join(":");
         };
 
 
@@ -244,8 +254,7 @@
             data.map((ev) => {
                 this.dataList.push(this.randomData(ev.price, ev.date));
             });
-            this.endDate = new Date(data[0].date + 86400000 * 5);
-
+            this.endDate = new Date(data[0].date+ 200000  + 86400000 * 3 );
             this.endListFu();
             this.chart.setOption(this.options);
         }
@@ -254,14 +263,12 @@
         endListFu() {
             let _date = this.dataList[this.dataList.length - 1].value[0];
             let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
-            let _scale: number = 36000000;
-            const factor = 0.4;
-            console.log(this.endDate);
+            const _factor = 0.995;
+            let _scale:number = (this.endDate.valueOf() - _date) /500;
 
-            for (let i = 0; i < ((this.endDate.valueOf() - _date) / _scale); i++) {
+            for (let i = 0; i < 500; i++) {
                 this.endList.push(this.randomData(_tmpPrice, _date + i * _scale),);
-                _tmpPrice = _tmpPrice * factor;
-
+                _tmpPrice = _tmpPrice * _factor;
             }
 
 
