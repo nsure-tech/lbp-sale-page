@@ -4,10 +4,11 @@
 
         <b-container class="bv-example-row echarts">
             <b-row class="justify-content-md-center">
-                <b-col sm="10" >
+                <b-col sm="10">
                     <div class="left">
                         <div id="myEcharts" style="height: 50vh;min-height:300px;width: 600px;max-width: 600px;"></div>
-                        <a href="https://kovan.balancer.exchange/#/swap/0xd0A1E359811322d97991E03f863a0C30C2cF029C/0x92c94707fdc3fE9FCb0278c310911A0371752A20">Access LBP on Balancer</a>
+                        <a href="https://kovan.balancer.exchange/#/swap/0xd0A1E359811322d97991E03f863a0C30C2cF029C/0x92c94707fdc3fE9FCb0278c310911A0371752A20">Access
+                            LBP on Balancer</a>
                     </div>
 
                 </b-col>
@@ -75,8 +76,7 @@
         private dataList: Array<any> = [];
         private endList: Array<any> = [];
 
-        private endDate = +new Date("2020-10-19");
-        private oneDay = 3600 * 100;
+        private endDate;
         public $echarts: any;
         private options = {
             tooltip: {
@@ -88,7 +88,7 @@
                     if (this.endList[1].name < data.name) {
                         return;
                     }
-                    return data.value[1] + " <br/> " + date.getDate() + "/" + (date.getHours()) + "/" + date.getMinutes() + "/" + date.getSeconds();
+                    return data.value[1] + " <br/> " + this.dateFmt(date);
                 },
                 axisPointer: {
                     animation: false
@@ -173,18 +173,21 @@
 
 
         public mounted() {
+            this.init();
+        }
+
+        async init() {
             let ele: any = document.getElementById("myEcharts");
             ele.style.width = "100%";
 
             this.chart = this.$echarts.init(ele);
 
-            this.startListFu();
-            this.getPrice();
+            await this.getPrice();
             this.countdown();
             this.getCurrentPrice();
 
-
             setInterval(async () => {
+
                 this.getCurrentPrice();
                 this.endList[0] = this.dataList[this.dataList.length - 1];
                 this.chart.setOption(this.options);
@@ -203,7 +206,7 @@
 
         countdown() {
             // 目标日期时间戳
-            const end = Date.parse("2020-10-19");
+            const end = this.endDate;
             const now = Date.parse(new Date().toString());
             const msec: any = end - now;
             let day: any = parseInt((msec / 1000 / 60 / 60 / 24).toString());
@@ -219,29 +222,41 @@
             }, 60000);
         }
 
+
+        dateFmt(date: Date) {
+            let
+                month = '' + (date.getMonth() + 1),
+                day = '' + date.getDate(),
+                h = ''+date.getHours(),
+                m= '' + date.getMinutes(),
+                s = '' + date.getSeconds();
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+            if (h.length < 2) h = '0' + h;
+            if (m.length < 2) m = '0' + m;
+            if (s.length < 2) s = '0' + s;
+            return [ month, day].join('-') + '  ' + [h,m,s].join(':');
+        };
+
+
         async getPrice() {
             let data: Array<any> = await ApiServer.getHistoryPrice();
-
-
             data.map((ev) => {
                 this.dataList.push(this.randomData(ev.price, ev.date));
             });
+            this.endDate = new Date(data[0].date + 86400000 * 5);
 
             this.endListFu();
             this.chart.setOption(this.options);
         }
 
 
-        startListFu() {
-            this.dataList.push(this.randomData(0.001, "2020-10-14 00:00:00"),);
-            this.dataList.push(this.randomData(0.001, "2020-10-14 23:59:59"),);
-        }
-
         endListFu() {
             let _date = this.dataList[this.dataList.length - 1].value[0];
             let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
             let _scale: number = 36000000;
             const factor = 0.4;
+            console.log(this.endDate);
 
             for (let i = 0; i < ((this.endDate.valueOf() - _date) / _scale); i++) {
                 this.endList.push(this.randomData(_tmpPrice, _date + i * _scale),);
@@ -287,11 +302,12 @@
 
         }
 
-        .echarts{
+        .echarts {
             height: 60vh;
+
             .left {
                 background-color: #243142;
-padding-bottom: 20px;
+                padding-bottom: 20px;
                 box-sizing: border-box;
                 display: flex;
                 flex-direction: column;
@@ -316,7 +332,7 @@ padding-bottom: 20px;
                 }
             }
 
-            .right-box{
+            .right-box {
 
                 .r_div {
                     width: 140px;
@@ -355,12 +371,12 @@ padding-bottom: 20px;
         }
 
 
-
         .bottom_bar {
             .box {
                 display: flex;
                 justify-content: space-around;
             }
+
             padding: 20px 0;
 
             .child {
@@ -392,12 +408,13 @@ padding-bottom: 20px;
 
         }
 
-        .bottom{
+        .bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
-            p{
+
+            p {
                 width: 30%;
                 height: 60px;
                 margin: 0;
