@@ -23,6 +23,9 @@
                 x2:35,
                 y2:60,
                 bottom:'8%',
+                left:"5%",
+                right:'3%',
+
                 borderWidth:1
             },
 
@@ -34,10 +37,16 @@
             xAxis: {
                 type: "category",
                 boundaryGap: false,
-                data: ["2020Q3", "2020Q4", "2021Q1", "2021Q2", "2021Q3", "2021Q4", "2022Q1", "2022Q2", "2022Q3", "2022Q4", "2023Q1"]
+                data: ["2020Q3", "2020Q4", "2021Q1", "2021Q2", "2021Q3", "2021Q4", "2022Q1", "2022Q2", "2022Q3", "2022Q4", "2023Q1"],
+
             },
             yAxis: {
-                type: "value"
+                type: "value",
+                axisLabel: {
+                    formatter: (value, idx) => {
+                        return (value/1000000) + 'Kw';
+                    }
+                },
             },
             series: [
                 {
@@ -130,7 +139,9 @@
 
 
         public created() {
-
+            if (document.body.clientWidth < 768) {
+                this.options.grid.left = "14%";
+            }
         }
 
         public mounted() {

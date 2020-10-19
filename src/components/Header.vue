@@ -31,10 +31,10 @@
         padding: 50px 0;
         img{
             margin-right: 10Px;
-            height: 74px;
-            width: 74px;
-            min-height: 30Px;
-            min-width: 30Px;
+            height: 65px;
+            width: 65px;
+            /*min-height: 30Px;*/
+            /*min-width: 30Px;*/
         }
         span{
             font-size: 16Px;

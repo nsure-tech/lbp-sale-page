@@ -20,7 +20,7 @@
                         <h4>{{date_}}</h4>
                     </div>
                     <div class="r_div">
-                        <p>Latest Price(USDE)</p>
+                        <p>Latest Price</p>
                         <h4>{{currentPrice? currentPrice.toFixed(5):'---'}}</h4>
                     </div>
 
@@ -77,12 +77,7 @@
         private endDate;
         public $echarts: any;
         private options = {
-            // grid: {
-            //     left: '0',
-            //     right: '0',
-            //     bottom: '1%',
-            //     containLabel: true
-            // },
+
             tooltip: {
                 trigger: "axis",
                 formatter: (params) => {
@@ -106,8 +101,13 @@
                 }),
                 axisLabel: {
                     formatter: (value, idx) => {
-                        let date = new Date(value);
-                        return [date.getMonth() + 1, date.getDate()].join("-");
+                        let _date = new Date(value);
+                        // return this.dateFmt(date);
+
+                        let _houes = _date.getHours() > 10 ? _date.getHours() : `0${_date.getHours()}`;
+                        let _getMinutes = _date.getMinutes() > 10 ? _date.getMinutes() : `0${_date.getMinutes()}`;
+
+                        return [_houes, _getMinutes].join(":");
                     }
                 },
                 splitLine: {
@@ -272,12 +272,16 @@
             let _date = this.dataList[this.dataList.length - 1].value[0];
             let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
             const _factor = 0.995;
-            let _scale: number = (this.endDate.valueOf() - _date) / 500;
+            let _scale: number = (1000*60 * 60 *6 ) / 500;
+
+
 
             for (let i = 0; i < 500; i++) {
                 this.endList.push(this.randomData(_tmpPrice, _date + i * _scale),);
                 _tmpPrice = _tmpPrice * _factor;
             }
+
+            console.log(this.endList[this.endList.length - 1]);
 
 
         }
@@ -357,7 +361,7 @@
                 }
 
                 #myEcharts {
-                    width: 1200px;
+                    width: 1100px;
                     min-width: 300Px;
                     height: 515px;
                 }
