@@ -64,6 +64,7 @@
 <script lang="ts">
     import {Component, Prop, Vue} from "vue-property-decorator";
     import {ApiServer} from "@/request";
+    const  BigNumber = require('big-number');
 
     @Component
     export default class Banner extends Vue {
@@ -73,6 +74,8 @@
 
         private dataList: Array<any> = [];
         private endList: Array<any> = [];
+        // TODO denormalizedWeightAndGetbalance
+        private dWAGL: { balanceA: string, balanceB: string, weightA: string, weightB: string, endDate: number, };
 
         private endDate;
         public $echarts: any;
@@ -258,10 +261,10 @@
 
         async getPrice() {
             let data: any = await ApiServer.getHistoryPrice();
-
             data.priceList.map((ev) => {
                 this.dataList.push(this.randomData(ev.price, ev.date));
             });
+            this.dWAGL = data;
             this.endDate = new Date(data.endDate);
             this.endListFu();
             this.chart.setOption(this.options);
@@ -269,16 +272,20 @@
 
 
         endListFu() {
+            console.log(this.dWAGL);
             let _date = this.dataList[this.dataList.length - 1].value[0];
             let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
-            const _factor = 0.995;
-            let _scale: number = (1000*60 * 60 *6 ) / 500;
+            // const _factor = 0.995;
 
-
-
-            for (let i = 0; i < 500; i++) {
-                this.endList.push(this.randomData(_tmpPrice, _date + i * _scale),);
-                _tmpPrice = _tmpPrice * _factor;
+            let balanceA = BigNumber(this.dWAGL.balanceA);
+            let balanceB = BigNumber(this.dWAGL.balanceB);
+            let weightA = BigNumber(this.dWAGL.weightA);
+            let weightB = BigNumber(this.dWAGL.weightB);
+            for (let i = 0; i < 60 * 6; i++) {
+                _tmpPrice = (balanceA / weightA) / (balanceB / weightB);
+                this.endList.push(this.randomData(_tmpPrice, _date + i * 60000,),);
+                weightA = weightA.plus(9123263888888888);   // every min
+                weightB = BigNumber(50000000000000000000).minus(weightA);
             }
 
             console.log(this.endList[this.endList.length - 1]);
