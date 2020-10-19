@@ -1,35 +1,14 @@
 <template>
-    <div class="header home">
-        <b-navbar toggleable="lg" type="dark">
-            <b-container>
-                <b-navbar-brand href="#">
-                    <div class="logon-wrapper" @click="home">
-                        <img src="@/assets/images/logo@2x.png" width="40" alt="">
-                        <span>Nsure.Network</span>
-                    </div>
-                </b-navbar-brand>
-                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-                <!--<b-collapse id="nav-collapse" is-nav>-->
-                    <!--&lt;!&ndash; Right aligned nav items &ndash;&gt;-->
-                    <!--<b-navbar-nav class="ml-auto">-->
-                        <!--<b-nav-form>-->
-                            <!--<div class="right-list-item">-->
-                                <!--<a href="/Nsure_WP_0.7.pdf" target="_blank" rel="">Whitepaper</a>-->
-                            <!--</div>-->
-                            <!--<div class="right-list-item">-->
-                                <!--<router-link to="/faq">FAQ</router-link>-->
-                            <!--</div>-->
+    <el-row :gutter="10">
+        <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
+            <div class="logo">
+                <img src="@/assets/images/logo@2x.png" width="40" alt="">
+                <span>Nsure.Network</span>
+            </div>
+        </el-col>
+    </el-row>
 
-                        <!--</b-nav-form>-->
-
-                    <!--</b-navbar-nav>-->
-                <!--</b-collapse>-->
-            </b-container>
-        </b-navbar>
-
-    </div>
 </template>
-
 
 <script lang="ts">
     import {Component, Prop, Vue} from "vue-property-decorator";
@@ -43,85 +22,27 @@
 </script>
 
 <style lang="scss" scoped>
-    .header {
+    .logo{
         height: 80px;
-        font-weight: bold;
-        background-color: #fff;
+        min-height: 30Px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        padding: 50px 0;
+        img{
+            margin-right: 10Px;
+            height: 74px;
+            width: 74px;
+            min-height: 30Px;
+            min-width: 30Px;
+        }
+        span{
+            font-size: 16Px;
+            font-family: Arial;
+            font-weight: bold;
+            color: #F1F1EF;
 
-        &.home {
-            background-color: #1B2532;
-
-            span {
-                color: #fff;
-            }
-
-            .pages-wrapper {
-                width: 100%;
-            }
         }
 
-        .header-wrapper {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logon-wrapper {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-
-            img {
-                margin-right: 20px;
-            }
-        }
-
-        .right-list {
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            &-item {
-                margin-left: 40px;
-                font-size: 16px;
-
-                a {
-                    color: #fff;
-                    cursor: pointer;
-                    text-decoration: none;
-                }
-
-                .last-item {
-                    display: block;
-                    cursor: pointer;
-                    width: 148px;
-                    height: 48px;
-                    line-height: 48px;
-                    text-align: center;
-                    /*background: url('../assets/images/button@2x.png') center center no-repeat;*/
-                    background-size: contain;
-                }
-            }
-        }
-
-        .nav-list {
-            display: flex;
-
-            li {
-                font-size: 14px;
-                margin-left: 20px;
-
-                a {
-                    color: #000;
-                    text-decoration: none;
-
-                    &.router-link-active {
-                        color: #00b984;
-                    }
-                }
-            }
-        }
     }
 </style>

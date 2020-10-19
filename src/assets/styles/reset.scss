@@ -31,6 +31,7 @@ body {
     padding: 0 5%;
     margin: 0 auto;
     height: 100vh;
+    box-sizing: border-box;
     color: #fff;
     font-size: 20px;
     line-height: 1.2;
@@ -137,6 +138,7 @@ input[type="number"] {
         }
     }
 }
+a{text-decoration:none;}
 
 .el-dropdown-menu {
     .el-dropdown-menu__item {

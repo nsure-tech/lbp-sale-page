@@ -3,10 +3,8 @@
         <h2>TOKEN ALLOCATION</h2>
 
         <div class="box">
-           <div class="charts">
-               <div id="ladderDiagram" style="height: 500px;"></div>
-           </div>
-       </div>
+            <div id="ladderDiagram"></div>
+        </div>
     </div>
 </template>
 
@@ -15,11 +13,24 @@
 
     @Component
     export default class LadderDiagram extends Vue {
-        private options = {
+        private options: any = {
             tooltip: {
                 trigger: "axis"
             },
-            legend: {},
+            grid:{
+                x:35,
+                y:100,
+                x2:35,
+                y2:60,
+                bottom:'8%',
+                borderWidth:1
+            },
+
+
+            legend: {
+                top: "20px",
+            },
+
             xAxis: {
                 type: "category",
                 boundaryGap: false,
@@ -29,12 +40,11 @@
                 type: "value"
             },
             series: [
-
                 {
                     name: "capital mining",
                     type: "line",
-                    symbol: 'circle',
-                    stack: 'todo',
+                    symbol: "circle",
+                    stack: "todo",
                     areaStyle: {
                         normal: {
                             // opacity: "0.4",
@@ -43,63 +53,11 @@
                     data: [0, 0, 1030000, 2060000, 4140000, 5170000, 6200000, 7230000, 8260000, 9290000, 10320000,]
                 },
                 {
-                    name: "team",
-                    type: "line",
-                    symbol: 'circle',
-                    stack: 'todo',
-
-                    areaStyle: {
-                        normal: {
-                            // opacity: ".4",
-                        }
-                    },
-                    data: [0, 0, 1500000, 1500000, 3000000, 3000000, 4500000, 4500000, 6000000, 6000000, 6000000]
-                },
-                {
-                    name: "public sale",
-                    type: "line",
-                    stack: 'todo',
-
-                    symbol: 'circle',
-                    areaStyle: {
-                        normal: {
-                            // opacity: ".4",
-                        }
-                    },
-                    data: [4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000]
-                },
-                {
-                    name: "private sale",
-                    type: "line",
-                    stack: 'todo',
-
-                    symbol: 'circle',
-                    areaStyle: {
-                        normal: {
-                            // opacity: ".4",
-                        }
-                    },
-                    data: [2800000, 5600000, 8400000, 11200000, 14000000, 14000000, 14000000, 14000000, 14000000, 14000000, 14000000]
-                },
-                {
-                    name: "foundation reserve",
-                    stack: 'todo',
-
-                    type: "line",
-                    symbol: 'circle',
-                    areaStyle: {
-                        normal: {
-                            // opacity: ".4",
-                        }
-                    },
-                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                },
-                {
                     name: "marketing&operation",
                     type: "line",
-                    stack: 'todo',
+                    stack: "todo",
 
-                    symbol: 'circle',
+                    symbol: "circle",
                     areaStyle: {
                         normal: {
                             // opacity: ".4",
@@ -109,18 +67,60 @@
                     ]
                 },
                 {
+                    name: "team",
+                    type: "line",
+                    symbol: "circle",
+                    stack: "todo",
+
+                    areaStyle: {
+                        normal: {
+                            // opacity: ".4",
+                        }
+                    },
+                    data: [0, 0, 1500000, 1500000, 3000000, 3000000, 4500000, 4500000, 6000000, 6000000, 6000000]
+                },
+                {
                     name: "seed",
                     type: "line",
-                    stack: 'todo',
+                    stack: "todo",
 
-                    symbol: 'circle',
+                    symbol: "circle",
                     areaStyle: {
                         normal: {
                             // opacity: ".4",
                         }
                     },
                     data: [200000, 400000, 600000, 800000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000]
-                }
+                },
+
+                {
+                    name: "private sale",
+                    type: "line",
+                    stack: "todo",
+
+                    symbol: "circle",
+                    areaStyle: {
+                        normal: {
+                            // opacity: ".4",
+                        }
+                    },
+                    data: [2800000, 5600000, 8400000, 11200000, 14000000, 14000000, 14000000, 14000000, 14000000, 14000000, 14000000]
+                },
+
+                {
+                    name: "public sale",
+                    type: "line",
+                    stack: "todo",
+
+                    symbol: "circle",
+                    areaStyle: {
+                        normal: {
+                            // opacity: ".4",
+                        }
+                    },
+                    data: [4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000]
+                },
+
             ]
         };
 
@@ -129,9 +129,12 @@
         private chart: any;
 
 
+        public created() {
+
+        }
+
         public mounted() {
             let ele: any = document.getElementById("ladderDiagram");
-            ele.style.width = "100%";
 
             this.chart = this.$echarts.init(ele);
             this.chart.setOption(this.options);
@@ -142,19 +145,28 @@
 
 <style lang="scss" scoped>
     .wap {
-        max-width: 1900px;
         margin: 0 auto;
-        h2{
-            height: 40px;
-            font-size: 2rem;
+
+        h2 {
+            font-size: 30px;
             font-family: Arial;
             font-weight: bold;
-            margin: 90px 0 30px 0;
+            margin: 90px 0 40px 0;
             color: #F1F1EF;
 
         }
-        .box{
+
+        .box {
             background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            #ladderDiagram {
+                height: 700px;
+                min-height: 400Px;
+                width: 1793px;
+            }
         }
     }
 </style>

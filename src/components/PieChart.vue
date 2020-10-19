@@ -1,17 +1,9 @@
 <template>
     <div class="wap">
         <h2>TOKEN ALLOCATION</h2>
-      <div class="box">
-          <div class="charts">
-              <b-container class="bv-example-row ">
-                  <b-row>
-                      <b-col>
-                          <div id="myEchartss" style="height: 400px;width: 100px;"></div>
-                      </b-col>
-                  </b-row>
-              </b-container>
-          </div>
-      </div>
+        <div class="box">
+            <div id="myEchartss" style="height: 400px;"></div>
+        </div>
 
     </div>
 </template>
@@ -21,20 +13,21 @@
 
     @Component
     export default class PieChart extends Vue {
-        private options = {
+        private options:any = {
             tooltip: {
                 trigger: "item",
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
             },
-            legend:{},
+            legend: {},
 
             series: [
                 {
                     name: "a",
                     type: "pie",
                     radius: ["50%", "70%"],
-                    avoidLabelOverlap: false,
-                    center: ['40%', '50%'],
+
+
+                    center: ["40%", "55%"],
                     data: [
                         {value: 1, name: "Seed round"},
                         {value: 55, name: "Capital/Insurance Minning"},
@@ -53,23 +46,38 @@
         private chart: any;
 
 
-        public created(){
-            if(document.body.clientWidth < 768){
+        public created() {
+            if (document.body.clientWidth < 768) {
 
-                this.options.series[0].center = ['50%', '50%'];
-            }else{
-                this.options.legend =  {
-                    orient: 'vertical',
-                    top: '20px',
-                    left: '70%',
-                    data: ["Capital/Insurance Minning", "Seed round", "Private Sale", "Public Sale", "Foundation Reserve", "Marketing & Operations","Team"]
+                this.options.series[0].center = ["50%", "65%"];
+                this.options.series[0].label = {
+                    show: false,
+                    position: 'center'
+                };
+
+                this.options.series[0].emphasis = {
+                    label: {
+                        show: true,
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                    }
+                };
+                this.options.series[0].labelLine = {
+                    show: false
+                };
+                this.options.tooltip = null;
+            } else {
+                this.options.legend = {
+                    orient: "vertical",
+                    top: "20px",
+                    left: "70%",
+                    data: ["Capital/Insurance Minning", "Seed round", "Private Sale", "Public Sale", "Foundation Reserve", "Marketing & Operations", "Team"]
                 };
             }
         }
 
         public mounted() {
-            let ele:any = document.getElementById("myEchartss");
-            ele.style.width = "100%";
+            let ele: any = document.getElementById("myEchartss");
 
 
             this.chart = this.$echarts.init(ele);
@@ -82,19 +90,30 @@
 
 <style lang="scss" scoped>
     .wap {
-        max-width: 900px;
+        /*max-width: 900px;*/
         margin: 0 auto;
-        h2{
-            height: 40px;
-            font-size: 2rem;
+
+        h2 {
+            font-size: 30px;
             font-family: Arial;
             font-weight: bold;
-            margin: 90px 0 30px 0;
+            margin: 90px 0 40px 0;
             color: #F1F1EF;
 
         }
-        .box{
+
+        .box {
             background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            #myEchartss {
+                height: 400px;
+                width:  1793px;
+                /*width: 1793px;*/
+                /*width: 300Px;*/
+            }
         }
     }
 </style>

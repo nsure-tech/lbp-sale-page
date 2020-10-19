@@ -1,5 +1,5 @@
 {
-  "name": "nsure.blp",
+  "name": "nsure.lbp",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,11 +9,11 @@
   },
   "dependencies": {
     "@types/echarts": "^4.8.1",
+    "amfe-flexible": "^2.2.1",
     "axios": "^0.19.2",
-    "bootstrap": "^4.5.3",
-    "bootstrap-vue": "^2.17.3",
     "core-js": "^3.6.5",
     "echarts": "^4.9.0",
+    "element-ui": "^2.13.2",
     "vue": "^2.6.12",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.2",
@@ -25,6 +25,7 @@
     "@vue/cli-plugin-typescript": "^4.5.0",
     "@vue/cli-service": "^4.5.0",
     "node-sass": "^4.9.2",
+    "postcss-pxtorem": "^5.1.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",

@@ -40,26 +40,27 @@
 <style lang="scss">
     #app {
         .caveat{
-            margin: 80px auto 80px auto;
+            margin: 120px auto 80px auto;
             box-sizing: border-box;
-            max-width: 900px;
+
+            /*max-width: 900px;*/
 
 
             .box{
                 position: relative;
                 img{
-                    width: 60px;
-                    height: 46px;
+                    width: 119px;
+                    height: 92px;
                     position: absolute;
                     left: 0;
-                    top: -30px;
+                    top: -70px;
                 }
                 .text{
                     background: #0a1525;
-                    padding:  26px 12px;
+                    padding: 30px 30px;
                     box-sizing: border-box;
                     text-align: left;
-                    font-size: 1rem;
+                    font-size: 32px;
                     font-family: Arial;
                     font-weight: bold;
                     color: #F1F1EF;

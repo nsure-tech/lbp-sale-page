@@ -3,18 +3,13 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import './assets/styles/reset.scss';
-import { BootstrapVue } from 'bootstrap-vue'
-import "bootstrap/dist/css/bootstrap.min.css"
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-
+import 'amfe-flexible';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/display.css';
 import Echart from 'echarts';
-Vue.use(BootstrapVue);
-
 Vue.config.productionTip = false;
-
-
-
-
+Vue.use(ElementUI);
 Vue.prototype.$echarts = Echart;
 new Vue({
     router,

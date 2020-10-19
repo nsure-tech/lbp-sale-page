@@ -2,44 +2,39 @@
     <div class="wap">
         <h2>Liquidity Bootstrapping Pool for Nsure</h2>
 
-        <b-container class="bv-example-row echarts">
-            <b-row class="justify-content-md-center">
-                <b-col sm="10">
-                    <div class="left">
-                        <div id="myEcharts" style="height: 50vh;min-height:300px;width: 600px;max-width: 600px;"></div>
-                        <a href="https://kovan.balancer.exchange/#/swap/0xd0A1E359811322d97991E03f863a0C30C2cF029C/0x92c94707fdc3fE9FCb0278c310911A0371752A20">Access
-                            LBP on Balancer</a>
+        <el-row class="echarts" :gutter="24" type="flex">
+            <el-col :sm="19">
+                <div class="left">
+                    <span href=""> </span>
+                    <div id="myEcharts" style="min-height:300px;"></div>
+                    <a target="_Blank"
+                       href="https://kovan.balancer.exchange/#/swap/0xd0A1E359811322d97991E03f863a0C30C2cF029C/0x92c94707fdc3fE9FCb0278c310911A0371752A20">Access
+                        LBP on Balancer</a>
+                </div>
+            </el-col>
+
+            <el-col :sm="4" class="hidden-xs-only">
+                <el-row type="flex" style="height: 100%" class="echarts_right">
+                    <div class="r_div">
+                        <p>LBP Ends in</p>
+                        <h4>{{date_}}</h4>
+                    </div>
+                    <div class="r_div">
+                        <p>Latest Price(USDE)</p>
+                        <h4>{{currentPrice? currentPrice.toFixed(5):'---'}}</h4>
                     </div>
 
-                </b-col>
-                <b-col sm="2" class="d-none d-sm-block right-box">
-                    <b-container style="height: 100%;" class="bv-example-row bv-example-row-flex-cols">
-                        <b-row align-v="center" style="height: 100%;" align-content="between">
-                            <b-col xs="3">
-                                <div class="r_div">
-                                    <p>LBP Ends in</p>
-                                    <h4>{{date_}}</h4>
-                                </div>
-                            </b-col>
-                            <b-col xs="3">
-                                <div class="r_div">
-                                    <p>Latest Price(USDE)</p>
-                                    <h4>{{currentPrice? currentPrice.toFixed(5):'---'}}</h4>
-                                </div>
-                            </b-col>
-                            <b-col xs="3">
-                                <div class="r_div">
-                                    <p>Estimated Market cap at current price</p>
-                                </div>
-                            </b-col>
-                        </b-row>
-                    </b-container>
+                    <div class="r_div">
+                        <p>Estimated Market cap at current price</p>
+                        <h4>{{currentPrice? (currentPrice * 5000000).toFixed(2) :'---'}}</h4>
+                    </div>
+                </el-row>
 
-                </b-col>
-            </b-row>
-        </b-container>
+            </el-col>
 
-        <div class="bottom_bar d-block d-sm-none">
+        </el-row>
+
+        <div class="bottom_bar hidden-sm-and-up">
             <div class="box">
                 <div class="child">
                     <p>LBP Ends in</p>
@@ -53,13 +48,16 @@
                     <p>Estimated Market cap at current price</p>
                 </div>
             </div>
+        </div>
 
-        </div>
-        <div class="bottom">
-            <p>whitepaper</p>
-            <p>NSURE LBP sheet</p>
-            <p>MUST READ</p>
-        </div>
+        <el-row :gutter="24" class="bottom">
+            <el-col :sm="8">
+                <a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">whitepaper</a>
+            </el-col>
+            <el-col :sm="8"><a target="_Blank" href="https://nsure.network">NSURE LBP sheet</a></el-col>
+            <el-col :sm="8"><a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">whitepaper</a></el-col>
+        </el-row>
+
     </div>
 </template>
 
@@ -79,6 +77,12 @@
         private endDate;
         public $echarts: any;
         private options = {
+            // grid: {
+            //     left: '0',
+            //     right: '0',
+            //     bottom: '1%',
+            //     containLabel: true
+            // },
             tooltip: {
                 trigger: "axis",
                 formatter: (params) => {
@@ -94,6 +98,7 @@
                     animation: false
                 }
             },
+
             xAxis: {
                 type: "time",
                 data: this.dataList.map((item) => {
@@ -131,8 +136,9 @@
                 {
                     type: "line",
                     showSymbol: false,
-                    hoverAnimation: false,
+                    // hoverAnimation: true,
                     data: this.dataList,
+                    hoverAnimation: false,
                     smooth: true,
                     lineStyle: {
                         color: "red",
@@ -178,7 +184,6 @@
 
         async init() {
             let ele: any = document.getElementById("myEcharts");
-            ele.style.width = "100%";
 
             this.chart = this.$echarts.init(ele);
 
@@ -197,11 +202,10 @@
         async getCurrentPrice() {
             let _data = await ApiServer.getCurrentPrice();
             let _spot = await ApiServer.spot();
-            this.currentPrice = _data.price * _spot.data.amount;
+            this.currentPrice = _data.price;
             this.dataList.push(this.randomData(_data.price, this.dataList[this.dataList.length - 1].value[0] + 10000,),);
 
         }
-
 
 
         countdown() {
@@ -209,6 +213,9 @@
             const end = this.endDate;
             const now = Date.parse(new Date().toString());
             const msec: any = end - now;
+            if (msec < 0) {
+                return this.date_ = `End`;
+            }
             let day: any = parseInt((msec / 1000 / 60 / 60 / 24).toString());
             let hr: any = parseInt((msec / 1000 / 60 / 60 % 24).toString()) + day * 24;
             let min: any = parseInt((msec / 1000 / 60 % 60).toString());
@@ -250,11 +257,12 @@
 
 
         async getPrice() {
-            let data: Array<any> = await ApiServer.getHistoryPrice();
-            data.map((ev) => {
+            let data: any = await ApiServer.getHistoryPrice();
+
+            data.priceList.map((ev) => {
                 this.dataList.push(this.randomData(ev.price, ev.date));
             });
-            this.endDate = new Date(data[0].date+ 200000  + 86400000 * 3 );
+            this.endDate = new Date(data.endDate);
             this.endListFu();
             this.chart.setOption(this.options);
         }
@@ -264,7 +272,7 @@
             let _date = this.dataList[this.dataList.length - 1].value[0];
             let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
             const _factor = 0.995;
-            let _scale:number = (this.endDate.valueOf() - _date) /500;
+            let _scale: number = (this.endDate.valueOf() - _date) / 500;
 
             for (let i = 0; i < 500; i++) {
                 this.endList.push(this.randomData(_tmpPrice, _date + i * _scale),);
@@ -294,14 +302,13 @@
     }
 
     .wap {
-        height: 90vh;
         margin: 0;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
 
         h2 {
-            font-size: 2rem;
+            font-size: 72px;
             font-family: Arial;
             font-weight: bold;
             color: #F1F1EF;
@@ -310,104 +317,132 @@
         }
 
         .echarts {
-            height: 60vh;
+            height: 700px;
+
+            min-height: 360Px;
+            padding: 0;
+            margin: 50px;
 
             .left {
-                background-color: #243142;
-                padding-bottom: 20px;
+                height: 100%;
+                padding: 42px 0;
                 box-sizing: border-box;
-                display: flex;
+                background-color: #243142;
                 flex-direction: column;
+                justify-content: space-around;
+                display: flex;
                 align-items: center;
 
+
                 a {
-                    display: block;
                     background-color: #09c992;
                     border-radius: 10px;
                     padding: 10px;
-                    width: 300px;
+                    width: 600px;
+                    min-width: 200Px;
                     margin: 0 auto;
-                    height: 50px;
+                    min-height: 30Px;
+                    height: 70px;
                     line-height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
 
-                    font-size: 1rem;
+                    font-size: 18px;
                     font-family: Arial;
                     font-weight: bold;
                     color: #1B2532;
                     text-align: center;
 
                 }
+
+                #myEcharts {
+                    width: 1200px;
+                    min-width: 300Px;
+                    height: 515px;
+                }
             }
 
-            .right-box {
+            .echarts_right {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
 
-                .r_div {
-                    width: 140px;
-                    height: 16vh;
-                    background-color: #24303e;
-                    padding: 10px;
+                div {
+                    height: 30%;
+                    background-color: #243142;
+                    text-align: center;
+                    padding: 20px;
                     box-sizing: border-box;
-                    display: flex;
-                    flex-direction: column;
-                    justify-items: center;
+                    position: relative;
 
                     p {
-                        font-weight: bold;
-                        font-size: 0.5rem;
+                        font-size: 20px;
                         font-family: Arial;
+                        font-weight: bold;
                         color: #F1F1EF;
-
                     }
 
                     h4 {
-                        flex: 1;
-                        display: flex;
-                        justify-items: center;
-                        align-items: center;
-                        justify-content: center;
-
-                        font-size: 0.5rem;
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        top: 0;
+                        height: 0;
+                        margin: auto;
+                        font-size: 20px;
                         font-family: Arial;
                         font-weight: bold;
                         color: #F1F1EF;
+
                     }
-
                 }
-
             }
         }
 
 
         .bottom_bar {
+
             .box {
+                height: 80Px;
                 display: flex;
-                justify-content: space-around;
+                justify-content: space-between;
             }
 
             padding: 20px 0;
 
             .child {
+                position: relative;
                 width: 29%;
-                height: 80px;
-                padding: 10px;
+                height: 100%;
                 box-sizing: border-box;
                 background-color: #24303e;
+                padding: 20px;
+                box-sizing: border-box;
 
                 p {
                     font-size: 12px;
                     color: white;
                     font-weight: bold;
                     margin: 0;
+                    text-align: center;
                 }
 
                 h4 {
-                    flex: 1;
-                    display: flex;
-                    justify-items: center;
-                    align-items: center;
-                    font-size: 14px;
-                    color: white;
-                    justify-content: center;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    top: 0;
+                    margin: auto;
+                    text-align: center;
+                    font-size: 20px;
+                    height: 20px;
+                    font-family: Arial;
+                    font-weight: bold;
+                    color: #F1F1EF;
+
                 }
 
             }
@@ -416,23 +451,21 @@
         }
 
         .bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
 
-            p {
-                width: 30%;
-                height: 60px;
-                margin: 0;
+            a {
+                margin-top: 10Px;
+                line-height: 80px;
+                min-height: 30Px;
                 text-align: center;
-                line-height: 60px;
                 border: 3px solid #57F9AF;
-                border-radius: 64px;
-                font-size: 1rem;
+                border-radius: 100px;
+                font-size: 20px;
                 font-family: Arial;
                 font-weight: bold;
                 color: #57F9AF;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
     }
