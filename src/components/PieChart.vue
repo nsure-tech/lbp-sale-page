@@ -13,7 +13,7 @@
 
     @Component
     export default class PieChart extends Vue {
-        private options:any = {
+        private options: any = {
             tooltip: {
                 trigger: "item",
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -52,14 +52,14 @@
                 this.options.series[0].center = ["50%", "65%"];
                 this.options.series[0].label = {
                     show: false,
-                    position: 'center'
+                    position: "center"
                 };
 
                 this.options.series[0].emphasis = {
                     label: {
                         show: true,
-                            fontSize: '30',
-                            fontWeight: 'bold'
+                        fontSize: "30",
+                        fontWeight: "bold"
                     }
                 };
                 this.options.series[0].labelLine = {
@@ -90,15 +90,20 @@
 
 <style lang="scss" scoped>
     .wap {
+        background-color: white;
         /*max-width: 900px;*/
         margin: 0 auto;
+        padding: 30px 5% 80px 5%;
 
         h2 {
-            font-size: 52px;
-            font-family: OpenSans-Regular;
+            font-size: 30px;
             font-weight: bold;
-            margin: 90px 0 40px 0;
-            color: #F1F1EF;
+            text-align: left;
+            color: #2F8FE9;
+            margin-bottom:20px;
+            @include  respond-to(xs){
+                text-align: center;
+            }
 
         }
 
@@ -110,7 +115,7 @@
 
             #myEchartss {
                 height: 400px;
-                width:  1793px;
+                width: 100%;
                 /*width: 1793px;*/
                 /*width: 300Px;*/
             }

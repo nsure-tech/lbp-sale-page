@@ -1,19 +1,4 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul {
-    margin: 0;
-    padding: 0;
-}
 
-ul,
-li {
-    list-style: none;
-}
 
 section:focus,
 button:focus,
@@ -25,10 +10,31 @@ input:focus {
     font-family: OpenSans-Regular;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+    margin: 0;
+    padding: 0;
+    font-family: "OpenSans-Regular";
+
+}
+
+ul,
+li {
+    list-style: none;
+    font-family: "OpenSans-Regular";
+
+}
+
 body {
     max-width: 100%;
     min-width: 100%;
-    padding: 0 15%;
+    //padding: 0 6%;
     margin: 0 auto;
     height: 100vh;
     box-sizing: border-box;
@@ -45,7 +51,7 @@ body {
 
 @media only screen and (max-width: 767px){
     body {
-        padding: 0 5%;
+        //padding: 0 5%;
     }
 }
 
@@ -200,19 +206,3 @@ table {
 }
 
 
-$type: monster;
-p {
-    @if $type == ocean {
-        color: blue;
-    } @else if $type == matador {
-        color: red;
-    } @else if $type == monster {
-        color: green;
-    } @else {
-        color: black;
-    }
-}
-
-@mixin size72{
-
-}

@@ -17,16 +17,16 @@
             tooltip: {
                 trigger: "axis"
             },
-            grid:{
-                x:35,
-                y:100,
-                x2:35,
-                y2:60,
-                bottom:'8%',
-                left:"5%",
-                right:'3%',
+            grid: {
+                x: 35,
+                y: 100,
+                x2: 35,
+                y2: 60,
+                bottom: "8%",
+                left: "5%",
+                right: "3%",
 
-                borderWidth:1
+                borderWidth: 1
             },
 
 
@@ -44,7 +44,7 @@
                 type: "value",
                 axisLabel: {
                     formatter: (value, idx) => {
-                        return (value/1000000) + 'Kw';
+                        return (value / 1000000) + "Kw";
                     }
                 },
             },
@@ -156,14 +156,21 @@
 
 <style lang="scss" scoped>
     .wap {
+        background-color: white;
+        /*max-width: 900px;*/
         margin: 0 auto;
+        padding: 30px 5%;
 
         h2 {
-            font-size: 52px;
-            font-family: OpenSans-Regular;
+            font-size: 30px;
             font-weight: bold;
-            margin: 90px 0 40px 0;
-            color: #F1F1EF;
+            text-align: left;
+            margin-bottom: 20px;
+            color: #2F8FE9;
+            @include respond-to(xs) {
+                text-align: center;
+            }
+
 
         }
 
@@ -174,9 +181,12 @@
             align-items: center;
 
             #ladderDiagram {
-                height: 700px;
+                height: 500px;
                 min-height: 400Px;
                 width: 1793px;
+                @include  respond-to(xs){
+                    height: 450px;
+                }
             }
         }
     }

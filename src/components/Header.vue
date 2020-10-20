@@ -20,17 +20,15 @@
 <style lang="scss" scoped>
     .logo{
         height: 80px;
+        padding: 0 3%;
         min-height: 30Px;
         display: flex;
         justify-content: left;
         align-items: center;
-        padding: 30px 0;
         img{
-            margin-right: 10Px;
-            height: 65px;
-            width: 65px;
-            /*min-height: 30Px;*/
-            /*min-width: 30Px;*/
+            margin-right: 15px;
+            height: 40px;
+            width: 40px;
         }
         span{
             font-size: 16Px;

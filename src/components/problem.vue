@@ -1,29 +1,34 @@
 <template>
-    <div class="wap">
-        <h2>What do l need to know? </h2>
-        <ul class="one">
-            <li></li>
-            <li v-for="item in problemList" :key="item.ask" @click="showAnswer(item.isShow)">
-                <div>
-                    <p><span></span>{{
-                        item.ask
-                        }}
-                    </p>
-                </div>
-                <h5 v-if="item.isShow == showKey">{{ item.answer}}</h5>
-            </li>
-        </ul>
+    <div class="wrpBox">
+        <div class="bg-white wap">
+            <div>
+                <h2><p>What do l need to know? </p></h2>
+                <ul class="one">
 
-        <h3>NSURE Token Sale and Economics</h3>
+                    <li v-for="item in problemList" :key="item.ask" @click="showAnswer(item.isShow)">
+                        <div>
+                            <p><span></span>{{
+                                item.ask
+                                }}
+                            </p>
+                        </div>
+                        <h5 v-if="item.isShow == showKey">{{ item.answer}}</h5>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wap">
+            <h3>NSURE Token Sale and Economics</h3>
 
-        <ul class="tow">
-            <li v-for="item in economicsList" :key="item.answer">
-                <p>{{item.one }}</p>
-                <p>{{item.tow }}</p>
-            </li>
-        </ul>
-
+            <ul class="tow">
+                <li v-for="item in economicsList" :key="item.answer">
+                    <p>{{item.one }}</p>
+                    <p>{{item.tow }}</p>
+                </li>
+            </ul>
+        </div>
     </div>
+
 </template>
 
 <script lang="ts">
@@ -193,144 +198,166 @@
 </script>
 
 <style lang="scss" scoped>
-    .wap {
-        margin: 0 auto;
-        position: relative;
-        text-align: left;
 
-        h2 {
-            position: absolute;
-            color: #1B2532;
-            /*max-height: 50Px;*/
-            text-align: center;
-            width: 60%;
-            margin: 0 auto 0 auto;
-            left: 0;
-            right: 0;
-            top: -25px;
-            min-height: 30Px;
-            height: 90px;
-            font-size: 60px;
-            background-color: #09c992;
-            border-radius: 3px;
-            padding: 0;
-
-            font-family: OpenSans-Regular;
-            font-weight: bold;
-            color: #1B2532;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
+    .wrpBox{
+        .bg-white{
+            background-color: white;
         }
+        .wap {
+
+            margin: 0 auto;
+            padding: 40px 5% 60px 5%;
+
+            text-align: left;
+
+            h2 {
+
+                margin: 0 auto 0 auto;
 
 
-        .tow {
-            li {
-                text-align: left;
-                line-height: 50px;
-                /*padding-left: 20px;*/
-                display: flex;
-                justify-content: left;
-                align-content: center;
-                align-items: center;
-                background-color: #2d3a4c;
-                font-family: OpenSans-Regular;
-                font-weight: 400;
-                color: #57F9AF;
-                padding: 30px 0 30px 30px;
+                /*padding: 20px;*/
+                background-color: #DEDEDE;
+                text-align: center;
+                position: relative;
+                height: 70px;
 
                 p {
-                    flex: 1;
-                    margin: 0;
-                    text-align: center;
-                    line-height: 100%;
-                    font-size: 30px;
+                    position: absolute;
+                    top: -30px;
+                    min-width: 300px;
+                    left: 0;
+                    right: 0;
+                    margin: 0 auto;
+                    width: 60%;
+                    max-width: 320px;
+                    background-color: #B6B6B6;
+                    border-radius: 3px;
+                    font-size: 20px;
+                    display: inline-block;
+                    font-weight: bold;
+                    color: #232323;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 20px 0;
+
+                }
+
+            }
+
+
+            .tow {
+                li {
+                    text-align: left;
+                    line-height: 50px;
+                    /*padding-left: 20px;*/
+                    display: flex;
+                    justify-content: left;
+                    align-content: center;
+                    align-items: center;
+                    background-color: #243142;
                     font-family: OpenSans-Regular;
                     font-weight: 400;
                     color: #57F9AF;
-
-
-                }
-            }
-
-            li:nth-of-type(even) {
-                background-color: #25313f;
-            }
-        }
-
-        .one {
-            li {
-                min-height: 20Px;
-                text-align: left;
-                background-color: #25313f;
-
-                /*height: 158px;*/
-                padding: 30px 0 30px 30px;
-
-
-                div {
-                    display: flex;
-                    align-items: center;
+                    padding: 20px 0 20px 30px;
 
                     p {
-                        display: flex;
+                        flex: 1;
                         margin: 0;
-                        justify-content: left;
-                        align-content: center;
-                        align-items: center;
-                        font-size: 30px;
+                        text-align: center;
+                        line-height: 100%;
+                      @include size20;
                         font-family: OpenSans-Regular;
                         font-weight: 400;
-                        color: #57F9AF;
-                        /*line-height: 1.2em;*/
-                        span {
-                            display: block;
-                            width: 26px;
-                            height: 26px;
-                            border-radius: 100px;
-                            background-color: #57F9AF;
-                            margin-right: 20px;
+                        color: #2F8FE9;
 
-                        }
+
                     }
                 }
 
+                li:nth-of-type(even) {
+                    background-color: #1B2532;
+                }
+            }
 
-                h5 {
-                    color: white;
-                    font-size: 30px;
-                    padding-top: 10Px;
-                    padding-right: 10px;
+
+            h3 {
+                font-size: 30px;
+                font-weight: bold;
+                color: #2F8FE9;
+                margin-bottom: 30px;
+                @include respond-to(xs){
+                    font-size: 22px;
+                    text-align: center;
                 }
 
-
             }
 
-            li:nth-of-type(even) {
-                background-color: #2d3a4c
+            .one {
+                li {
+                    min-height: 20Px;
+                    text-align: left;
+                    background-color: #F0EFEF;
+
+                    padding: 25px 0 25px 30px;
+
+
+                    div {
+                        display: flex;
+                        align-items: center;
+
+                        p {
+                            display: flex;
+                            margin: 0;
+                            justify-content: left;
+                            align-content: center;
+                            align-items: center;
+                            @include size20;
+
+                            font-weight: 400;
+                            color: #232323;
+                            span {
+                                display: block;
+                                width: 15px;
+                                height: 15px;
+                                border-radius: 100%;
+                                background-color: #232323;
+                                margin-right: 20px;
+                            }
+                        }
+                    }
+
+
+                    h5 {
+                        color: #232323;
+                        font-size: 20px;
+                        padding-top: 10Px;
+                        padding-right: 10px;
+                    }
+
+
+                }
+
+                li:nth-of-type(even) {
+                    background-color: #DEDEDE;
+
+                }
             }
-        }
 
 
-        h3 {
-            font-size: 52px;
-            font-family: OpenSans-Regular;
-            font-weight: bold;
-            color: #57F9AF;
-            margin: 60px 0 30px 0;
 
         }
     }
 
 
+
     @media only screen and (max-width: 767px) {
         .wap {
-            .one,.tow {
+            .one, .tow {
                 li {
-                    p{
+                    p {
                         font-size: 60px;
                     }
+
                     div {
                         p {
                             font-size: 60px;

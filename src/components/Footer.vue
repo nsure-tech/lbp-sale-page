@@ -63,7 +63,7 @@
     .footer {
         color: #fff;
         background-color: #1B2532;
-        padding: 60px 0 100px;
+        padding: 30px 7% 50px 7%;
 
         .log {
             padding-top: 20px;
@@ -90,7 +90,7 @@
                 }
 
                 &-list {
-                    font-size: 40px;
+                    font-size: 14px;
 
                     li {
                         margin-bottom: 15Px;
@@ -103,7 +103,7 @@
                         }
                         a {
                             color: #fff;
-                            font-size: 30px;
+                            /*font-size: 30px;*/
                         }
                     }
                 }
@@ -111,24 +111,4 @@
         }
     }
 
-    @media only screen and (max-width: 767px) {
-        .footer .footer-right-item-list li a{
-            font-size: 40px;
-
-        }
-        .wap {
-            .one,.tow {
-                li {
-                    p{
-                        font-size: 60px;
-                    }
-                    div {
-                        p {
-                            font-size: 60px;
-                        }
-                    }
-                }
-            }
-        }
-    }
 </style>

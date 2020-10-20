@@ -16,7 +16,6 @@
         <Problem></Problem>
 
         <PieChart/>
-        <div style="height: 20px"></div>
         <LadderDiagram/>
         <Footer/>
     </div>
@@ -40,8 +39,9 @@
 <style lang="scss">
     #app {
         .caveat{
-            margin: 120px auto 80px auto;
+            margin: 50px 0;
             box-sizing: border-box;
+            padding: 0 5%;
 
             /*max-width: 900px;*/
 
@@ -49,18 +49,18 @@
             .box{
                 position: relative;
                 img{
-                    width: 119px;
-                    height: 92px;
+                    width: 50px;
+                    height: 40px;
                     position: absolute;
-                    left: 0;
-                    top: -70px;
+                    left: 10px;
+                    top: -25px;
                 }
                 .text{
                     background: #0a1525;
-                    padding: 30px 30px;
+                    padding: 18px;
                     box-sizing: border-box;
                     text-align: left;
-                    font-size: 17Px;
+                    font-size: 18Px;
                     font-family: OpenSans-Regular;
                     font-weight: bold;
                     color: #F1F1EF;
