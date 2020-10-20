@@ -21,8 +21,8 @@ input:focus {
     outline: none;
 }
 @font-face{
-    src : url('../font/arial.ttf');
-    font-family: Arial;
+    src : url('../font/OpenSans-Regular.ttf');
+    font-family: OpenSans-Regular;
 }
 
 body {
@@ -150,7 +150,7 @@ a{text-decoration:none;}
 .el-dropdown-menu {
     .el-dropdown-menu__item {
         color: #000;
-        font-family: Avenir, Helvetica, Arial, sans-serif;
+        font-family: Avenir, Helvetica, OpenSans-Regular, sans-serif;
     }
 }
 
@@ -198,3 +198,5 @@ table {
     opacity: 0.4;
     padding: 20px 0;
 }
+
+

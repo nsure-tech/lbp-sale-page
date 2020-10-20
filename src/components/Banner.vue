@@ -323,7 +323,7 @@
 
         h2 {
             font-size: 72px;
-            font-family: Arial;
+            font-family: OpenSans-Regular;
             font-weight: bold;
             color: #F1F1EF;
             text-align: center;
@@ -363,7 +363,7 @@
                     align-items: center;
                     font-size:40px;
                     /*font-size: 18px;*/
-                    font-family: Arial;
+                    font-family: OpenSans-Regular;
                     font-weight: bold;
                     color: #1B2532;
                     text-align: center;
@@ -394,7 +394,7 @@
 
                     p {
                         font-size: 20px;
-                        font-family: Arial;
+                        font-family: OpenSans-Regular;
                         font-weight: bold;
                         color: #F1F1EF;
                     }
@@ -408,7 +408,7 @@
                         height: 0;
                         margin: auto;
                         font-size: 20px;
-                        font-family: Arial;
+                        font-family: OpenSans-Regular;
                         font-weight: bold;
                         color: #F1F1EF;
 
@@ -455,7 +455,7 @@
                     text-align: center;
                     font-size: 40px;
                     height: 20px;
-                    font-family: Arial;
+                    font-family: OpenSans-Regular;
                     font-weight: bold;
                     color: #F1F1EF;
 
@@ -476,12 +476,26 @@
                 border: 3px solid #57F9AF;
                 border-radius: 100px;
                 font-size: 40px;
-                font-family: Arial;
+                font-family: OpenSans-Regular;
                 font-weight: bold;
                 color: #57F9AF;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        .footer .footer-right-item-list li a{
+            font-size: 40px;
+
+        }
+        .wap {
+            .bottom {
+                a{
+                    font-size: 50px;
+                }
             }
         }
     }

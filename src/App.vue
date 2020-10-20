@@ -60,19 +60,24 @@
                     padding: 30px 30px;
                     box-sizing: border-box;
                     text-align: left;
-                    font-size: 38px;
-                    font-family: Arial;
+                    font-size: 17Px;
+                    font-family: OpenSans-Regular;
                     font-weight: bold;
                     color: #F1F1EF;
                 }
             }
         }
-        font-family: Avenir, Helvetica, Arial, sans-serif;
+        font-family: Avenir, Helvetica, OpenSans-Regular, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
         background-color: #1B2532;
+    }
+
+
+    @media only screen and (max-width: 767px) {
+
     }
 
 </style>

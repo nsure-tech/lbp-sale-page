@@ -1,12 +1,8 @@
 <template>
-    <el-row :gutter="10">
-        <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
-            <div class="logo">
-                <img src="@/assets/images/logo@2x.png" width="40" alt="">
-                <span>Nsure.Network</span>
-            </div>
-        </el-col>
-    </el-row>
+    <div class="logo">
+        <img src="@/assets/images/logo@2x.png" width="40" alt="">
+        <span>Nsure.Network</span>
+    </div>
 
 </template>
 
@@ -28,7 +24,7 @@
         display: flex;
         justify-content: left;
         align-items: center;
-        padding: 50px 0;
+        padding: 30px 0;
         img{
             margin-right: 10Px;
             height: 65px;
@@ -38,7 +34,7 @@
         }
         span{
             font-size: 16Px;
-            font-family: Arial;
+            font-family: OpenSans-Regular;
             font-weight: bold;
             color: #F1F1EF;
 

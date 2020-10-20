@@ -95,7 +95,7 @@
 
         h2 {
             font-size: 52px;
-            font-family: Arial;
+            font-family: OpenSans-Regular;
             font-weight: bold;
             margin: 90px 0 40px 0;
             color: #F1F1EF;

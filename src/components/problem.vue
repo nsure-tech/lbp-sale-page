@@ -194,27 +194,28 @@
 
 <style lang="scss" scoped>
     .wap {
-        margin: 25px auto 0 auto;
+        margin: 0 auto;
         position: relative;
         text-align: left;
 
         h2 {
             position: absolute;
             color: #1B2532;
-            max-height: 50Px;
+            /*max-height: 50Px;*/
             text-align: center;
             width: 60%;
             margin: 0 auto 0 auto;
             left: 0;
             right: 0;
             top: -25px;
-            height: 120px;
+            min-height: 30Px;
+            height: 90px;
             font-size: 60px;
             background-color: #09c992;
             border-radius: 3px;
             padding: 0;
 
-            font-family: Arial;
+            font-family: OpenSans-Regular;
             font-weight: bold;
             color: #1B2532;
             display: flex;
@@ -234,7 +235,7 @@
                 align-content: center;
                 align-items: center;
                 background-color: #2d3a4c;
-                font-family: Arial;
+                font-family: OpenSans-Regular;
                 font-weight: 400;
                 color: #57F9AF;
                 padding: 30px 0 30px 30px;
@@ -245,7 +246,7 @@
                     text-align: center;
                     line-height: 100%;
                     font-size: 30px;
-                    font-family: Arial;
+                    font-family: OpenSans-Regular;
                     font-weight: 400;
                     color: #57F9AF;
 
@@ -264,6 +265,7 @@
                 text-align: left;
                 background-color: #25313f;
 
+                /*height: 158px;*/
                 padding: 30px 0 30px 30px;
 
 
@@ -278,7 +280,7 @@
                         align-content: center;
                         align-items: center;
                         font-size: 30px;
-                        font-family: Arial;
+                        font-family: OpenSans-Regular;
                         font-weight: 400;
                         color: #57F9AF;
                         /*line-height: 1.2em;*/
@@ -313,7 +315,7 @@
 
         h3 {
             font-size: 52px;
-            font-family: Arial;
+            font-family: OpenSans-Regular;
             font-weight: bold;
             color: #57F9AF;
             margin: 60px 0 30px 0;
