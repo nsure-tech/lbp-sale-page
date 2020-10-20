@@ -90,10 +90,10 @@
                 }
 
                 &-list {
-                    font-size: 14px;
+                    font-size: 40px;
 
                     li {
-                        margin-bottom: 15px;
+                        margin-bottom: 15Px;
 
                         display: flex;
                         justify-content: left;
@@ -101,16 +101,34 @@
                         img{
                             margin-right: 10Px;
                         }
-
                         a {
                             color: #fff;
-                            font-size: 20px;
+                            font-size: 30px;
                         }
                     }
                 }
             }
         }
-
     }
 
+    @media only screen and (max-width: 767px) {
+        .footer .footer-right-item-list li a{
+            font-size: 40px;
+
+        }
+        .wap {
+            .one,.tow {
+                li {
+                    p{
+                        font-size: 60px;
+                    }
+                    div {
+                        p {
+                            font-size: 60px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 </style>

@@ -75,7 +75,7 @@
         private dataList: Array<any> = [];
         private endList: Array<any> = [];
         // TODO denormalizedWeightAndGetbalance
-        private dWAGL: { balanceA: string, balanceB: string, weightA: string, weightB: string, endDate: number, };
+        private dWAGL:any;
 
         private endDate;
         public $echarts: any;
@@ -272,7 +272,6 @@
 
 
         endListFu() {
-            console.log(this.dWAGL);
             let _date = this.dataList[this.dataList.length - 1].value[0];
             let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
             // const _factor = 0.995;
@@ -358,8 +357,8 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-
-                    font-size: 18px;
+                    font-size:40px;
+                    /*font-size: 18px;*/
                     font-family: Arial;
                     font-weight: bold;
                     color: #1B2532;
@@ -370,7 +369,9 @@
                 #myEcharts {
                     width: 1100px;
                     min-width: 300Px;
-                    height: 515px;
+                    /*height: 515px;*/
+                    height: 718px;
+
                 }
             }
 
@@ -433,7 +434,7 @@
                 box-sizing: border-box;
 
                 p {
-                    font-size: 12px;
+                    font-size: 40px;
                     color: white;
                     font-weight: bold;
                     margin: 0;
@@ -448,7 +449,7 @@
                     top: 0;
                     margin: auto;
                     text-align: center;
-                    font-size: 20px;
+                    font-size: 40px;
                     height: 20px;
                     font-family: Arial;
                     font-weight: bold;
@@ -470,7 +471,7 @@
                 text-align: center;
                 border: 3px solid #57F9AF;
                 border-radius: 100px;
-                font-size: 20px;
+                font-size: 40px;
                 font-family: Arial;
                 font-weight: bold;
                 color: #57F9AF;

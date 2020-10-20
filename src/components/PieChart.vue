@@ -94,7 +94,7 @@
         margin: 0 auto;
 
         h2 {
-            font-size: 30px;
+            font-size: 52px;
             font-family: Arial;
             font-weight: bold;
             margin: 90px 0 40px 0;

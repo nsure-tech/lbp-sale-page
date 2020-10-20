@@ -60,7 +60,7 @@
                     padding: 30px 30px;
                     box-sizing: border-box;
                     text-align: left;
-                    font-size: 32px;
+                    font-size: 38px;
                     font-family: Arial;
                     font-weight: bold;
                     color: #F1F1EF;
