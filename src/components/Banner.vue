@@ -8,7 +8,7 @@
                     <span href=""> </span>
                     <div id="myEcharts" style="min-height:300px;"></div>
                     <a target="_Blank"
-                       href="https://kovan.balancer.exchange/#/swap/0xd0A1E359811322d97991E03f863a0C30C2cF029C/0x92c94707fdc3fE9FCb0278c310911A0371752A20">Access
+                       href="https://kovan.balancer.exchange/#/swap/0x05F9583926CD311FE960F9Fe8B83bAB3E13AffC1/0x3c438CBEC8CF581f6843191228402B9A5801Fb76">Access
                         LBP on Balancer</a>
                 </div>
             </el-col>
@@ -274,7 +274,8 @@
         endListFu() {
             let _date = this.dataList[this.dataList.length - 1].value[0];
             let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
-            // const _factor = 0.995;
+            let _initPrice: number = this.dataList[this.dataList.length - 1].value[1];
+
 
             let balanceA = BigNumber(this.dWAGL.balanceA);
             let balanceB = BigNumber(this.dWAGL.balanceB);
@@ -282,7 +283,10 @@
             let weightB = BigNumber(this.dWAGL.weightB);
             for (let i = 0; i < 60 * 6; i++) {
                 _tmpPrice = (balanceA / weightA) / (balanceB / weightB);
-                this.endList.push(this.randomData(_tmpPrice, _date + i * 60000,),);
+                // console.log(_tmpPrice>_prince);
+                if(_tmpPrice < _initPrice){
+                    this.endList.push(this.randomData(_tmpPrice, _date + i * 60000,),);
+                }
                 weightA = weightA.plus(9123263888888888);   // every min
                 weightB = BigNumber(50000000000000000000).minus(weightA);
             }
