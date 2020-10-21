@@ -13,6 +13,37 @@
 
     @Component
     export default class LadderDiagram extends Vue {
+
+        private  startDate:Date = new  Date('2020/09/01');
+        private dateList:Array<Date> = [
+
+        ];
+        private listInt: Array<{ name: string, list: Array<number> }> = [
+            {
+                name: "capital mining",
+                list: [0, 0, 0, 0, 345600, 691200, 1036800, 1382400, 1728000, 2073600, 2419200, 2764800, 3110400, 3456000, 3801600, 4147200, 4492800, 4838400, 5184000, 5529600, 5875200, 6220800, 6566400, 6912000, 7257600, 7603200, 7948800, 8294400, 8640000, 8985600, 9331200, 9676800, 10022400],
+            },
+            {
+                name: "marketing&operation",
+                list: [0,0,0,0,0,0,1500000,1500000,1500000,1500000,1500000,1500000,3000000,3000000,3000000,3000000,3000000,3000000,4500000,4500000,4500000,4500000,4500000,4500000,6000000,6000000,6000000,6000000,6000000,6000000,6000000,6000000,6000000],
+            },
+            {
+                name: "team",
+                list: [4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000],
+            },
+            {
+                name: "seed",
+                list: [2800000,2800000,2800000,5600000,5600000,5600000,8400000,8400000,8400000,11200000,11200000,11200000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000,14000000],
+            },
+            {
+                name: "private sale",
+                list: [2000000,2000000,2000000,2000000,2000000,2000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,4000000,8000000,8000000,8000000,8000000,8000000,8000000,8000000,8000000,8000000,10000000,10000000,10000000,10000000,10000000,10000000,10000000,10000000,10000000],
+            },
+            {
+                name: "public sale",
+                list: [200000,200000,200000,400000,400000,400000,600000,600000,600000,800000,800000,800000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000],
+            },
+        ];
         private options: any = {
             tooltip: {
                 trigger: "axis"
@@ -36,113 +67,29 @@
 
             xAxis: {
                 type: "category",
+                data: this.dateList,
+                axisLabel: {
+                    formatter: (value, idx) => {
+                        let _date = new Date(value);
+                         return idx == 0 ? null :[_date.getFullYear() ,_date.getMonth() + 1].join('-');
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
                 boundaryGap: false,
-                data: ["2020Q3", "2020Q4", "2021Q1", "2021Q2", "2021Q3", "2021Q4", "2022Q1", "2022Q2", "2022Q3", "2022Q4", "2023Q1"],
 
             },
             yAxis: {
                 type: "value",
                 axisLabel: {
                     formatter: (value, idx) => {
-                        return (value / 1000000) + "Kw";
+                        return (value / 1000) + "K";
                     }
                 },
             },
             series: [
-              /*  {
-                    name: "capital mining",
-                    type: "line",
-                    symbol: "circle",
-                    stack: "todo",
 
-                    areaStyle: {
-                        normal: {
-                            // opacity: "0.4",
-                        }
-                    },
-                    data: [0, 0, 1030000,1030000, 2060000, 4140000, 5170000, 6200000, 7230000, 8260000, 9290000, 10320000,]
-                },*/
-                {
-                    name: "capital mining",
-                    type: "line",
-                    symbol: "circle",
-                    stack: "todo",
-
-                    areaStyle: {
-                        normal: {
-                            // opacity: "0.4",
-                        }
-                    },
-                    data: [0, 0, 1030000, 2060000, 4140000, 5170000, 6200000, 7230000, 8260000, 9290000, 10320000,]
-                },
-                {
-                    name: "marketing&operation",
-                    type: "line",
-                    stack: "todo",
-
-                    symbol: "circle",
-                    areaStyle: {
-                        normal: {
-                            // opacity: ".4",
-                        }
-                    },
-                    data: [2000000, 2000000, 4000000, 4000000, 4000000, 8000000, 8000000, 8000000, 10000000, 10000000, 10000000
-                    ]
-                },
-                {
-                    name: "team",
-                    type: "line",
-                    symbol: "circle",
-                    stack: "todo",
-
-                    areaStyle: {
-                        normal: {
-                            // opacity: ".4",
-                        }
-                    },
-                    data: [0, 0, 1500000, 1500000, 3000000, 3000000, 4500000, 4500000, 6000000, 6000000, 6000000]
-                },
-                {
-                    name: "seed",
-                    type: "line",
-                    stack: "todo",
-
-                    symbol: "circle",
-                    areaStyle: {
-                        normal: {
-                            // opacity: ".4",
-                        }
-                    },
-                    data: [200000, 400000, 600000, 800000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000]
-                },
-
-                {
-                    name: "private sale",
-                    type: "line",
-                    stack: "todo",
-
-                    symbol: "circle",
-                    areaStyle: {
-                        normal: {
-                            // opacity: ".4",
-                        }
-                    },
-                    data: [2800000, 5600000, 8400000, 11200000, 14000000, 14000000, 14000000, 14000000, 14000000, 14000000, 14000000]
-                },
-
-                {
-                    name: "public sale",
-                    type: "line",
-                    stack: "todo",
-
-                    symbol: "circle",
-                    areaStyle: {
-                        normal: {
-                            // opacity: ".4",
-                        }
-                    },
-                    data: [4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000]
-                },
             ]
         };
 
@@ -155,6 +102,24 @@
             if (document.body.clientWidth < 768) {
                 this.options.grid.left = "14%";
             }
+            for(let i = 0;i<33;i++){
+                this.startDate.setMonth(this.startDate.getMonth() +1);
+                this.dateList.push(new Date(this.startDate.valueOf()));
+            }
+            this.listInt.map((ev) => {
+
+                this.options.series.push({
+                    name: ev.name,
+                    type: "line",
+                    symbol: "circle",
+                    stack: "todo",
+
+                    areaStyle: {
+                        normal: {}
+                    },
+                    data: ev.list
+                });
+            });
         }
 
         public mounted() {
@@ -197,7 +162,7 @@
                 height: 500px;
                 min-height: 400Px;
                 width: 1793px;
-                @include  respond-to(xs){
+                @include respond-to(xs) {
                     height: 450px;
                 }
             }

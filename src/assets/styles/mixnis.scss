@@ -24,3 +24,10 @@ $breakpoints: (
     font-size: 13Px;
   }
 }
+
+@mixin size16 {
+  font-size:16px;
+  @include respond-to(xs) {
+    font-size: 12Px;
+  }
+}

@@ -110,10 +110,8 @@
                     formatter: (value, idx) => {
                         let _date = new Date(value);
                         // return this.dateFmt(date);
-
                         let _houes = _date.getHours() > 10 ? _date.getHours() : `0${_date.getHours()}`;
                         let _getMinutes = _date.getMinutes() > 10 ? _date.getMinutes() : `0${_date.getMinutes()}`;
-
                         return [_houes, _getMinutes].join(":");
                     }
                 },
@@ -207,7 +205,7 @@
             let _data = await ApiServer.getCurrentPrice();
             let _spot = await ApiServer.spot();
             this.currentPrice = _data.price;
-            this.dataList.push(this.randomData(_data.price, _data.currentData,));
+            this.dataList.push(this.randomData(_data.price, _data.data,));
         }
 
 

@@ -41,7 +41,6 @@
         .caveat{
             margin: 50px 0;
             box-sizing: border-box;
-            padding: 0 5%;
 
             /*max-width: 900px;*/
 
@@ -57,11 +56,10 @@
                 }
                 .text{
                     background: #0a1525;
-                    padding: 18px;
+                    padding: 20px 18px;
                     box-sizing: border-box;
                     text-align: left;
-                    font-size: 18Px;
-                    font-family: OpenSans-Regular;
+                   @include  size20;
                     font-weight: bold;
                     color: #F1F1EF;
                 }

@@ -107,11 +107,11 @@
 
             {
                 one: " LBP Allocation",
-                tow: "  4.000.000 NSURE"
+                tow: "  4,000,000 NSURE"
             },
             {
                 one: "Total Token Supply",
-                tow: "  100000000 NSURE"
+                tow: "  100,000,000 NSURE"
             },
             {
                 one: "Initial Circulating Supply",
@@ -306,9 +306,9 @@
                             align-content: center;
                             align-items: center;
                             @include size20;
-                            font-weight: bold;
-
-                            color: #232323;
+                            /*font-weight: bold;*/
+                            font-weight: 500;
+                            color: #1b2532;
                             span {
                                 display: block;
                                 width: 15px;
@@ -322,10 +322,12 @@
 
 
                     p {
-                        color: #232323;
-                        @include  size20;
+                        color: #1b2532;
+                        @include  size16;
                         padding-top: 10Px;
                         padding-right: 10px;
+                        opacity: .4;
+                        padding-left: 35px;
                     }
 
 
