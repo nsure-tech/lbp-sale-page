@@ -185,7 +185,7 @@
 
         showAnswer(ev) {
             if(this.showKey == ev){
-                this.showKey = null;
+                this.showKey = '0';
             }else{
                 this.showKey = ev;
 

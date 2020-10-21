@@ -49,11 +49,25 @@
                 },
             },
             series: [
+              /*  {
+                    name: "capital mining",
+                    type: "line",
+                    symbol: "circle",
+                    stack: "todo",
+
+                    areaStyle: {
+                        normal: {
+                            // opacity: "0.4",
+                        }
+                    },
+                    data: [0, 0, 1030000,1030000, 2060000, 4140000, 5170000, 6200000, 7230000, 8260000, 9290000, 10320000,]
+                },*/
                 {
                     name: "capital mining",
                     type: "line",
                     symbol: "circle",
                     stack: "todo",
+
                     areaStyle: {
                         normal: {
                             // opacity: "0.4",
@@ -129,7 +143,6 @@
                     },
                     data: [4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000, 4000000]
                 },
-
             ]
         };
 

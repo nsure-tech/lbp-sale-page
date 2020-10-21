@@ -91,9 +91,9 @@
                     let data: any = params;
                     data = data[0].data;
                     let date = new Date(data.name);
-                    // if (this.endList[1].name < data.name) {
-                    //     return;
-                    // }
+                    if (this.dataList[this.dataList.length - 1].name < data.name) {
+                        return;
+                    }
                     return data.value[1] + " <br/> " + this.dateFmt(date);
                 },
                 axisPointer: {
@@ -199,12 +199,9 @@
             this.chart = this.$echarts.init(ele);
             await this.getPrice();
             this.countdown();
-            this.getCurrentPrice();
-
             setInterval(async () => {
                 await this.getCurrentPrice();
                 this.endListFu();
-
             }, 10000,);
         }
 
@@ -213,7 +210,7 @@
             let _data = await ApiServer.getCurrentPrice();
             let _spot = await ApiServer.spot();
             this.currentPrice = _data.price;
-            this.dataList.push(this.randomData(_data.price, this.dataList[this.dataList.length - 1].value[0] + 10000,),);
+            this.dataList.push(this.randomData(_data.price, _data.currentData,));
         }
 
 
