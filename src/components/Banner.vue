@@ -1,5 +1,5 @@
 <template>
-    <div class="wap">
+    <div class="wap padding20">
         <h2>Liquidity Bootstrapping Pool for Nsure</h2>
 
         <el-row class="echarts" :gutter="24" type="flex">

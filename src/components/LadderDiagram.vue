@@ -1,5 +1,5 @@
 <template>
-    <div class="wap">
+    <div class="wap padding20">
         <h2>TOKEN ALLOCATION</h2>
 
         <div class="box">
@@ -137,7 +137,8 @@
         background-color: white;
         /*max-width: 900px;*/
         margin: 0 auto;
-        padding: 30px 0;
+        padding-top: 30px;
+        padding-bottom: 30px;
 
         h2 {
             font-size: 30px;

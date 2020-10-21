@@ -1,6 +1,6 @@
 <template>
     <div class="wrpBox">
-        <div class="bg-white wap">
+        <div class="bg-white wap padding20">
             <div>
                 <h2><p>What do l need to know? </p></h2>
                 <ul class="one">
@@ -17,7 +17,7 @@
                 </ul>
             </div>
         </div>
-        <div class="wap">
+        <div class="wap padding20">
             <h3>NSURE Token Sale and Economics</h3>
             <ul class="tow">
                 <li v-for="item in economicsList" :key="item.answer">
@@ -187,13 +187,13 @@
 <style lang="scss" scoped>
 
     .wrpBox{
-        .bg-white{
-            /*background-color: white;*/
-        }
+
         .wap {
 
             margin: 0 auto;
-            padding: 40px 0 60px 0;
+            /*padding: 40px 0 60px 0;*/
+            padding-top: 40px;
+            padding-bottom: 60px;
 
             text-align: left;
 
@@ -329,6 +329,12 @@
 
 
 
+        }
+
+        .bg-white{
+            background-color: white;
+            padding-top: 70px;
+            padding-bottom: 70px;
         }
     }
 

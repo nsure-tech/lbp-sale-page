@@ -1,5 +1,5 @@
 <template>
-    <div class="wap">
+    <div class="wap padding20">
         <h2>TOKEN ALLOCATION</h2>
         <div class="box">
             <div id="myEchartss" style="height: 400px;"></div>
@@ -93,8 +93,9 @@
         background-color: white;
         /*max-width: 900px;*/
         margin: 0 auto;
-        padding: 30px 5% 80px 5%;
 
+        padding-top: 30px;
+        padding-bottom: 80px;
         h2 {
             font-size: 30px;
             font-weight: bold;

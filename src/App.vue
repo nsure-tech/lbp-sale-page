@@ -3,9 +3,9 @@
 
         <HeaderBar/>
 
-       <div class="padding20">
+       <!--<div class="padding20">-->
            <Banner/>
-           <div class="caveat">
+           <div class="caveat padding20">
                <div class="box">
                    <img src="@/assets/images/caveat.png" alt="">
                    <div class="text">
@@ -18,7 +18,7 @@
 
            <PieChart/>
            <LadderDiagram/>
-       </div>
+       <!--</div>-->
         <Footer/>
     </div>
 </template>
