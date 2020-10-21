@@ -84,7 +84,7 @@
                 type: "value",
                 axisLabel: {
                     formatter: (value, idx) => {
-                        return (value / 1000) + "K";
+                        return (value / 1000000) + "M";
                     }
                 },
             },
