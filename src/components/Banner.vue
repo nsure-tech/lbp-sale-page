@@ -334,7 +334,7 @@
 
     .wap {
         margin: 0;
-        padding: 0 5%;
+       //
         display: flex;
         flex-direction: column;
         justify-content: space-around;
