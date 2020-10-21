@@ -18,7 +18,8 @@
     "vue": "^2.6.12",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.2",
-    "vue-router": "^3.2.0"
+    "vue-router": "^3.2.0",
+    "web3": "latest"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.0",

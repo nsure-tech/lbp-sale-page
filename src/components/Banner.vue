@@ -8,7 +8,7 @@
                     <span href=""> </span>
                     <div id="myEcharts" style="min-height:300px;"></div>
                     <a target="_Blank"
-                       href="https://kovan.balancer.exchange/#/swap/0x05F9583926CD311FE960F9Fe8B83bAB3E13AffC1/0x3c438CBEC8CF581f6843191228402B9A5801Fb76">Access
+                       href="https://balancer.exchange/#/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/0xe22e5Acede7391E41bcbb2af7b2D12787537470b">Access
                         LBP on Balancer</a>
                 </div>
             </el-col>
@@ -193,18 +193,17 @@
 
             this.chart = this.$echarts.init(ele);
             await this.getPrice();
-            this.getCurrentPrice();
+            // this.getCurrentPrice();
             this.countdown();
             setInterval(async () => {
                 await this.getCurrentPrice();
                 this.endListFu();
-            }, 10000,);
+            }, 30000,);
         }
 
 
         async getCurrentPrice() {
             let _data = await ApiServer.getCurrentPrice();
-            let _spot = await ApiServer.spot();
             this.currentPrice = _data.price;
             this.dataList.push(this.randomData(_data.price, _data.data,));
         }
@@ -275,24 +274,23 @@
             let _date = this.dataList[this.dataList.length - 1].value[0];
             let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
             let _initPrice: number = this.dataList[this.dataList.length - 1].value[1];
-                this.endList = [];
+            this.endList = [];
             let balanceA = BigNumber(this.dWAGL.balanceA);
             let balanceB = BigNumber(this.dWAGL.balanceB);
             let weightA = BigNumber(this.dWAGL.weightA);
             let weightB = BigNumber(this.dWAGL.weightB);
-
             for (let i = 0; i < 60 * 6; i++) {
-                _tmpPrice = (balanceA / weightA) / (balanceB / weightB);
-
+                _tmpPrice = (balanceA / weightA) / (balanceB / weightB) * 1e12;
                 if(_tmpPrice < _initPrice){
                     _date += 60000;
-                    this.endList.push(this.randomData(_tmpPrice, _date,),);
+                    this.endList.push(this.randomData(_tmpPrice , _date,),);
                 }
                 weightA = weightA.plus(9123263888888888);   // every min
                 weightB = BigNumber(50000000000000000000).minus(weightA);
                 if(_date>this.endDate.valueOf())
                     break;
             }
+            console.log(_tmpPrice);
             this.options.series[1].data = this.endList;
             this.chart.setOption(this.options);
         }

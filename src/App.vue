@@ -33,8 +33,42 @@
     import {Component, Prop, Vue} from "vue-property-decorator";
     import Problem from '@/components/problem.vue';
 
+    // import Web3 from 'web3'
     @Component({components: {HeaderBar,Footer,Banner,PieChart,LadderDiagram,Problem}})
     export default class App extends Vue {
+
+
+        /*created(): void {
+            window.addEventListener('load', async () => {
+                // Modern dapp browsers...
+                if (window.ethereum) {
+                    // eslint-disable-next-line no-undef
+                    window.web3 = new Web3(ethereum);
+                    try {
+                        // Request account access if needed
+                        // eslint-disable-next-line no-undef
+                        await ethereum.enable();
+                        // Acccounts now exposed
+                        // eslint-disable-next-line no-undef
+                        web3.eth.sendTransaction({/!* ... *!/});
+                    } catch (error) {
+                        // User denied account access...
+                    }
+                }
+                // Legacy dapp browsers...
+                else if (window.web3) {
+                    // eslint-disable-next-line no-undef
+                    window.web3 = new Web3(web3.currentProvider);
+                    // Acccounts always exposed
+                    // eslint-disable-next-line no-undef
+                    web3.eth.sendTransaction({/!* ... *!/});
+                }
+                // Non-dapp browsers...
+                else {
+                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+                }
+            });
+        }*/
     }
 </script>
 
