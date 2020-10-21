@@ -3,20 +3,22 @@
 
         <HeaderBar/>
 
-        <Banner/>
-        <div class="caveat">
-            <div class="box">
-                <img src="@/assets/images/caveat.png" alt="">
-                <div class="text">
-                    This Balancer LBP is intended to act as TGE for the public  and will be closed once the targeted block height (approx. 2 days) is reached. The Dynamics of this LBP are designed to allow users to purchase NSURE while allowing for fair price discovery, as it’s structure is based on principles of Dutch Auctions.
+       <div class="padding20">
+           <Banner/>
+           <div class="caveat">
+               <div class="box">
+                   <img src="@/assets/images/caveat.png" alt="">
+                   <div class="text">
+                       This Balancer LBP is intended to act as TGE for the public  and will be closed once the targeted block height (approx. 2 days) is reached. The Dynamics of this LBP are designed to allow users to purchase NSURE while allowing for fair price discovery, as it’s structure is based on principles of Dutch Auctions.
 
-                </div>
-            </div>
-        </div>
-        <Problem></Problem>
+                   </div>
+               </div>
+           </div>
+           <Problem></Problem>
 
-        <PieChart/>
-        <LadderDiagram/>
+           <PieChart/>
+           <LadderDiagram/>
+       </div>
         <Footer/>
     </div>
 </template>

@@ -63,7 +63,7 @@
     .footer {
         color: #fff;
         background-color: #1B2532;
-        padding: 30px 7% 50px 7%;
+        padding: 30px 0;
 
         .log {
             padding-top: 20px;

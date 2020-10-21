@@ -33,9 +33,9 @@ li {
 
 body {
     max-width: 100%;
-    min-width: 100%;
-    padding: 0 20%;
+    min-width: 920px;
     margin: 0 auto;
+
     height: 100vh;
     box-sizing: border-box;
     color: #fff;
@@ -49,10 +49,26 @@ body {
     word-wrap:break-word;
 }
 
+.padding20{
+    padding: 0 20%;
+}
+
 @media only screen and (max-width: 767px){
+
     body {
         padding: 0 3%;
-
+        min-width: 375px;
+    }
+    .padding20{
+        padding: 0 3%;
+    }
+}
+@media only screen and (max-width: 1240px){
+    body {
+        padding: 0 3%;
+    }
+    .padding20{
+        padding: 0 3%;
     }
 }
 

@@ -22,6 +22,7 @@
             <ul class="tow">
                 <li v-for="item in economicsList" :key="item.answer">
                     <p>{{item.one }}</p>
+                    <p style="width: 10px;"></p>
                     <p>{{item.tow }}</p>
                 </li>
             </ul>
@@ -187,7 +188,7 @@
 
     .wrpBox{
         .bg-white{
-            background-color: white;
+            /*background-color: white;*/
         }
         .wap {
 
@@ -240,7 +241,7 @@
                     font-family: OpenSans-Regular;
                     font-weight: 400;
                     color: #57F9AF;
-                    padding: 20px 0 20px 30px;
+                    padding: 20px 15px;
 
                     p {
                         flex: 1;

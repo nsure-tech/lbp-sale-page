@@ -137,13 +137,14 @@
         background-color: white;
         /*max-width: 900px;*/
         margin: 0 auto;
-        padding: 30px 5%;
+        padding: 30px 0;
 
         h2 {
             font-size: 30px;
             font-weight: bold;
             text-align: left;
             margin-bottom: 20px;
+            padding-left: 5%;
             color: #2F8FE9;
             @include respond-to(xs) {
                 text-align: center;

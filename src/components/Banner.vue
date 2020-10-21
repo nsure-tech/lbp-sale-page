@@ -26,7 +26,7 @@
 
                     <div class="r_div">
                         <p>Estimated Market cap</p>
-                        <h4>{{currentPrice? (currentPrice * 5000000).toFixed(2) :'---'}}</h4>
+                        <h4>{{currentPrice? (currentPrice * 9000000).toFixed(2) :'---'}}</h4>
                     </div>
                 </el-row>
 
@@ -46,7 +46,7 @@
                 </div>
                 <div class="child">
                     <p>Estimated Market cap</p>
-                    <h4>{{currentPrice? (currentPrice * 5000000).toFixed(2) :'---'}}</h4>
+                    <h4>{{currentPrice? (currentPrice * 9000000).toFixed(2) :'---'}}</h4>
                 </div>
             </div>
         </div>
