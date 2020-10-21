@@ -147,10 +147,7 @@
                     data: this.dataList,
                     hoverAnimation: false,
                     smooth: true,
-                    lineStyle: {
-                        color: "red",
-                        width: 1
-                    },
+
                     markLine: {
                         symbol: ["none", "none"],
                     },
