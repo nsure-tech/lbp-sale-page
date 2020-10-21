@@ -71,7 +71,7 @@
                 axisLabel: {
                     formatter: (value, idx) => {
                         let _date = new Date(value);
-                         return idx == 0 ? null :[_date.getFullYear() ,_date.getMonth() + 1].join('-');
+                         return idx == 0 ? 'TGE' :[_date.getFullYear() ,_date.getMonth() + 1].join('-');
                     }
                 },
                 splitLine: {

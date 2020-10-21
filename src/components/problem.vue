@@ -50,11 +50,7 @@
 
                 answer: "The TGE via LBP on Balance will take place on the XXXX starting at XXX UTC, for a duration of approximately 2 days, from block XXXX to block XXXX."
             },
-            {
-                ask: "How does the Balancer LBP work?",
-                isShow: "3",
-                answer: "Because of the dynamic weight change provided by the Balancer LBP, the weight between the two pools (NSURE:USDC) will change from 90:10 to 30:70. Every time the weight changes, the price will be less than the previous price. It creates a downward pressure for the price during the Balancer LBP period. The trading experience is just like the usual Balancer Pool. If there are more people buying NSURE, the price goes up. Otherwise, the price goes down. The only difference is the Balancer LBP makes it harder for the price to go up."
-            },
+
             {
                 ask: "Why can’t I purchase the tokens from Balancer LBP at the 1st block?",
                 isShow: "4",
@@ -85,21 +81,7 @@
                 isShow: "9",
                 answer: "Once the LBP has come to an end, 10% of the funds raised will be utilised for seeding a pool of selected AMMs for trading purposes. For the resulting amount of NSURE unsold after the LBP, it will be partially utilised for liquidity purposes, as well as for initially providing capacity on insurance products once the Nsure Network goes live. After the platform naturally grows in capacity, and the boost is no longer needed, the tokens will be transferred to the Nsure DAO to decide on it’s management."
             },
-            {
-                ask: "Who is behind Perpetual Protocol?",
-                isShow: "10",
-                answer: "Our team members are also very decentralized. Team members and strategic partners are from Europe, America, and Asia, core members are based in Shanghai and Shenzhen, all have a solid combined working experience in the insurance and blockchain industry like Venture Capital, crypto exchanges, wallet solution services, multinational insurance companies, actuarial analysis etc."
-            },
-            {
-                ask: "Who are the strategic investors of the Perpetual Protocol?",
-                isShow: "11",
-                answer: "We have raised $1.45M in a strategic seed & private round led by Based Ventures with participation from Mechanism Capital, Three Commas, AU21, GenBlock and Signal Ventures. Further strategic partners and collaborations to be announced as we move on to Beta."
-            },
-            {
-                ask: "Weight changes and other parameters for the Nsure LBP",
-                isShow: "12",
-                answer: "Create doc like Perp:\thttps://docs.google.com/spreadsheets/d/10yyVQjPtWsWMP6L--AT0_PsNdZdEo6_Zkpv30qh3CZU/edit#gid=0\n"
-            },
+
 
         ];
 
@@ -115,7 +97,7 @@
             },
             {
                 one: "Initial Circulating Supply",
-                tow: "  13.69% of Total Token Supply"
+                tow: "  9% of Total Token Supply"
             },
             {
                 one: "LBP Token Price Ceiling",
@@ -127,7 +109,7 @@
             },
             {
                 one: "Airdrop Allocation",
-                tow: "100.000 NSURE"
+                tow: "100,000 NSURE"
             },
             {
                 one: "LBP Vesting Period",
@@ -149,6 +131,11 @@
                 one: "Seed Token Price",
                 tow: "1 NSURE = 0.05 USD"
             },
+            {
+                one: "Seed Allocation",
+                tow: "1% of Total Token Supply"
+            },
+
             {
                 one: "Foundation Reserve Allocation",
                 tow: "10% of Total Token Supply *1"
