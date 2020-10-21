@@ -46,6 +46,7 @@
                 </div>
                 <div class="child">
                     <p>Estimated Market cap</p>
+                    <h4>{{currentPrice? (currentPrice * 5000000).toFixed(2) :'---'}}</h4>
                 </div>
             </div>
         </div>
@@ -90,9 +91,9 @@
                     let data: any = params;
                     data = data[0].data;
                     let date = new Date(data.name);
-                    if (this.endList[1].name < data.name) {
-                        return;
-                    }
+                    // if (this.endList[1].name < data.name) {
+                    //     return;
+                    // }
                     return data.value[1] + " <br/> " + this.dateFmt(date);
                 },
                 axisPointer: {
@@ -152,6 +153,10 @@
                     },
                     markLine: {
                         symbol: ["none", "none"],
+                    },
+                    lineStyle: {
+                        color: "#12C0FD",
+                        width: 1
                     },
                 },
                 {
@@ -213,9 +218,9 @@
 
 
         countdown() {
-            // 目标日期时间戳
-            const end = this.endDate;
-            const now = Date.parse(new Date().toString());
+
+            const end = this.endDate.valueOf();
+            const now = new Date().valueOf();
             const msec: any = end - now;
             if (msec < 0) {
                 return this.date_ = `End`;
@@ -228,6 +233,7 @@
             min = min > 9 ? min : "0" + min;
             sec = sec > 9 ? sec : "0" + sec;
             this.date_ = `${hr}H ${min}m`;
+            // alert(`${hr}H ${min}m`);
             setTimeout(() => {
                 this.countdown();
             }, 60000);
@@ -286,10 +292,13 @@
                 _tmpPrice = (balanceA / weightA) / (balanceB / weightB);
 
                 if(_tmpPrice < _initPrice){
-                    this.endList.push(this.randomData(_tmpPrice, _date + i * 60000,),);
+                    _date += 60000;
+                    this.endList.push(this.randomData(_tmpPrice, _date,),);
                 }
                 weightA = weightA.plus(9123263888888888);   // every min
                 weightB = BigNumber(50000000000000000000).minus(weightA);
+                if(_date>this.endDate.valueOf())
+                    break;
             }
             this.options.series[1].data = this.endList;
             this.chart.setOption(this.options);

@@ -7,19 +7,18 @@
 
                     <li v-for="item in problemList" :key="item.ask" @click="showAnswer(item.isShow)">
                         <div>
-                            <p><span></span>{{
+                            <h5><span></span>{{
                                 item.ask
                                 }}
-                            </p>
+                            </h5>
                         </div>
-                        <h5 v-if="item.isShow == showKey">{{ item.answer}}</h5>
+                        <p v-if="item.isShow == showKey">{{ item.answer}}</p>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="wap">
             <h3>NSURE Token Sale and Economics</h3>
-
             <ul class="tow">
                 <li v-for="item in economicsList" :key="item.answer">
                     <p>{{item.one }}</p>
@@ -43,26 +42,26 @@
             {
                 ask: "How can I get Nsure tokens?",
                 isShow: "1",
-                answer: "The main options to get NSURE tokens now is either through capital mining or Balancer Liquidity Bootstrapping Pool (LBP). We also have a trading competition coming in a few weeks.",
+                answer: "The main options to get NSURE tokens now is either through our upcoming Balancer Liquidity Bootstrapping Pool (LBP), or capital mining post-TGE.",
             },
             {
                 ask: "When will the TGE take place on Balancer LBP?",
                 isShow: "2",
 
-                answer: "The TGE via LBP on Balance will take place on the XXXX starting at XXX UTC, for a duration of approximately 2 days, from block XXXX to block XXXX.\n"
+                answer: "The TGE via LBP on Balance will take place on the XXXX starting at XXX UTC, for a duration of approximately 2 days, from block XXXX to block XXXX."
             },
             {
                 ask: "How does the Balancer LBP work?",
                 isShow: "3",
-                answer: "The TGE via LBP on Balance will take place on the XXXX starting at XXX UTC, for a duration of approximately 2 days, from block XXXX to block XXXX.\n"
+                answer: "Because of the dynamic weight change provided by the Balancer LBP, the weight between the two pools (NSURE:USDC) will change from 90:10 to 30:70. Every time the weight changes, the price will be less than the previous price. It creates a downward pressure for the price during the Balancer LBP period. The trading experience is just like the usual Balancer Pool. If there are more people buying NSURE, the price goes up. Otherwise, the price goes down. The only difference is the Balancer LBP makes it harder for the price to go up."
             },
             {
-                ask: "Why can’t I purchase the tokens from Balancer LBP at the 1st block?\n",
+                ask: "Why can’t I purchase the tokens from Balancer LBP at the 1st block?",
                 isShow: "4",
                 answer: "Participants should not purchase NSURE tokens when LBP starts, there will be a very large slippage to be dealt with."
             },
             {
-                ask: "What is the best strategy to get PERP from LBP?",
+                ask: "What is the best strategy to get NSURE from LBP?",
                 isShow: "5",
                 answer: "If you want to submit a very large order, the best strategy for you is to divide the order into small chunks and spread them out over 2 days to average down the price."
             },
@@ -74,8 +73,7 @@
             {
                 ask: "Can I get NSURE from Uniswap?",
                 isShow: "7",
-                answer: "It’s possible that during the three-day existence of the Balancer’s Liquidity Bootstrapping Pool (LBP), someone who has acquired our token and created a pool for people to buy it.\n" +
-                    "But we expect there will be lots of scam pools on Uniswap. Therefore, it’s recommended only to get NSURE from our LBP on Balancer."
+                answer: "It’s possible that during the two-day existence of the Balancer’s Liquidity Bootstrapping Pool (LBP), someone who has acquired our token and created a pool for people to buy it. But we expect there will be lots of scam pools on Uniswap. Therefore, it’s recommended only to get NSURE from our LBP on Balancer."
             },
             {
                 ask: "Which Wallet is supported on Balancer LBP?",
@@ -83,9 +81,9 @@
                 answer: "Metamask, Portis, or any wallet that can be connected to a desktop Dapp through wallet connect should be fine. You can test if your wallet is supported now by going to Balancer’s website and swapping a token to another. https://balancer.exchange"
             },
             {
-                ask: "How about a whitelist and a fixed price?",
+                ask: "What happens to the proceeds after LBP concludes?",
                 isShow: "9",
-                answer: "The goal of the Nsure Network is to build a 1) permissionless protocol with 2) price discovery provided by a vAMM. We think it’s not aligned with our goal to have a whitelist and a fixed price."
+                answer: "Once the LBP has come to an end, 10% of the funds raised will be utilised for seeding a pool of selected AMMs for trading purposes. For the resulting amount of NSURE unsold after the LBP, it will be partially utilised for liquidity purposes, as well as for initially providing capacity on insurance products once the Nsure Network goes live. After the platform naturally grows in capacity, and the boost is no longer needed, the tokens will be transferred to the Nsure DAO to decide on it’s management."
             },
             {
                 ask: "Who is behind Perpetual Protocol?",
@@ -107,10 +105,6 @@
 
         private economicsList: Array<{ one: string, tow: string }> = [
 
-            // {
-            //     one:" Launchpad Hard Cap",
-            //     tow:'  3000000 USD'
-            // },
             {
                 one: " LBP Allocation",
                 tow: "  4.000.000 NSURE"
@@ -190,7 +184,12 @@
         }
 
         showAnswer(ev) {
-            this.showKey = ev;
+            if(this.showKey == ev){
+                this.showKey = null;
+            }else{
+                this.showKey = ev;
+
+            }
             this.$forceUpdate();
         }
 
@@ -206,16 +205,12 @@
         .wap {
 
             margin: 0 auto;
-            padding: 40px 5% 60px 5%;
+            padding: 40px 0 60px 0;
 
             text-align: left;
 
             h2 {
-
                 margin: 0 auto 0 auto;
-
-
-                /*padding: 20px;*/
                 background-color: #DEDEDE;
                 text-align: center;
                 position: relative;
@@ -270,7 +265,9 @@
                         font-weight: 400;
                         color: #2F8FE9;
 
-
+                    }
+                    p:last-child{
+                        color: white;
                     }
                 }
 
@@ -297,23 +294,20 @@
                     min-height: 20Px;
                     text-align: left;
                     background-color: #F0EFEF;
-
                     padding: 25px 0 25px 30px;
-
-
                     div {
                         display: flex;
                         align-items: center;
 
-                        p {
+                        h5 {
                             display: flex;
                             margin: 0;
                             justify-content: left;
                             align-content: center;
                             align-items: center;
                             @include size20;
+                            font-weight: bold;
 
-                            font-weight: 400;
                             color: #232323;
                             span {
                                 display: block;
@@ -327,9 +321,9 @@
                     }
 
 
-                    h5 {
+                    p {
                         color: #232323;
-                        font-size: 20px;
+                        @include  size20;
                         padding-top: 10Px;
                         padding-right: 10px;
                     }
