@@ -1,5 +1,6 @@
 import Vue, { VNode } from 'vue';
 
+
 declare global {
   namespace JSX {
     // tslint:disable no-empty-interface
@@ -9,5 +10,6 @@ declare global {
     interface IntrinsicElements {
       [elem: string]: any;
     }
+    // interface Window { analytics: any; }
   }
 }

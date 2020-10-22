@@ -3,104 +3,104 @@
 
         <HeaderBar/>
 
-       <!--<div class="padding20">-->
-           <Banner/>
-           <div class="caveat padding20">
-               <div class="box">
-                   <img src="@/assets/images/caveat.png" alt="">
-                   <div class="text">
-                       This Balancer LBP is intended to act as TGE for the public  and will be closed once the targeted block height (approx. 2 days) is reached. The Dynamics of this LBP are designed to allow users to purchase NSURE while allowing for fair price discovery, as it’s structure is based on principles of Dutch Auctions.
+        <!--<div class="padding20">-->
+        <Banner/>
+        <div class="caveat padding20">
+            <div class="box">
+                <img src="@/assets/images/caveat.png" alt="">
+                <div class="text">
+                    This Balancer LBP is intended to act as TGE for the public and will be closed once the targeted
+                    block height (approx. 2 days) is reached. The Dynamics of this LBP are designed to allow users to
+                    purchase NSURE while allowing for fair price discovery, as it’s structure is based on principles of
+                    Dutch Auctions.
 
-                   </div>
-               </div>
-           </div>
-           <Problem></Problem>
+                </div>
+            </div>
+        </div>
+        <Problem></Problem>
 
-           <PieChart/>
-           <LadderDiagram/>
-       <!--</div>-->
+        <PieChart/>
+        <LadderDiagram/>
+        <!--</div>-->
         <Footer/>
     </div>
 </template>
 
 
 <script lang="ts">
-    import HeaderBar from '@/components/Header.vue';
-    import Footer from '@/components/Footer.vue';
-    import Banner from '@/components/Banner.vue';
-    import PieChart from '@/components/PieChart.vue';
-    import LadderDiagram from '@/components/LadderDiagram.vue';
+    import HeaderBar from "@/components/Header.vue";
+    import Footer from "@/components/Footer.vue";
+    import Banner from "@/components/Banner.vue";
+    import PieChart from "@/components/PieChart.vue";
+    import LadderDiagram from "@/components/LadderDiagram.vue";
     import {Component, Prop, Vue} from "vue-property-decorator";
-    import Problem from '@/components/problem.vue';
+    import Problem from "@/components/problem.vue";
+    import Web3 from "web3";
 
-    // import Web3 from 'web3'
-    @Component({components: {HeaderBar,Footer,Banner,PieChart,LadderDiagram,Problem}})
+    @Component({components: {HeaderBar, Footer, Banner, PieChart, LadderDiagram, Problem}})
     export default class App extends Vue {
 
+        private ethereum = window['ethereum'];
 
-        /*created(): void {
-            window.addEventListener('load', async () => {
-                // Modern dapp browsers...
-                if (window.ethereum) {
-                    // eslint-disable-next-line no-undef
-                    window.web3 = new Web3(ethereum);
-                    try {
-                        // Request account access if needed
-                        // eslint-disable-next-line no-undef
-                        await ethereum.enable();
-                        // Acccounts now exposed
-                        // eslint-disable-next-line no-undef
-                        web3.eth.sendTransaction({/!* ... *!/});
-                    } catch (error) {
-                        // User denied account access...
-                    }
+        created(): void {
+            this.init();
+
+        }
+
+        async init() {
+
+
+            if (this.ethereum) {
+                try {
+                 let bb = await this.ethereum.enable();
+                } catch (error) {
+                    console.log(error);
                 }
-                // Legacy dapp browsers...
-                else if (window.web3) {
-                    // eslint-disable-next-line no-undef
-                    window.web3 = new Web3(web3.currentProvider);
-                    // Acccounts always exposed
-                    // eslint-disable-next-line no-undef
-                    web3.eth.sendTransaction({/!* ... *!/});
-                }
-                // Non-dapp browsers...
-                else {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
-                }
-            });
-        }*/
+            } else if (window['web3']) {
+                // eslint-disable-next-line no-undef
+                window['web3'] = new Web3( window['web3'].currentProvider);
+
+            }else {
+                console.log("Non-Ethereum browser detected. You should consider trying MetaMask!");
+            }
+        }
+
+
     }
 </script>
 
 <style lang="scss">
     #app {
-        .caveat{
+        .caveat {
             margin: 50px 0;
             box-sizing: border-box;
 
             /*max-width: 900px;*/
 
 
-            .box{
+            .box {
                 position: relative;
-                img{
+
+                img {
                     width: 50px;
                     height: 40px;
                     position: absolute;
                     left: 10px;
                     top: -25px;
                 }
-                .text{
+
+                .text {
                     background: #0a1525;
                     padding: 20px 18px;
                     box-sizing: border-box;
                     text-align: left;
-                   @include  size20;
+                    @include size20;
                     font-weight: bold;
                     color: #F1F1EF;
                 }
             }
         }
+
         font-family: Avenir, Helvetica, OpenSans-Regular, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;

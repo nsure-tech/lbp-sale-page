@@ -68,18 +68,28 @@
 <script lang="ts">
     import {Component, Prop, Vue} from "vue-property-decorator";
     import {ApiServer} from "@/request";
-    const  BigNumber = require('big-number');
 
+    const BigNumber = require("big-number");
+
+    import {State, Action, Getter, Mutation} from "vuex-class";
+    import {DenormalizedWeightAndGetbalance, Erc20Model} from "../store/erc20/erc20_model";
+
+    const namespace = "Erc20";
     @Component
     export default class Banner extends Vue {
+        @Getter("getPrice", {namespace}) private price: number;
+        @Getter("getDWG", {namespace}) private getDWG: DenormalizedWeightAndGetbalance;
+        @Mutation("setDWG", {namespace}) private setDWG;
 
+        @Action("getSpotPrice", {namespace}) private getSpotPrice;
+        @Action("getDenormalizedWeightAndGetbalance", {namespace}) private getDenormalizedWeightAndGetbalance;
         private date_ = "";
         private currentPrice = 0;
 
+        private getPriceTime: number = 30000;
+
         private dataList: Array<any> = [];
         private endList: Array<any> = [];
-        // TODO denormalizedWeightAndGetbalance
-        private dWAGL:any;
 
         private endDate;
         public $echarts: any;
@@ -190,7 +200,6 @@
 
         async init() {
             let ele: any = document.getElementById("myEcharts");
-
             this.chart = this.$echarts.init(ele);
             await this.getPrice();
             this.getCurrentPrice();
@@ -198,14 +207,18 @@
             setInterval(async () => {
                 await this.getCurrentPrice();
                 this.endListFu();
-            }, 30000,);
+            }, this.getPriceTime,);
+
+            setInterval(async () => {
+                await this.getDenormalizedWeightAndGetbalance();
+            }, 10000,);
         }
 
 
         async getCurrentPrice() {
-            let _data = await ApiServer.getCurrentPrice();
-            this.currentPrice = _data.price;
-            this.dataList.push(this.randomData(_data.price, _data.data,));
+            await this.getSpotPrice();
+            this.currentPrice = this.price;
+            this.dataList.push(this.randomData(this.currentPrice, this.dataList[this.dataList.length - 1].name + this.getPriceTime,));
         }
 
 
@@ -225,7 +238,6 @@
             min = min > 9 ? min : "0" + min;
             sec = sec > 9 ? sec : "0" + sec;
             this.date_ = `${hr}H ${min}m`;
-            // alert(`${hr}H ${min}m`);
             setTimeout(() => {
                 this.countdown();
             }, 60000);
@@ -264,7 +276,19 @@
             data.priceList.map((ev) => {
                 this.dataList.push(this.randomData(ev.price, ev.date));
             });
-            this.dWAGL = data;
+            await this.getDenormalizedWeightAndGetbalance();
+            console.log('-------');
+            console.log(this.getDWG);
+            let _dwg: DenormalizedWeightAndGetbalance = {
+                weightA: data.weightA,
+                weightB: data.weightB,
+                balanceB: data.balanceB,
+                balanceA: data.balanceA,
+            };
+            console.log(_dwg);
+            // this.setDWG(_dwg);
+
+
             this.endDate = new Date(data.endDate);
             this.endListFu();
         }
@@ -275,22 +299,22 @@
             let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
             let _initPrice: number = this.dataList[this.dataList.length - 1].value[1];
             this.endList = [];
-            let balanceA = BigNumber(this.dWAGL.balanceA);
-            let balanceB = BigNumber(this.dWAGL.balanceB);
-            let weightA = BigNumber(this.dWAGL.weightA);
-            let weightB = BigNumber(this.dWAGL.weightB);
+            let balanceA = BigNumber(this.getDWG.balanceA);
+            let balanceB = BigNumber(this.getDWG.balanceB);
+            let weightA = BigNumber(this.getDWG.weightA);
+            let weightB = BigNumber(this.getDWG.weightB);
             for (let i = 0; i < 60 * 6; i++) {
                 _tmpPrice = (balanceA / weightA) / (balanceB / weightB) * 1e12;
-                if(_tmpPrice < _initPrice){
+                if (_tmpPrice < _initPrice) {
                     _date += 60000;
-                    this.endList.push(this.randomData(_tmpPrice , _date,),);
+                    this.endList.push(this.randomData(_tmpPrice, _date,),);
                 }
                 weightA = weightA.plus(9123263888888888);   // every min
                 weightB = BigNumber(50000000000000000000).minus(weightA);
-                if(_date>this.endDate.valueOf())
+                if (_date > this.endDate.valueOf()) {
                     break;
+                }
             }
-            console.log(_tmpPrice);
             this.options.series[1].data = this.endList;
             this.chart.setOption(this.options);
         }
@@ -315,9 +339,8 @@
     }
 
 
-
     @mixin size40 {
-        font-size:20px;
+        font-size: 20px;
         @include respond-to(xs) {
             font-size: 12Px;
         }
@@ -325,7 +348,7 @@
 
     .wap {
         margin: 0;
-       //
+        //
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -409,7 +432,7 @@
                     position: relative;
 
                     p {
-                        @include  size20;
+                        @include size20;
                         font-family: OpenSans-Regular;
                         font-weight: bold;
                         color: #F1F1EF;
@@ -423,7 +446,7 @@
                         top: 0;
                         height: 0;
                         margin: auto;
-                        @include  size20;
+                        @include size20;
                         font-family: OpenSans-Regular;
                         font-weight: bold;
                         color: #F1F1EF;
@@ -452,7 +475,7 @@
                 box-sizing: border-box;
 
                 p {
-                    @include  size40;
+                    @include size40;
 
                     color: white;
                     font-weight: bold;
@@ -469,7 +492,7 @@
                     top: 0;
                     margin: auto;
                     text-align: center;
-                    @include  size40;
+                    @include size40;
                     height: 20px;
                     font-family: OpenSans-Regular;
                     font-weight: bold;
@@ -484,6 +507,7 @@
 
         .bottom {
             margin-top: 20px;
+
             a {
                 text-align: center;
                 border: 2px solid #12C0FD;

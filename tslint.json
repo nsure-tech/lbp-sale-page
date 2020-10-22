@@ -22,6 +22,7 @@
     "object-literal-sort-keys": false,
     "ordered-imports": false,
     "noImplicitAny": false,
+    "object-literal-key-quotes": false,
     "quotemark": [true, "single"]
   }
 }

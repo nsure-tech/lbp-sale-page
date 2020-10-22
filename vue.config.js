@@ -17,7 +17,14 @@ module.exports = {
             },
         }
     },
+    configureWebpack: config => {
+        config.plugins.forEach((item,i)=>{
+            if(item.tsconfig){
+                config.plugins.splice(i,1);
+            }
+        })
+    },
     publicPath: process.env.NODE_ENV === 'production'
-        ? '/'
-        : '/'
+        ? './'
+        : './'
 };

@@ -29,11 +29,5 @@ apiRequest.axios.interceptors.response.use(
 export class ApiServer {
    static getHistoryPrice = () => {
         return apiRequest.get(`${baseURL_V1}/price/get_history_price`,{});
-    };
-   static getCurrentPrice = () => {
-        return apiRequest.get(`${baseURL_V1}/price/get_current_price`,{});
-   };
-   static spot = () => {
-        return apiRequest.get(`https://api.coinbase.com/v2/prices/ETH-USD/spot`,{});
-   }
+    }
 }
