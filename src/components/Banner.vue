@@ -193,7 +193,7 @@
 
             this.chart = this.$echarts.init(ele);
             await this.getPrice();
-            // this.getCurrentPrice();
+            this.getCurrentPrice();
             this.countdown();
             setInterval(async () => {
                 await this.getCurrentPrice();
