@@ -5,8 +5,6 @@
         <el-row class="echarts" :gutter="24" type="flex">
             <el-col :sm="19">
                 <div class="left">
-                    <span href=""> </span>
-                    <div id="myEcharts" style="min-height:300px;"></div>
                     <a target="_Blank"
                        href="https://balancer.exchange/#/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/0xe22e5Acede7391E41bcbb2af7b2D12787537470b">Access
                         LBP on Balancer</a>
@@ -26,7 +24,7 @@
 
                     <div class="r_div">
                         <p>Estimated Market cap</p>
-                        <h4>{{currentPrice? (currentPrice * 9000000).toFixed(2) :'---'}}</h4>
+                        <h4>{{currentPrice?  (currentPrice * 9000000).toFixed(2) :'---'}}</h4>
                     </div>
                 </el-row>
 
@@ -78,120 +76,16 @@
     @Component
     export default class Banner extends Vue {
         @Getter("getPrice", {namespace}) private price: number;
-        @Getter("getDWG", {namespace}) private getDWG: DenormalizedWeightAndGetbalance;
-        @Mutation("setDWG", {namespace}) private setDWG;
 
         @Action("getSpotPrice", {namespace}) private getSpotPrice;
-        @Action("getDenormalizedWeightAndGetbalance", {namespace}) private getDenormalizedWeightAndGetbalance;
         private date_ = "";
         private currentPrice = 0;
 
         private getPriceTime: number = 30000;
 
-        private dataList: Array<any> = [];
-        private endList: Array<any> = [];
 
-        private endDate;
-        public $echarts: any;
-        private options = {
+        private endDate = new Date('2020/10/25');
 
-            tooltip: {
-                trigger: "axis",
-                formatter: (params) => {
-                    let data: any = params;
-                    data = data[0].data;
-                    let date = new Date(data.name);
-                    if (this.dataList[this.dataList.length - 1].name < data.name) {
-                        return;
-                    }
-                    return data.value[1] + " <br/> " + this.dateFmt(date);
-                },
-                axisPointer: {
-                    animation: false
-                }
-            },
-
-            xAxis: {
-                type: "time",
-                data: this.dataList.map((item) => {
-                    return item.date;
-                }),
-                axisLabel: {
-                    formatter: (value, idx) => {
-                        let _date = new Date(value);
-                        // return this.dateFmt(date);
-                        let _houes = _date.getHours() > 10 ? _date.getHours() : `0${_date.getHours()}`;
-                        let _getMinutes = _date.getMinutes() > 10 ? _date.getMinutes() : `0${_date.getMinutes()}`;
-                        return [_date.getHours(), _getMinutes].join(":");
-                    }
-                },
-                splitLine: {
-                    show: false
-                },
-                boundaryGap: false,
-                axisLine: {
-                    lineStyle: {
-                        color: "#fff"
-                    }
-                },
-            },
-            yAxis: {
-                type: "value",
-                splitLine: {
-                    show: false
-                },
-                boundaryGap: [0, "100%"],
-                axisLine: {
-                    lineStyle: {
-                        color: "#fff"
-                    }
-                },
-            },
-            series: [
-                {
-                    type: "line",
-                    showSymbol: false,
-                    // hoverAnimation: true,
-                    data: this.dataList,
-                    hoverAnimation: false,
-                    smooth: true,
-
-                    markLine: {
-                        symbol: ["none", "none"],
-                    },
-                    lineStyle: {
-                        color: "#12C0FD",
-                        width: 1
-                    },
-                },
-                {
-
-                    type: "line",
-                    showSymbol: false,
-                    hoverAnimation: false,
-                    data: this.endList,
-                    smooth: true,
-                    itemStyle: {
-                        normal: {
-                            lineStyle: {
-                                width: 2,
-                                type: "dotted"  //'dotted'虚线 'solid'实线
-                            }
-                        }
-                    },
-
-                    lineStyle: {
-                        color: "#fff",
-                        width: 1
-                    },
-                    markLine: {
-                        symbol: ["none", "none"],
-                    },
-                },
-            ]
-        };
-
-        private chart: any;
 
 
         public mounted() {
@@ -199,27 +93,20 @@
         }
 
         async init() {
-            let ele: any = document.getElementById("myEcharts");
-            this.chart = this.$echarts.init(ele);
-            await this.getPrice();
             this.getCurrentPrice();
             this.countdown();
             setInterval(async () => {
                 await this.getCurrentPrice();
-                this.endListFu();
             }, this.getPriceTime,);
 
-            setInterval(async () => {
-                await this.getDenormalizedWeightAndGetbalance();
-            }, this.getPriceTime,);
         }
 
 
         async getCurrentPrice() {
             await this.getSpotPrice();
-            console.log(this.price);
-            this.currentPrice = this.price;
-            this.dataList.push(this.randomData(this.currentPrice, this.dataList[this.dataList.length - 1].name + this.getPriceTime,));
+            this.currentPrice = this.price * 1e12;
+            this.$forceUpdate();
+
         }
 
 
@@ -241,89 +128,18 @@
             this.date_ = `${hr}H ${min}m`;
             setTimeout(() => {
                 this.countdown();
+                this.date_ = '123123';
             }, 60000);
         }
 
 
-        dateFmt(date: Date) {
-            let
-                month = "" + (date.getMonth() + 1),
-                day = "" + date.getDate(),
-                h = "" + date.getHours(),
-                m = "" + date.getMinutes(),
-                s = "" + date.getSeconds();
-            if (month.length < 2) {
-                month = "0" + month;
-            }
-            if (day.length < 2) {
-                day = "0" + day;
-            }
-            if (h.length < 2) {
-                h = "0" + h;
-            }
-            if (m.length < 2) {
-                m = "0" + m;
-            }
-            if (s.length < 2) {
-                s = "0" + s;
-            }
-            return [month, day].join("-") + "  " + [h, m, s].join(":");
-        };
-
-
-        async getPrice() {
-
-            let data: any = await ApiServer.getHistoryPrice();
-            data.priceList.map((ev) => {
-                this.dataList.push(this.randomData(ev.price, ev.date));
-            });
-            await this.getDenormalizedWeightAndGetbalance();
 
 
 
-            this.endDate = new Date(data.endDate);
-            this.endListFu();
-        }
 
 
-        endListFu() {
-
-            let _date = this.dataList[this.dataList.length - 1].value[0];
-            let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
-            console.log('----------------->Depict the tail',_tmpPrice);
-            let _initPrice: number = this.dataList[this.dataList.length - 1].value[1];
-            this.endList = [];
-            let balanceA = BigNumber(this.getDWG.balanceA);
-            let balanceB = BigNumber(this.getDWG.balanceB);
-            let weightA = BigNumber(this.getDWG.weightA);
-            let weightB = BigNumber(this.getDWG.weightB);
-            for (let i = 0; i < 60 * 6; i++) {
-                _tmpPrice = (balanceA / weightA) / (balanceB / weightB) * 1e12;
-                if (_tmpPrice < _initPrice) {
-                    _date += 60000;
-                    this.endList.push(this.randomData(_tmpPrice, _date,),);
-                }
-                weightA = weightA.plus(9123263888888888);   // every min
-                weightB = BigNumber(50000000000000000000).minus(weightA);
-                if (_date > this.endDate.valueOf()) {
-                    break;
-                }
-            }
-            this.options.series[1].data = this.endList;
-            this.chart.setOption(this.options);
-        }
 
 
-        randomData(ev: number, date: any) {
-            let now = new Date(date).valueOf();
-            return {
-                name: now,
-                value: [
-                    now,
-                    ev
-                ]
-            };
-        }
     }
 </script>
 
