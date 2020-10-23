@@ -1,6 +1,6 @@
 // token配置
 const token = {
-    BPool: '0x27fdccd1a9ee46b46b3d4547cbf4c57bc10c0508',
+    BPool: '0x4C709bE5dfcE030a7719Af9eC8e472D57803e569',
 };
 
 export const Config = {

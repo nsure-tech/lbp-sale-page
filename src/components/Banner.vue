@@ -8,7 +8,7 @@
                     <span href=""> </span>
                     <div id="myEcharts" style="min-height:300px;"></div>
                     <a target="_Blank"
-                       href="https://balancer.exchange/#/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/0xe22e5Acede7391E41bcbb2af7b2D12787537470b">Access
+                       href="https://balancer.exchange/#/swap/0xDaDDf3D778b9188e731d14F8F2207FF6eA03FBE0/0xe22e5Acede7391E41bcbb2af7b2D12787537470b">Access
                         LBP on Balancer</a>
                 </div>
             </el-col>
