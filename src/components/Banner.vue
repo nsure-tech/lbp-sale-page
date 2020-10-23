@@ -104,7 +104,7 @@
 
         async getCurrentPrice() {
             await this.getSpotPrice();
-            this.currentPrice = this.price * 1e12;
+            this.currentPrice = this.price;
             this.$forceUpdate();
 
         }
