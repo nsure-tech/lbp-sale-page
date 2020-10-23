@@ -49,36 +49,7 @@
         private options: any = {
             tooltip: {
                 trigger: "axis",
-                formatter: function(params) {
-                    var htmlStr = "";
-                    console.log(params[0]);
-                    for (var i = params.length -1; i >= 0; i--) {
-                        var param = params[i];
-                        var xName = param.name;//x轴的名称
-                        var seriesName = param.seriesName;//图例名称
-                        var value = param.value;//y轴值
-                        var color = param.color;//图例颜色
-
-                        if (i === 5) {
-                            htmlStr += xName + "<br/>";//x轴的名称
-                        }
-                        htmlStr += "<div>";
-                        //为了保证和原来的效果一样，这里自己实现了一个点的效果
-                        htmlStr += "<span style=\"margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:" + color + ";\"></span>";
-
-                        // 文本颜色设置--2020-07-23(需要设置,请解注释下面一行)
-                        //htmlStr += '<span style="color:'+color+'">';
-
-                        //圆点后面显示的文本
-                        htmlStr += seriesName + "：" + value;
-
-                        // 文本颜色设置--2020-07-23(需要设置,请解注释下面一行)
-                        //htmlStr += '</span>';
-
-                        htmlStr += "</div>";
-                    }
-                    return htmlStr;
-                },
+                formatter: this.formatterFn ,
             },
             grid: {
                 x: 35,
@@ -160,6 +131,37 @@
             this.chart = this.$echarts.init(ele);
             this.chart.setOption(this.options);
 
+        }
+
+
+        public  formatterFn(params) {
+            let htmlStr = "";
+            for (let i = params.length -1; i >= 0; i--) {
+                let param = params[i];
+                let xName = param.name;//x轴的名称
+                let seriesName = param.seriesName;//图例名称
+                let value = param.value;//y轴值
+                let color = param.color;//图例颜色
+
+                if (i === 5) {
+                    htmlStr += xName + "<br/>";//x轴的名称
+                }
+                htmlStr += "<div style='text-align: start'>";
+                //为了保证和原来的效果一样，这里自己实现了一个点的效果
+                htmlStr += "<span style=\"margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:" + color + ";\"></span>";
+
+                // 文本颜色设置--2020-07-23(需要设置,请解注释下面一行)
+                //htmlStr += '<span style="color:'+color+'">';
+
+                //圆点后面显示的文本
+                htmlStr += seriesName + "：" + value;
+
+                // 文本颜色设置--2020-07-23(需要设置,请解注释下面一行)
+                //htmlStr += '</span>';
+
+                htmlStr += "</div>";
+            }
+            return htmlStr;
         }
     }
 </script>
