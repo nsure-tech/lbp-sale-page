@@ -1,4 +1,6 @@
-const bPOOL: AbiItem[] = [{'inputs': [], 'payable': false, 'stateMutability': 'nonpayable', 'type': 'constructor'}, {
+
+
+const bPOOL = [{'inputs': [], 'payable': false, 'stateMutability': 'nonpayable', 'type': 'constructor'}, {
     'anonymous': false,
     'inputs': [{'indexed': true, 'internalType': 'address', 'name': 'src', 'type': 'address'}, {
         'indexed': true,

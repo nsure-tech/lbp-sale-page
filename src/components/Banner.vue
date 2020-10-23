@@ -86,7 +86,7 @@
         private date_ = "";
         private currentPrice = 0;
 
-        private getPriceTime: number = 30000;
+        private getPriceTime: number = 3000;
 
         private dataList: Array<any> = [];
         private endList: Array<any> = [];
@@ -211,12 +211,14 @@
 
             setInterval(async () => {
                 await this.getDenormalizedWeightAndGetbalance();
+
             }, 10000,);
         }
 
 
         async getCurrentPrice() {
             await this.getSpotPrice();
+            console.log(this.price);
             this.currentPrice = this.price;
             this.dataList.push(this.randomData(this.currentPrice, this.dataList[this.dataList.length - 1].name + this.getPriceTime,));
         }
@@ -277,16 +279,7 @@
                 this.dataList.push(this.randomData(ev.price, ev.date));
             });
             await this.getDenormalizedWeightAndGetbalance();
-            console.log('-------');
-            console.log(this.getDWG);
-            let _dwg: DenormalizedWeightAndGetbalance = {
-                weightA: data.weightA,
-                weightB: data.weightB,
-                balanceB: data.balanceB,
-                balanceA: data.balanceA,
-            };
-            console.log(_dwg);
-            // this.setDWG(_dwg);
+
 
 
             this.endDate = new Date(data.endDate);
@@ -295,8 +288,10 @@
 
 
         endListFu() {
+
             let _date = this.dataList[this.dataList.length - 1].value[0];
             let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
+            console.log('----------------->Depict the tail',_tmpPrice);
             let _initPrice: number = this.dataList[this.dataList.length - 1].value[1];
             this.endList = [];
             let balanceA = BigNumber(this.getDWG.balanceA);

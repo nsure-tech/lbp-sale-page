@@ -8,6 +8,7 @@ import bPOOL from '@/config/abi/bpool';
 
 const web3: Web3 = new Web3(Web3.givenProvider);
 const ethereum = window['ethereum'] || undefined;
+// @ts-ignore
 const bPOOLContract = new web3.eth.Contract(bPOOL, bpoolTOken);
 if (ethereum) {
     web3.eth.net.getId().then((chainId) => {
@@ -66,6 +67,7 @@ export const actions: ActionTree<Erc20Model, RootState> = {
             balanceA: await bPOOLContract.methods.getBalance(Config.bPoolTokenIn).call(),
             balanceB: await bPOOLContract.methods.getBalance(Config.bPoolTokenOut).call()
         };
+
         commit('setDWG',dWG);
     },
 };
