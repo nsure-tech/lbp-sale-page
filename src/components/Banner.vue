@@ -55,9 +55,9 @@
             <el-col :sm="6">
                 <a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">whitepaper</a>
             </el-col>
-            <el-col :sm="3">'</el-col>
+            <el-col :sm="3"><span style="color: transparent">'</span></el-col>
             <el-col :sm="6"><a target="_Blank" href="https://nsure.network">NSURE LBP sheet</a></el-col>
-            <el-col :sm="3">'</el-col>
+            <el-col :sm="3"><span style="color: transparent">'</span></el-col>
 
             <el-col :sm="6"><a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">whitepaper</a></el-col>
         </el-row>
@@ -86,7 +86,7 @@
         private date_ = "";
         private currentPrice = 0;
 
-        private getPriceTime: number = 3000;
+        private getPriceTime: number = 30000;
 
         private dataList: Array<any> = [];
         private endList: Array<any> = [];
@@ -122,7 +122,7 @@
                         // return this.dateFmt(date);
                         let _houes = _date.getHours() > 10 ? _date.getHours() : `0${_date.getHours()}`;
                         let _getMinutes = _date.getMinutes() > 10 ? _date.getMinutes() : `0${_date.getMinutes()}`;
-                        return [_houes, _getMinutes].join(":");
+                        return [_date.getHours(), _getMinutes].join(":");
                     }
                 },
                 splitLine: {
@@ -211,8 +211,7 @@
 
             setInterval(async () => {
                 await this.getDenormalizedWeightAndGetbalance();
-
-            }, 10000,);
+            }, this.getPriceTime,);
         }
 
 
