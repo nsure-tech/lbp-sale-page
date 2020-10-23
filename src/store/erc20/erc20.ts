@@ -57,7 +57,7 @@ export const mutation: MutationTree<Erc20Model> = {
 export const actions: ActionTree<Erc20Model, RootState> = {
     async getSpotPrice({commit}) {
         let bb = await bPOOLContract.methods.getSpotPrice(Config.bPoolTokenIn, Config.bPoolTokenOut).call();
-        commit('setPrice', bb / 1e18);
+        commit('setPrice', bb / 1e6);
     },
     async getDenormalizedWeightAndGetbalance({commit}) {
 
