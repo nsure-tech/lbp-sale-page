@@ -52,7 +52,7 @@
 
             if (this.ethereum) {
                 try {
-                 let bb = await this.ethereum.enable();
+                    let bb = await this.ethereum.enable();
                 } catch (error) {
                     console.log(error);
                 }
@@ -63,6 +63,7 @@
             }else {
                 console.log("Non-Ethereum browser detected. You should consider trying MetaMask!");
             }
+
         }
 
 
