@@ -1,6 +1,6 @@
 <template>
     <div class="wap padding20">
-        <h2>NSURE Liquidity Bootstrapping Pool <br>(LBP)</h2>
+        <h2>NSURE Liquidity Bootstrapping Pool (LBP)</h2>
 
         <el-row class="echarts" :gutter="24" type="flex">
             <el-col :sm="19">
@@ -8,7 +8,7 @@
                     <span href=""> </span>
                     <div id="myEcharts" style="min-height:300px;"></div>
                     <a target="_Blank"
-                       href="https://balancer.exchange/#/swap/0xDaDDf3D778b9188e731d14F8F2207FF6eA03FBE0/0xe22e5Acede7391E41bcbb2af7b2D12787537470b">Access
+                       href="https://balancer.exchange/#/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/0xDaDDf3D778b9188e731d14F8F2207FF6eA03FBE0">Access
                         LBP on Balancer</a>
                 </div>
             </el-col>
@@ -26,7 +26,7 @@
 
                     <div class="r_div">
                         <p>Estimated Market cap</p>
-                        <h4>${{currentPrice? '$'+(currentPrice * 9000000).toFixed(2) :'---'}}</h4>
+                        <h4>{{currentPrice? '$'+(currentPrice * 9000000).toFixed(2) :'---'}}</h4>
                     </div>
                 </el-row>
 
@@ -56,7 +56,7 @@
                 <a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">Whitepaper</a>
             </el-col>
             <el-col :sm="3"><span style="color: transparent">'</span></el-col>
-            <el-col :sm="6"><a target="_Blank" href="https://nsure.network">NSURE LBP Sheet</a></el-col>
+            <el-col :sm="6"><a target="_Blank" href="https://docs.google.com/spreadsheets/d/1JxvcP13QmR_cCgmWciPvKYQEWGwb17Or9koMoiOloOs/editk">NSURE LBP Sheet</a></el-col>
             <el-col :sm="3"><span style="color: transparent">'</span></el-col>
 
             <el-col :sm="6"><a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">Must Read</a></el-col>

@@ -2,7 +2,7 @@
     <div class="wrpBox">
         <div class="bg-white wap padding20">
             <div>
-                <h2><p>Token Distribution FAQ</p></h2>
+                <h2><p>What do l need to know? </p></h2>
                 <ul class="one">
 
                     <li v-for="item in problemList" :key="item.ask" @click="showAnswer(item.isShow)">
@@ -23,10 +23,10 @@
                 <li v-for="item in economicsList" :key="item.answer">
                     <p>{{item.one }}</p>
                     <p style="width: 10px;"></p>
-                    <p>{{item.tow }}</p>
+                    <p>{{item.tow }} <a href="#tis">{{item.msg}}</a></p>
                 </li>
             </ul>
-            <h5 class="tis">*1  Foundation reserves are split in equal parts, 5% dedicated to nurture and further build the Nsure Ecosystem, 5% will be allocated for participants of the NsureDAO to vote on. Foundation to be unlocked with mainnet launch (estimated Q1 2021). Reserve to be unlocked with DAO launch (estimated Q2 2021).
+            <h5 class="tis" id="tis">*1  Foundation reserves are split in equal parts, 5% dedicated to nurture and further build the Nsure Ecosystem, 5% will be allocated for participants of the NsureDAO to vote on. Foundation to be unlocked with mainnet launch (estimated Q1 2021). Reserve to be unlocked with DAO launch (estimated Q2 2021).
             </h5>
         </div>
     </div>
@@ -88,7 +88,7 @@
 
         ];
 
-        private economicsList: Array<{ one: string, tow: string, msg?: string }> = [
+        private economicsList: Array<{ one: string, tow: string }> = [
 
             {
                 one: " LBP Allocation",
@@ -108,7 +108,7 @@
             },
             {
                 one: "LBP Token Price Floor",
-                tow: "  0.1 USDC"
+                tow: "  0.10 USDC"
             },
             {
                 one: "Airdrop Allocation",
@@ -141,7 +141,8 @@
 
             {
                 one: "Foundation Reserve Allocation",
-                tow: "10% of Total Token Supply *1",
+                tow: "10% of Total Token Supply",
+                msg:'*1'
             },
             {
                 one: "Marketing & Operations Allocation",
@@ -174,9 +175,9 @@
         }
 
         showAnswer(ev) {
-            if (this.showKey == ev) {
-                this.showKey = "0";
-            } else {
+            if(this.showKey == ev){
+                this.showKey = '0';
+            }else{
                 this.showKey = ev;
 
             }
@@ -188,7 +189,7 @@
 
 <style lang="scss" scoped>
 
-    .wrpBox {
+    .wrpBox{
 
         .wap {
 
@@ -256,16 +257,25 @@
                         color: #2F8FE9;
 
                     }
-
-                    p:last-child {
+                    p:last-child{
                         color: white;
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: center;
+                        a{
+                            line-height: 1;
+                            display: block;
+                            margin-left: 5px;
+                            font-size: 11px;
+                            color: #2F8FE9;
+                            cursor:pointer;
+                        }
                     }
                 }
 
                 li:nth-of-type(even) {
                     background-color: #1B2532;
                 }
-
             }
 
 
@@ -273,11 +283,13 @@
                 font-size: 30px;
                 font-weight: bold;
                 color: #2F8FE9;
-                margin-bottom: 30px;
                 text-align: center;
-                @include respond-to(xs) {
+                margin-bottom: 30px;
+                @include respond-to(xs){
                     font-size: 22px;
+                    text-align: center;
                 }
+
             }
 
             .tis{
@@ -285,6 +297,7 @@
                 font-size: 14px;
                 margin-top: 10px;
                 font-style: italic;
+                font-weight: 400;
             }
 
             .one {
@@ -293,7 +306,6 @@
                     text-align: left;
                     background-color: #F0EFEF;
                     padding: 25px 0 25px 30px;
-
                     div {
                         display: flex;
                         align-items: center;
@@ -308,7 +320,6 @@
                             /*font-weight: bold;*/
                             font-weight: 500;
                             color: #1b2532;
-
                             span {
                                 display: block;
                                 width: 15px;
@@ -323,7 +334,7 @@
 
                     p {
                         color: #1b2532;
-                        @include size16;
+                        @include  size16;
                         padding-top: 10Px;
                         padding-right: 10px;
                         opacity: .4;
@@ -340,14 +351,16 @@
             }
 
 
+
         }
 
-        .bg-white {
+        .bg-white{
             background-color: white;
             padding-top: 70px;
             padding-bottom: 70px;
         }
     }
+
 
 
     @media only screen and (max-width: 767px) {
