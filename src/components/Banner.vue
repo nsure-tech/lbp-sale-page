@@ -1,6 +1,6 @@
 <template>
     <div class="wap padding20">
-        <h2>Liquidity Bootstrapping Pool for Nsure</h2>
+        <h2>NSURE Liquidity Bootstrapping Pool <br>(LBP)</h2>
 
         <el-row class="echarts" :gutter="24" type="flex">
             <el-col :sm="19">
@@ -21,12 +21,12 @@
                     </div>
                     <div class="r_div">
                         <p>Latest Price</p>
-                        <h4>{{currentPrice? currentPrice.toFixed(5):'---'}}</h4>
+                        <h4>{{currentPrice? '$'+currentPrice.toFixed(2):'---'}}</h4>
                     </div>
 
                     <div class="r_div">
                         <p>Estimated Market cap</p>
-                        <h4>{{currentPrice? (currentPrice * 9000000).toFixed(2) :'---'}}</h4>
+                        <h4>${{currentPrice? '$'+(currentPrice * 9000000).toFixed(2) :'---'}}</h4>
                     </div>
                 </el-row>
 
@@ -42,24 +42,24 @@
                 </div>
                 <div class="child">
                     <p>Latest Price(USDE)</p>
-                    <h4>{{currentPrice? currentPrice.toFixed(5):'---'}}</h4>
+                    <h4>{{currentPrice? "$" + currentPrice.toFixed(2):'---'}}</h4>
                 </div>
                 <div class="child">
                     <p>Estimated Market cap</p>
-                    <h4>{{currentPrice? (currentPrice * 9000000).toFixed(2) :'---'}}</h4>
+                    <h4>${{currentPrice? "$" + (currentPrice * 9000000).toFixed(2) :'---'}}</h4>
                 </div>
             </div>
         </div>
 
         <el-row :gutter="0" class="bottom">
             <el-col :sm="6">
-                <a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">whitepaper</a>
+                <a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">Whitepaper</a>
             </el-col>
             <el-col :sm="3"><span style="color: transparent">'</span></el-col>
-            <el-col :sm="6"><a target="_Blank" href="https://nsure.network">NSURE LBP sheet</a></el-col>
+            <el-col :sm="6"><a target="_Blank" href="https://nsure.network">NSURE LBP Sheet</a></el-col>
             <el-col :sm="3"><span style="color: transparent">'</span></el-col>
 
-            <el-col :sm="6"><a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">whitepaper</a></el-col>
+            <el-col :sm="6"><a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">Must Read</a></el-col>
         </el-row>
 
     </div>
@@ -229,7 +229,7 @@
             const now = new Date().valueOf();
             const msec: any = end - now;
             if (msec < 0) {
-                return this.date_ = `End`;
+                return this.date_ = `Ended`;
             }
             let day: any = parseInt((msec / 1000 / 60 / 60 / 24).toString());
             let hr: any = parseInt((msec / 1000 / 60 / 60 % 24).toString()) + day * 24;

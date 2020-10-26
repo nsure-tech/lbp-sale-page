@@ -1,6 +1,6 @@
 <template>
     <div class="wap padding20">
-        <h2>TOKEN ALLOCATION</h2>
+        <h2>Token Distribution</h2>
         <div class="box">
             <div id="myEchartss" style="height: 400px;"></div>
         </div>
@@ -16,7 +16,7 @@
         private options: any = {
             tooltip: {
                 trigger: "item",
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                formatter: "{b} :  {d}%"
             },
             legend: {},
 
@@ -30,9 +30,9 @@
                     center: ["40%", "55%"],
                     data: [
                         {value: 1, name: "Seed round"},
-                        {value: 55, name: "Capital/Insurance Minning"},
+                        {value: 55, name: "Capital/Insurance mining"},
                         {value: 14, name: "Private Sale"},
-                        {value: 4, name: "Public Sale"},
+                        {value: 4, name: "TGE"},
                         {value: 10, name: "Foundation Reserve"},
                         {value: 10, name: "Marketing & Operations"},
                         {value: 6, name: "Team"},
@@ -71,7 +71,7 @@
                     orient: "vertical",
                     top: "20px",
                     left: "70%",
-                    data: ["Capital/Insurance Minning", "Seed round", "Private Sale", "Public Sale", "Foundation Reserve", "Marketing & Operations", "Team"]
+                    data: ["Capital/Insurance mining", "Seed round", "Private Sale", "Public Sale", "Foundation Reserve", "Marketing & Operations", "Team"]
                 };
             }
         }
