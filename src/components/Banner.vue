@@ -65,7 +65,7 @@
                 LBP Sheet</a></el-col>
             <el-col :sm="3"><span style="color: transparent">'</span></el-col>
 
-            <el-col :sm="6"><a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">Must Read</a></el-col>
+            <el-col :sm="6"><a target="_Blank" href="https://nsure-network.medium.com/nsure-network-tge-balancer-lbp-user-guide-2d61b40f2a7c">Must Read</a></el-col>
         </el-row>
 
     </div>
