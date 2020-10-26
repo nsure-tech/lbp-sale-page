@@ -2,7 +2,7 @@
     <div class="wrpBox">
         <div class="bg-white wap padding20">
             <div>
-                <h2><p>What do l need to know? </p></h2>
+                <h2><p>Token Distribution FAQ</p></h2>
                 <ul class="one">
 
                     <li v-for="item in problemList" :key="item.ask" @click="showAnswer(item.isShow)">

@@ -138,6 +138,8 @@
 
         }
 
+
+
         public  formatterFn(params) {
             let htmlStr = "";
             for (let i = params.length -1; i >= 0; i--) {
@@ -150,21 +152,22 @@
                     htmlStr += `<p style="text-align: start">${[xName.getFullYear(),this.monthList[xName.getMonth()]].join(' ')}</p>`;//x轴的名称
                 }
                 htmlStr += "<div style='text-align: start'>";
-                //为了保证和原来的效果一样，这里自己实现了一个点的效果
                 htmlStr += "<span style=\"margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:" + color + ";\"></span>";
 
-                // 文本颜色设置--2020-07-23(需要设置,请解注释下面一行)
-                //htmlStr += '<span style="color:'+color+'">';
+                htmlStr += seriesName + "：" + this.thousands(value);
 
-                //圆点后面显示的文本
-                htmlStr += seriesName + "：" + value;
-
-                // 文本颜色设置--2020-07-23(需要设置,请解注释下面一行)
-                //htmlStr += '</span>';
 
                 htmlStr += "</div>";
             }
             return htmlStr;
+        }
+
+
+        thousands(num:string):string{
+            return num && num.toString()
+                .replace(/\d+/, function(s){
+                    return s.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+                })
         }
 
 

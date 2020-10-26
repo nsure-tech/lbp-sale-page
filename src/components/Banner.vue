@@ -26,7 +26,9 @@
 
                     <div class="r_div">
                         <p>Estimated Market cap</p>
-                        <h4>{{currentPrice? '$'+(currentPrice * 9000000).toFixed(2) :'---'}}</h4>
+                        <h4>{{currentPrice? "$" + thousands((currentPrice * 9000000).toFixed(2)) :'---'}}</h4>
+
+                        <!--<h4>{{currentPrice? '$'+(currentPrice * 9000000).toFixed(2) :'-&#45;&#45;'}}</h4>-->
                     </div>
                 </el-row>
 
@@ -46,7 +48,7 @@
                 </div>
                 <div class="child">
                     <p>Estimated Market cap</p>
-                    <h4>${{currentPrice? "$" + (currentPrice * 9000000).toFixed(2) :'---'}}</h4>
+                    <h4>${{currentPrice? "$" + ((currentPrice * 9000000).toFixed(2)).replace(regtmp,'$1,') :'---'}}</h4>
                 </div>
             </div>
         </div>
@@ -56,7 +58,7 @@
                 <a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">Whitepaper</a>
             </el-col>
             <el-col :sm="3"><span style="color: transparent">'</span></el-col>
-            <el-col :sm="6"><a target="_Blank" href="https://docs.google.com/spreadsheets/d/1JxvcP13QmR_cCgmWciPvKYQEWGwb17Or9koMoiOloOs/editk">NSURE LBP Sheet</a></el-col>
+            <el-col :sm="6"><a target="_Blank" href="https://docs.google.com/spreadsheets/d/1JxvcP13QmR_cCgmWciPvKYQEWGwb17Or9koMoiOloOs/edit">NSURE LBP Sheet</a></el-col>
             <el-col :sm="3"><span style="color: transparent">'</span></el-col>
 
             <el-col :sm="6"><a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">Must Read</a></el-col>
@@ -85,6 +87,7 @@
         @Action("getDenormalizedWeightAndGetbalance", {namespace}) private getDenormalizedWeightAndGetbalance;
         private date_ = "";
         private currentPrice = 0;
+        private regtmp = /(\d)(?=(?:\d{4})+$)/g;
 
         private getPriceTime: number = 30000;
 
@@ -212,6 +215,14 @@
             setInterval(async () => {
                 await this.getDenormalizedWeightAndGetbalance();
             }, this.getPriceTime,);
+        }
+
+
+        thousands(num:string):string{
+            return num && num.toString()
+                .replace(/\d+/, function(s){
+                    return s.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+                })
         }
 
 
