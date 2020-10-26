@@ -36,23 +36,26 @@
     import {Component, Prop, Vue} from "vue-property-decorator";
     import Problem from "@/components/problem.vue";
     import Web3 from "web3";
+    import {State, Action, Getter, Mutation} from "vuex-class";
 
     @Component({components: {HeaderBar, Footer, Banner, PieChart, LadderDiagram, Problem}})
     export default class App extends Vue {
+
+
 
         private ethereum = window['ethereum'];
 
         created(): void {
             this.init();
 
+
         }
 
         async init() {
 
-
             if (this.ethereum) {
                 try {
-                 let bb = await this.ethereum.enable();
+                    let bb = await this.ethereum.enable();
                 } catch (error) {
                     console.log(error);
                 }
@@ -63,6 +66,7 @@
             }else {
                 console.log("Non-Ethereum browser detected. You should consider trying MetaMask!");
             }
+
         }
 
 

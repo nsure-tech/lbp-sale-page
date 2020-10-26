@@ -8,10 +8,16 @@ import bPOOL from '@/config/abi/bpool';
 
 const web3: Web3 = new Web3(Web3.givenProvider);
 const ethereum = window['ethereum'] || undefined;
+
+const RINKEBY_NETWORK_ID = 1;
+const RINKEBY_NETWORK_TIPS = 'please use mainnet to use lbp page!';
 // @ts-ignore
 const bPOOLContract = new web3.eth.Contract(bPOOL, bpoolTOken);
 if (ethereum) {
     web3.eth.net.getId().then((chainId) => {
+        if (chainId !== RINKEBY_NETWORK_ID) {
+            Message.warning(RINKEBY_NETWORK_TIPS);
+        }
         ethereum.on('chainChanged', (_chainId) => {
             window.location.reload();
         });

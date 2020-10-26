@@ -2,7 +2,7 @@
     <div class="wrpBox">
         <div class="bg-white wap padding20">
             <div>
-                <h2><p>What do l need to know? </p></h2>
+                <h2><p>Token Distribution FAQ</p></h2>
                 <ul class="one">
 
                     <li v-for="item in problemList" :key="item.ask" @click="showAnswer(item.isShow)">
@@ -18,14 +18,16 @@
             </div>
         </div>
         <div class="wap padding20">
-            <h3>NSURE Token Sale and Economics</h3>
+            <h3>Nsure Token Sale & Economics</h3>
             <ul class="tow">
                 <li v-for="item in economicsList" :key="item.answer">
                     <p>{{item.one }}</p>
                     <p style="width: 10px;"></p>
-                    <p>{{item.tow }}</p>
+                    <p>{{item.tow }} <a href="#tis">{{item.msg}}</a></p>
                 </li>
             </ul>
+            <h5 class="tis" id="tis">*1  Foundation reserves are split in equal parts, 5% dedicated to nurture and further build the Nsure Ecosystem, 5% will be allocated for participants of the NsureDAO to vote on. Foundation to be unlocked with mainnet launch (estimated Q1 2021). Reserve to be unlocked with DAO launch (estimated Q2 2021).
+            </h5>
         </div>
     </div>
 
@@ -106,7 +108,7 @@
             },
             {
                 one: "LBP Token Price Floor",
-                tow: "  0.1 USDC"
+                tow: "  0.10 USDC"
             },
             {
                 one: "Airdrop Allocation",
@@ -118,7 +120,7 @@
             },
             {
                 one: "Private Sale Token Price",
-                tow: "1 NSURE = 0.01 USD"
+                tow: "1 NSURE = 0.10 USD"
             },
             {
                 one: "Private Sale Allocation",
@@ -139,7 +141,8 @@
 
             {
                 one: "Foundation Reserve Allocation",
-                tow: "10% of Total Token Supply *1"
+                tow: "10% of Total Token Supply",
+                msg:'*1'
             },
             {
                 one: "Marketing & Operations Allocation",
@@ -248,7 +251,7 @@
                         margin: 0;
                         text-align: center;
                         line-height: 100%;
-                      @include size20;
+                        @include size20;
                         font-family: OpenSans-Regular;
                         font-weight: 400;
                         color: #2F8FE9;
@@ -256,6 +259,17 @@
                     }
                     p:last-child{
                         color: white;
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: center;
+                        a{
+                            line-height: 1;
+                            display: block;
+                            margin-left: 5px;
+                            font-size: 11px;
+                            color: #2F8FE9;
+                            cursor:pointer;
+                        }
                     }
                 }
 
@@ -269,12 +283,21 @@
                 font-size: 30px;
                 font-weight: bold;
                 color: #2F8FE9;
+                text-align: center;
                 margin-bottom: 30px;
                 @include respond-to(xs){
                     font-size: 22px;
                     text-align: center;
                 }
 
+            }
+
+            .tis{
+                color: white;
+                font-size: 14px;
+                margin-top: 10px;
+                font-style: italic;
+                font-weight: 400;
             }
 
             .one {

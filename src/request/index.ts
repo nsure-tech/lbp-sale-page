@@ -1,5 +1,5 @@
 import ApiRequest from './request';
-import { baseURL } from './config';
+import {baseURL} from './config';
 
 const apiVersion = '';
 const baseURL_V1 = baseURL + apiVersion;
@@ -27,7 +27,11 @@ apiRequest.axios.interceptors.response.use(
 
 
 export class ApiServer {
-   static getHistoryPrice = () => {
-        return apiRequest.get(`${baseURL_V1}/price/get_history_price`,{});
+    static getHistoryPrice = () => {
+        return apiRequest.get(`${baseURL_V1}/price/get_history_price`, {});
+    };
+
+    static getConfig = () => {
+        return apiRequest.get(`./project.config.json`, {});
     }
 }

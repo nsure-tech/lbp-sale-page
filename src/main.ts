@@ -10,9 +10,12 @@ import 'element-ui/lib/theme-chalk/display.css';
 import store from './store'
 import Web3 from 'web3';
 import Echart from 'echarts';
+import {ApiServer} from '@/request';
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 Vue.prototype.$echarts = Echart;
+
+
 
 
 new Vue({
@@ -20,3 +23,8 @@ new Vue({
     store,
     render: (h) => h(App),
 }).$mount('#app');
+
+
+
+
+
