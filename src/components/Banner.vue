@@ -5,11 +5,13 @@
         <el-row class="echarts" :gutter="24" type="flex">
             <el-col :sm="19">
                 <div class="left">
-                    <span href=""> </span>
-                    <div id="myEcharts" style="min-height:300px;"></div>
-                    <a target="_Blank"
+                    <span v-if="getConfig.status === 0 && showEcharts" href=""> </span>
+                    <div v-show="getConfig.status === 0 && showEcharts" id="myEcharts" style="min-height:300px;"></div>
+
+                    <a v-if="showEcharts" target="_Blank"
                        href="https://balancer.exchange/#/swap/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/0xDaDDf3D778b9188e731d14F8F2207FF6eA03FBE0">Access
                         LBP on Balancer</a>
+                    <a v-if="!showEcharts" target="_Blank">Not Started Yet</a>
                 </div>
             </el-col>
 
@@ -17,7 +19,7 @@
                 <el-row type="flex" style="height: 100%" class="echarts_right">
                     <div class="r_div">
                         <p>LBP Ends in</p>
-                        <h4>{{date_}}</h4>
+                        <h4>{{date_?date_:'---'}}</h4>
                     </div>
                     <div class="r_div">
                         <p>Latest Price</p>
@@ -48,7 +50,7 @@
                 </div>
                 <div class="child">
                     <p>Estimated Market cap</p>
-                    <h4>${{currentPrice? "$" + ((currentPrice * 9000000).toFixed(2)).replace(regtmp,'$1,') :'---'}}</h4>
+                    <h4>{{currentPrice? "$" + thousands((currentPrice * 9000000).toFixed(2)) :'---'}}</h4>
                 </div>
             </div>
         </div>
@@ -58,7 +60,9 @@
                 <a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">Whitepaper</a>
             </el-col>
             <el-col :sm="3"><span style="color: transparent">'</span></el-col>
-            <el-col :sm="6"><a target="_Blank" href="https://docs.google.com/spreadsheets/d/1JxvcP13QmR_cCgmWciPvKYQEWGwb17Or9koMoiOloOs/edit">NSURE LBP Sheet</a></el-col>
+            <el-col :sm="6"><a target="_Blank"
+                               href="https://docs.google.com/spreadsheets/d/1JxvcP13QmR_cCgmWciPvKYQEWGwb17Or9koMoiOloOs/edit">NSURE
+                LBP Sheet</a></el-col>
             <el-col :sm="3"><span style="color: transparent">'</span></el-col>
 
             <el-col :sm="6"><a target="_Blank" href="https://nsure.network/Nsure_WP_0.7.pdf">Must Read</a></el-col>
@@ -81,19 +85,20 @@
     export default class Banner extends Vue {
         @Getter("getPrice", {namespace}) private price: number;
         @Getter("getDWG", {namespace}) private getDWG: DenormalizedWeightAndGetbalance;
+
         @Mutation("setDWG", {namespace}) private setDWG;
 
         @Action("getSpotPrice", {namespace}) private getSpotPrice;
         @Action("getDenormalizedWeightAndGetbalance", {namespace}) private getDenormalizedWeightAndGetbalance;
         private date_ = "";
         private currentPrice = 0;
-        private regtmp = /(\d)(?=(?:\d{4})+$)/g;
 
         private getPriceTime: number = 30000;
 
         private dataList: Array<any> = [];
         private endList: Array<any> = [];
 
+        private showEcharts = true;
         private endDate;
         public $echarts: any;
         private options = {
@@ -194,6 +199,8 @@
             ]
         };
 
+        private getConfig?: { status: number, endDate: string, showEchartsTime?: number } = {status: 0, endDate: "123"};
+
         private chart: any;
 
 
@@ -202,35 +209,50 @@
         }
 
         async init() {
-            let ele: any = document.getElementById("myEcharts");
-            this.chart = this.$echarts.init(ele);
-            await this.getPrice();
+
+            this.getConfig = await ApiServer.getConfig();
+            this.endDate = new Date(this.getConfig.endDate);
+            if (this.endDate.valueOf() - new Date().valueOf() > this.getConfig.showEchartsTime) {
+                this.showEcharts = false;
+                return;
+            }
+            if (this.getConfig.status == 0) {
+                await this.echartsFn();
+            }
             this.getCurrentPrice();
             this.countdown();
             setInterval(async () => {
                 await this.getCurrentPrice();
-                this.endListFu();
             }, this.getPriceTime,);
 
+        }
+
+
+        async echartsFn() {
+            let ele: any = document.getElementById("myEcharts");
+            this.chart = this.$echarts.init(ele);
+            await this.getPrice();
             setInterval(async () => {
                 await this.getDenormalizedWeightAndGetbalance();
             }, this.getPriceTime,);
         }
 
 
-        thousands(num:string):string{
+        thousands(num: string): string {
             return num && num.toString()
-                .replace(/\d+/, function(s){
-                    return s.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
-                })
+                .replace(/\d+/, function(s) {
+                    return s.replace(/(\d)(?=(\d{3})+$)/g, "$1,");
+                });
         }
 
 
         async getCurrentPrice() {
             await this.getSpotPrice();
-            console.log(this.price);
             this.currentPrice = this.price;
-            this.dataList.push(this.randomData(this.currentPrice, this.dataList[this.dataList.length - 1].name + this.getPriceTime,));
+            if (this.getConfig.status == 0) {
+                this.dataList.push(this.randomData(this.currentPrice, this.dataList[this.dataList.length - 1].name + this.getPriceTime,));
+                this.endListFu();
+            }
         }
 
 
@@ -289,10 +311,6 @@
                 this.dataList.push(this.randomData(ev.price, ev.date));
             });
             await this.getDenormalizedWeightAndGetbalance();
-
-
-
-            this.endDate = new Date(data.endDate);
             this.endListFu();
         }
 
@@ -301,7 +319,7 @@
 
             let _date = this.dataList[this.dataList.length - 1].value[0];
             let _tmpPrice: number = this.dataList[this.dataList.length - 1].value[1];
-            console.log('----------------->Depict the tail',_tmpPrice);
+            console.log("----------------->Depict the tail", _tmpPrice);
             let _initPrice: number = this.dataList[this.dataList.length - 1].value[1];
             this.endList = [];
             let balanceA = BigNumber(this.getDWG.balanceA);
@@ -415,11 +433,7 @@
                     justify-content: center;
                     align-items: center;
                     margin: 0 auto;
-                    /*width: 1100px;*/
-                    /*min-width: 300Px;*/
-                    /*height: 515px;*/
-                    height: 718px;
-
+                    height: 515px;
                 }
             }
 
