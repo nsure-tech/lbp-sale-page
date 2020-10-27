@@ -51,7 +51,7 @@
                 ask: "When will the TGE take place on Balancer LBP?",
                 isShow: "2",
 
-                answer: "The TGE via LBP on Balance will take place on the XXXX starting at XXX UTC, for a duration of approximately 2 days, from block XXXX to block XXXX."
+                answer: "The TGE via LBP on Balance will take place on the October 28th starting at 11:00am UTC, for a duration of approximately 2 days, from block 11144773 to block 11157773."
             },
 
             {
