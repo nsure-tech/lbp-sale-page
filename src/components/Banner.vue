@@ -45,7 +45,7 @@
                     <h4>{{date_}}</h4>
                 </div>
                 <div class="child">
-                    <p>Latest Price(USDE)</p>
+                    <p>Latest Price</p>
                     <h4>{{currentPrice? "$" + currentPrice.toFixed(2):'---'}}</h4>
                 </div>
                 <div class="child">
