@@ -1,4 +1,4 @@
-# nsure.blp
+# Nsure Token Generation Event Page 2020-10-29 // Balancer LBP monitor & guide page 
 
 ## Project setup
 ```
